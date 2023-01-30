@@ -1,27 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import DataItemService from "../services/OfferRequestService";
+import "../styles/OrdersComponent.scss"
 import {Link} from "react-router-dom";
+import OffersService from "../services/OffersService";
 
 const OrdersComponent = () => {
 
     const [dataItems, setUsers] = useState([]);
 
     useEffect(() => {
-        return () => {
 
-            DataItemService.getOfferById()
-                .then(response => {
-                    setUsers(response.data);
-                    console.log(response.data)
-                    
-                })
-                .catch(error => console.log(error))
-        };
-    }, []);
+    return () => {
+
+        OffersService.getAllOffers()
+            .then(response => {
+                setUsers(response.data);
+            })
+            .catch(error => console.log(error))
+    };
+
+    },[]);
 
     return (
         <div>
-            <div className="container-lg w-100 h-75">
+            <div className="container-lg w-100 h-75 orders-container">
                 <div className="container mt-5 m-auto d-flex justify-content-center justify-content-lg-around">
                     <Link to='/book_flight' className='btn btn-outline-dark w-25 h-25'>Book a Flight</Link>
                 </div>

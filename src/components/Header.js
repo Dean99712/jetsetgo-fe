@@ -1,12 +1,25 @@
 import React from 'react';
+import "../styles/Header.scss"
+import {Navbar} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
         <div>
-            <div className="container-lg h-50 d-flex justify-content-center justify-content-center">
-                <h4 className="p-4 m-1 border-1 border-secondary border border-end">Book a Flight</h4>
-                <h4 className="p-4 m-1 border-1 border-secondary border border-end">Get Ready</h4>
-            </div>
+            <Navbar className="header-container">
+                <div className="log-in-button">
+                    <button className="btn-login">Log in</button>
+                </div>
+
+                <div className="header-middle-titles">
+                    <h3 className="header-middle-title">Book a Flight</h3>
+                    <h3 className="header-middle-title">Get Ready</h3>
+                    <h3 className="header-middle-title">Service & Information</h3>
+                </div>
+                <div>
+                    <h1 className="logo"><Link to={"/"}/>Logo</h1>
+                </div>
+            </Navbar>
         </div>
     );
 };

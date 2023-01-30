@@ -1,80 +1,60 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useLocation} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlaneArrival, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
+import {useLocation} from "react-router-dom";
+import OfferCard from "./OfferCard";
+import OffersService from "../services/OffersService";
 
 const OffersComponent = () => {
 
     const location = useLocation();
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const orqId = location.state.id
 
     useEffect(() => {
-        try {
-            fetch('http://localhost:8080/api/offers/offer?offer_request_id=' + orqId, {
-                method: 'GET',
+        OffersService.getOfferById(orqId)
+            .then((response) => {
+                setData(response.data);
+                console.log(data)
             })
-                .then(response => response.json())
-                .then(data => {
-                    setData(data.data.offers);
-                    console.log(data.data.offers);
-                })
-        } catch (e) {
-            console.log(e)
-        }
-
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
 
     return (
         <div>
-            <h2 className="text-center mt-4">List of offers</h2>
-            <div className="container mt-3">
-                <table className="table table-hover">
-                    <thead className="table-dark">
-                    <tr>
-                        <th>offer_id</th>
-                        <th>total_amount</th>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                        <th>Duration</th>
-                    </tr>
-                    </thead>
-                    <tbody>{
-                        data.map(
-                            offer =>
-                                <tr key={offer.id}>
-                                    <td className="fw-semibold">{offer.id}</td>
-                                    <td className={"fw-bold"}>{offer.total_amount} <span
-                                        className="fw-semibold">{offer.total_currency}</span></td>
-                                    <td className="fw-bold">{offer.slices.map(slice =>
-                                        <span><FontAwesomeIcon icon={faPlaneDeparture}/>
-                                            <td>{slice.origin.iata_code}, <div
-                                                className="fw-semibold">{slice.origin.city_name}</div></td>
-                                        </span>
-                                    )}
-                                    </td>
-                                    <td className="fw-bold">{offer.slices.map(slice =>
-                                        <span>
+            <div>
+                <h2 className="text-center mt-4">List of offers</h2>
+                <div className="container mt-3">
+                    {data.map(offer => (
+                        offer.slices.map(slice => (
+                            slice.segments.map(segment => (
+                                segment.passengers.map(passenger => (
+                                    <OfferCard
+                                        // slices={slices}
+                                        key={offer.id}
+                                        id={offer.id}
+                                        origin={slice.origin}
+                                        destination={slice.destination}
+                                        arrivingAt={segment.arriving_at}
+                                        departingAt={segment.departing_at}
+                                        cabinClass={passenger.cabin_class}
+                                        flightNumber={segment.marketing_carrier_flight_number}
+                                        duration={segment.duration}
+                                        passengerId={passenger.id}
+                                    />
+                                ))
+                            ))
+                        ))
+                    ))
 
-                                            <td>{slice.destination.iata_code},
-                                                <FontAwesomeIcon className="px-3"
-                                                                 icon={faPlaneArrival}/>
-                                                <div
-                                                    className="fw-semibold">{slice.destination.city_name}</div>
-                                            </td></span>
-                                    )}</td>
-                                    <td>{offer.slices.map(slice =>
-                                        <td className="fw-semibold">{slice.duration.slice(2,-1).toLowerCase()}</td>
-                                    )}</td>
-                                </tr>
-                        )
                     }
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     );
+
 };
 
 export default OffersComponent;

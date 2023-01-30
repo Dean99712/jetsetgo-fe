@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@duffel/api": "^1.19.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.5",
     "@mui/x-date-pickers": "^5.0.15",
     "@mui/x-date-pickers-pro": "^5.0.15",
     "@testing-library/jest-dom": "^5.16.5",

@@ -1,0 +1,47 @@
+$base-color: #27939f;
+$header-height: 75px;
+
+.header-container {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: $header-height;
+  background-color: #FFFFFF;
+  justify-content: space-between;
+  padding: 1em 3em;
+  font-weight: lighter;
+  box-shadow: 0 0 1em 1px #D5D5D57A;
+  z-index: 5;
+
+  //Middle Titles
+  .header-middle-titles {
+    display: flex;
+    gap: 6em;
+    justify-content: center;
+    align-content: end;
+
+    .header-middle-title {
+      font-size: 24px;
+      font-weight: 400;
+      border-left: 2px #d5d5d5 solid;
+      padding: 0 1em;
+      text-align: center;
+      &:nth-last-child(3) {
+        border: none;
+      }
+
+      &:hover {
+        color: $base-color;
+        cursor: pointer;;
+      }
+    }
+  }
+}
+
+.btn-login {
+  border: none;
+  padding: 10px 2em;
+  background: $base-color;
+  color: #FFFFFF;
+}

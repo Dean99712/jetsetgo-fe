@@ -1,81 +1,86 @@
-import React, {useState} from "react";
-import "../styles/BookFlightComponent.css"
+import React, {useRef, useState} from "react";
+import "../styles/BookFlightComponent.scss"
+import "../styles/PassengersOptions.scss"
 import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlaneArrival, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
-import useFullPageLoader from "./hooks/useFullPageLoader";
+import {faCalendarCheck, faPlaneUp, faRepeat, faTicket} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import FullPageLoader from "./FullPageLoader";
+import PassengersOptionsComponent from "./PassengersOptionsComponent";
 
 const BookFlightComponent = () => {
 
-    const [offerRequestId, setOrderRequestId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
 
-    // const [options, setOptions] = useState({
-    //     adult: 1,
-    //     child: 0,
-    //     baby: 0
-    // })
-    const [loader, showLoader, hideLoader] = useFullPageLoader()
+    const [offerRequestId, setOfferRequestId] = useState(null);
+
+    const [options, setOptions] = useState({
+        adult: 1,
+        child: 0,
+        infant_without_seat: 0
+    });
+
+    const handelOption = (name, operation) => {
+
+        setOptions((prev) => {
+            return {
+                ...prev,
+                [name]: operation === "i" ? options[name] + 1 : options[name] - 1
+            }
+        })
+    };
+
+    const [passengers, setPassengers] = useState([{
+        type: "adult"
+    }]);
+
+    const handelAddPassenger = (type) => {
+        const passenger = {
+            type
+        }
+        for (let i = 0; i <= options[type]; i++) {
+            setPassengers([...passengers, passenger])
+            handelOption(type, "i")
+        }
+    }
+
+    const handelRemovePassenger = (type) => {
+        let z = passengers.findIndex((t) => t.type === type);
+        let temp = passengers.splice(z, 1)
+        passengers[temp] = {type: ''};
+        setPassengers(passengers.filter((elem => elem.type !== '')))
+        handelOption(type, "d")
+    };
+
+    const [openOptions, setOpenOptions] = useState(false);
 
     const navigate = useNavigate();
 
-    const passengers = [
-        {
-            type: "adult"
-        }
-    ]
+    const origin = useRef()
+    const destination = useRef()
+    const departure_date = useRef()
 
-    const [offerDetails, setFormDetails] = useState({
-        slices: [{
-            origin: '',
-            destination: '',
-            departure_date: ''
-        }],
-        passengers,
-        cabin_class: '',
-        max_connections: ''
-    })
-
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        const nameArr = name.split(".");
-        if (nameArr.length > 1) {
-            setFormDetails({
-                ...offerDetails,
-                [nameArr[0]]: {
-                    ...offerDetails[nameArr[0]],
-                    [nameArr[1]]: value
-                }
-            });
-        } else {
-            setFormDetails({...offerDetails, [name]: value});
-        }
-    };
-
-    // const handelOption = (name, operation) => {
-    //     setOptions((prev) => {
-    //         return {
-    //             ...prev,
-    //             [name]: operation === "i" ? options[name] + 1 : options[name] -1
-    //         }
-    //     })
-    // }
     const handelSubmit = async (e) => {
+
         e.preventDefault()
 
         async function createOfferRequest() {
+
+            let slices = [{
+                origin: origin.current?.value,
+                destination: destination.current?.value,
+                departure_date: departure_date.current?.value,
+            }]
             try {
-            showLoader()
-                const response = await fetch('http://localhost:8080/api/offer_request/createOffer', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(offerDetails)
-                });
-                const data = await response.json();
-                setOrderRequestId(data.data.id);
-                hideLoader()
+                setIsLoading(true)
+                const response = await axios.post("http://localhost:8080/api/offer_request/createOffer", {
+                    data: {
+                        slices,
+                        passengers
+                    }
+                })
+                setOfferRequestId(response.data.data.id)
+
             } catch (error) {
                 console.log(error)
             }
@@ -85,76 +90,99 @@ const BookFlightComponent = () => {
     };
 
     function navigateToOffers() {
-        if (offerRequestId != null) {
+        if (offerRequestId !== null) {
+            setIsLoading(false)
             return navigate('/offers', {state: {id: offerRequestId}});
         }
     }
 
     return (
         <div>
-                <div className="container-xxl">
-                    <h1 className="mx-auto">Book your Flight today!</h1>
-                    <form className="d-flex flex-sm-column bd-highlight" onSubmit={handelSubmit}>
+            {isLoading ? <FullPageLoader/> : <div></div>}
+            <div className="search_form">
+                <div className="nav-icons">
+                    <button className="btn-search-form"><FontAwesomeIcon className="nav-icon" icon={faPlaneUp}/>Book a
+                        Flight
+                    </button>
+                    <button className="btn-search-form"><FontAwesomeIcon className="nav-icon" icon={faTicket}/>Manage
+                        Your Booking
+                    </button>
+                    <button className="btn-search-form"><FontAwesomeIcon className="nav-icon" icon={faCalendarCheck}/>Flight
+                        Schedule
+                    </button>
+                </div>
+                <div className="form-container">
+                    <form onSubmit={handelSubmit}>
 
-                        <label className="form-label fw-bold fs-5"><FontAwesomeIcon
-                            icon={faPlaneDeparture}/> From</label>
-                        <input
-                            className="form-control p-2 bd-highlight fw-bold "
-                            type="text"
-                            name="slices.origin"
-                            placeholder="Where from?"
-                            value={offerDetails.slices.origin}
-                            onChange={handleChange}
-                        />
-                        <label className="form-label fw-bold fs-5"><FontAwesomeIcon icon={faPlaneArrival}/> To</label>
+                        {/*Location Container*/}
+                        <div className="form-input-location input_location-container">
+                            {/* Origin*/}
+                            <input
+                                className="form-search-input input_origin"
+                                type="text"
+                                name="slices.origin"
+                                placeholder="From"
+                                maxLength={3}
+                                autoComplete="off"
+                                ref={origin}
+                            />
+                            <label className="form-label-location origin">Where from?</label>
 
-                        <input
-                            className="form-control fw-bold"
-                            type="text"
-                            name="slices.destination"
-                            placeholder="Where to?"
-                            value={offerDetails.slices.destination}
-                            onChange={handleChange}
-                        />
-                        <label className="form-label fw-bold fs-5">Departure Date</label>
-                        <input
-                            className="form-control fw-"
-                            type="date"
-                            name="slices.departure_date"
-                            placeholder="Departure Date"
-                            value={offerDetails.slices.departure_date}
-                            onChange={handleChange}
-                        />
-                        {/*<DateRangeComponent/>*/}
-                        <label className="form-label fw-bold fs-5">Passenger</label>
-                        <input
-                            className="form-control fw-bold"
-                            name="passengers.type"
-                            placeholder="Passenger"
-                            value={offerDetails.passengers[0].type}
-                            onChange={handleChange}
-                        />
-                        <label className="form-label fw-bold fs-5">Cabin Class</label>
-                        <input
-                            className="form-control fw-bold"
-                            type="text"
-                            name="cabin_class"
-                            placeholder="Cabin Class"
-                            value={offerDetails.cabin_class}
-                            onChange={handleChange}
-                        />
-                        <div>
-                            <div className="container  align-items-start w-25 d-flex justify-content-evenly">
-                                <button type={"submit"} className="btn btn-primary mt-4"
-                                        onClick={navigateToOffers()}>Submit
-                                </button>
+                            {/* Destination*/}
+                            <FontAwesomeIcon className="switch-locations-icon" icon={faRepeat}/>
+                            <input
+                                className="form-search-input input_destination"
+                                type="text"
+                                name="slices.destination"
+                                placeholder="To"
+                                maxLength={3}
+                                autoComplete="off"
+                                ref={destination}
+                            /><label className="form-label-location destination">Where to?</label>
+
+                            {/* Departure Date*/}
+                            <input
+                                className="form-input-location date_departure_date"
+                                type="date"
+                                name="slices.departure_date"
+                                placeholder="Departure Date"
+                                ref={departure_date}
+                            />
+                            <label className="form-label-location departure_date">Departure Date</label>
+                        </div>
+
+                        {/* Passengers*/}
+                        <div className="second-row-container">
+                            <div className="passengers-options">
+                                <input
+                                    className=" form-search-input input_passengers"
+                                    name="passengers.type"
+                                    placeholder="Passenger"
+                                    value={(options.adult + options.child + options.infant_without_seat)}
+                                    readOnly={true}
+                                    onClick={() => setOpenOptions(!openOptions)}
+                                />
+                                <label className="form-label num-of-passengers">Passenger</label>
+                                {/*Options menu Adult*/}
+                                {openOptions &&
+                                    <PassengersOptionsComponent
+                                        onRemovePassenger={handelRemovePassenger}
+                                        onAddPassenger={handelAddPassenger}
+                                        options={options}
+                                    />
+                                }
                             </div>
+                            {/* Submit Form*/}
+                            <button type={"submit"} className="form-btn submit-form-button"
+                                    onClick={navigateToOffers()}
+                            >Find me a flight
+                            </button>
                         </div>
                     </form>
                 </div>
+            </div>
         </div>
     );
 };
-
 
 export default BookFlightComponent

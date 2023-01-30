@@ -1,12 +1,16 @@
 import axios from "axios";
 
 const OFFERS_BASE_URL = 'http://localhost:8080/api/offers'
-const GET_OFFERS_URL = `${OFFERS_BASE_URL}/offers`
+const GET_OFFERS_BY_ID_URL = `${OFFERS_BASE_URL}/getOfferById/`
 
 class OffersService {
 
+
+    getAllOffers() {
+        return axios.get(OFFERS_BASE_URL)
+    }
     getOfferById(id) {
-        return axios.get(GET_OFFERS_URL, id)
+        return axios.get(GET_OFFERS_BY_ID_URL + id)
     }
 }
 export default new OffersService()

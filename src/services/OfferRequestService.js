@@ -6,14 +6,10 @@ const GET_OFFERS_URL = `${OFFERS_BASE_URL}/offers`
 
 class OfferRequestService {
 
-
-    getOfferById(id) {
-        return axios.get(GET_OFFERS_URL, id)
-    }
-
     createOfferRequest(dataItem) {
         return axios.post(CREATE_OFFER_URL, dataItem
         )
     }
 }
+
 export default new OfferRequestService();
