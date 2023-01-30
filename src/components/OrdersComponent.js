@@ -24,7 +24,7 @@ const OrdersComponent = () => {
         <div>
             <div className="container-lg w-100 h-75 orders-container">
                 <div className="container mt-5 m-auto d-flex justify-content-center justify-content-lg-around">
-                    <Link to='/book_flight' className='btn btn-outline-dark w-25 h-25'>Book a Flight</Link>
+                    <Link to='/' className='btn btn-outline-dark w-25 h-25'>Book a Flight</Link>
                 </div>
                 <div className="container mt-3">
                     <table className="table table-hover">

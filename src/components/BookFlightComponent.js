@@ -10,6 +10,10 @@ import PassengersOptionsComponent from "./PassengersOptionsComponent";
 
 const BookFlightComponent = () => {
 
+    const origin = useRef()
+    const destination = useRef()
+    const departure_date = useRef()
+
     const [isLoading, setIsLoading] = useState(false)
 
     const [offerRequestId, setOfferRequestId] = useState(null);
@@ -56,10 +60,6 @@ const BookFlightComponent = () => {
 
     const navigate = useNavigate();
 
-    const origin = useRef()
-    const destination = useRef()
-    const departure_date = useRef()
-
     const handelSubmit = async (e) => {
 
         e.preventDefault()
@@ -71,6 +71,7 @@ const BookFlightComponent = () => {
                 destination: destination.current?.value,
                 departure_date: departure_date.current?.value,
             }]
+
             try {
                 setIsLoading(true)
                 const response = await axios.post("http://localhost:8080/api/offer_request/createOffer", {
@@ -87,7 +88,7 @@ const BookFlightComponent = () => {
         }
 
         await createOfferRequest();
-    };
+    }
 
     function navigateToOffers() {
         if (offerRequestId !== null) {
@@ -112,10 +113,10 @@ const BookFlightComponent = () => {
                     </button>
                 </div>
                 <div className="form-container">
-                    <form onSubmit={handelSubmit}>
-
+                    {/*<form onSubmit={handelSubmit}>*/}
+                    <form onSubmit={(e) => handelSubmit(e)}>
                         {/*Location Container*/}
-                        <div className="form-input-location input_location-container">
+                        <div className="form-input input_location-container">
                             {/* Origin*/}
                             <input
                                 className="form-search-input input_origin"
@@ -131,7 +132,7 @@ const BookFlightComponent = () => {
                             {/* Destination*/}
                             <FontAwesomeIcon className="switch-locations-icon" icon={faRepeat}/>
                             <input
-                                className="form-search-input input_destination"
+                                className="form-search-input destination"
                                 type="text"
                                 name="slices.destination"
                                 placeholder="To"
@@ -142,7 +143,7 @@ const BookFlightComponent = () => {
 
                             {/* Departure Date*/}
                             <input
-                                className="form-input-location date_departure_date"
+                                className="form-search date_departure_date"
                                 type="date"
                                 name="slices.departure_date"
                                 placeholder="Departure Date"
@@ -150,7 +151,6 @@ const BookFlightComponent = () => {
                             />
                             <label className="form-label-location departure_date">Departure Date</label>
                         </div>
-
                         {/* Passengers*/}
                         <div className="second-row-container">
                             <div className="passengers-options">

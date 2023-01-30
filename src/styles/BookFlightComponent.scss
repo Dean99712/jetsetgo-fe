@@ -131,23 +131,21 @@ $header-height: 75px;
 .form-label-location {
   position: absolute;
   font-size: 14px;
+  top: 9em;
 
   &.origin {
-    top: 9em;
     left: 31.7em;
   }
-  &.destination {
+
+  &.departure_date {
     top: 9em;
+    left: 63.4em;
   }
 }
 .switch-locations-icon {
   color: $baseColor;
 }
-.form-label {
-  position: absolute;
-  bottom: 14px;
-  left: 15px
-}
+
 /* Second Row*/
 .second-row-container {
   display: flex;
