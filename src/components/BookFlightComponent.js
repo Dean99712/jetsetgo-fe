@@ -7,8 +7,9 @@ import {faCalendarCheck, faPlaneUp, faRepeat, faTicket} from "@fortawesome/free-
 import axios from "axios";
 import FullPageLoader from "./FullPageLoader";
 import PassengersOptionsComponent from "./PassengersOptionsComponent";
+import Skeleton from "react-loading-skeleton";
 
-const BookFlightComponent = () => {
+const BookFlightComponent = (props) => {
 
     const origin = useRef()
     const destination = useRef()
@@ -98,8 +99,8 @@ const BookFlightComponent = () => {
     }
 
     return (
-        <div>
-            {isLoading ? <FullPageLoader/> : <div></div>}
+        <div className="bookFlight-Container">
+            {isLoading ? <FullPageLoader/> : <span></span>}
             <div className="search_form">
                 <div className="nav-icons">
                     <button className="btn-search-form"><FontAwesomeIcon className="nav-icon" icon={faPlaneUp}/>Book a
@@ -113,7 +114,6 @@ const BookFlightComponent = () => {
                     </button>
                 </div>
                 <div className="form-container">
-                    {/*<form onSubmit={handelSubmit}>*/}
                     <form onSubmit={(e) => handelSubmit(e)}>
                         {/*Location Container*/}
                         <div className="form-input input_location-container">
@@ -181,6 +181,7 @@ const BookFlightComponent = () => {
                     </form>
                 </div>
             </div>
+
         </div>
     );
 };

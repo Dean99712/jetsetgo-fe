@@ -1,0 +1,11 @@
+.card-container {
+  display: flex;
+  width: 1200px;
+  height: 150px;
+  padding: 1em;
+  margin: 10px;
+  justify-content: space-around;
+  box-shadow: 0 0 0.5em 0 #d5d5d5;
+}
+
+/*# sourceMappingURL=Card.css.map */

@@ -1,0 +1,42 @@
+.header-container {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 75px;
+  background-color: #FFFFFF;
+  justify-content: space-between;
+  padding: 1em 3em;
+  font-weight: lighter;
+  box-shadow: 0 0 1em 1px rgba(213, 213, 213, 0.4784313725);
+  z-index: 5;
+}
+.header-container .header-middle-titles {
+  display: flex;
+  gap: 6em;
+  justify-content: center;
+  align-content: end;
+}
+.header-container .header-middle-titles .header-middle-title {
+  font-size: 24px;
+  font-weight: 400;
+  border-left: 2px #d5d5d5 solid;
+  padding: 0 1em;
+  text-align: center;
+}
+.header-container .header-middle-titles .header-middle-title:nth-last-child(3) {
+  border: none;
+}
+.header-container .header-middle-titles .header-middle-title:hover {
+  color: #27939f;
+  cursor: pointer;
+}
+
+.btn-login {
+  border: none;
+  padding: 10px 2em;
+  background: #27939f;
+  color: #FFFFFF;
+}
+
+/*# sourceMappingURL=Header.css.map */

@@ -1,4 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import '../styles/OffersComponent.scss'
 import {useLocation} from "react-router-dom";
 import OfferCard from "./OfferCard";
 
@@ -9,44 +10,43 @@ const OffersComponent = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [slices, setSlices] = useState([])
-    const [passengers, setPassengers] = useState([])
-    const [segments, setSegments] = useState([])
-    const [segmentPassenger, setSegmentPassenger] = useState([])
-
     const offerId = location.state.id;
 
-    // const orqId = location.state.id
+    useEffect(() => {
 
-    function fetchOffersHandler() {
-        fetch(`http://localhost:8080/api/offers/getOfferById/${offerId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                const transferredData = data.data.map(offer => {
-                    return {
-                        id: offer.id,
-                        conditions: offer.conditions,
-                        base_amount: offer.base_amount,
-                        passengers: [offer.passengers],
-                        slices: [offer.slices],
-                        tax_amount: offer.tax_amount,
-                        total_amount: offer.total_amount
-                    }
-                })
-                setOffers(transferredData)
-                console.log(offers)
-            });
+        fetchOffersHandler();
+    }, []);
+
+    async function fetchOffersHandler() {
+
+        setIsLoading(true);
+
+        const response = await fetch(`http://localhost:8080/api/offers/getOfferById/${offerId}`)
+        const data = await response.json()
+        const transferredData = data.data.map(offer => {
+            return {
+                id: offer.id,
+                conditions: offer.conditions,
+                base_amount: offer.base_amount,
+                passengers: offer.passengers,
+                slices: offer.slices,
+                tax_amount: offer.tax_amount,
+                total_amount: offer.total_amount,
+                base_currency: offer.base_currency,
+                owner: offer.owner
+            }
+        })
+        setOffers(transferredData);
+        setIsLoading(false);
     }
 
     return (
         <div>
-            <div>
-                <h2 className="text-center mt-4">List of offers</h2>
+            <div className="offers-container">
                 <div className="container mt-3">
                     {offers.map(offer => (
                         <span key={offer.id}>
-                            {<OfferCard
-                                // key={offer.id}
+                            <OfferCard
                                 id={offer.id}
                                 conditions={offer.conditions}
                                 baseAmount={offer.base_amount}
@@ -54,15 +54,14 @@ const OffersComponent = () => {
                                 slices={offer.slices}
                                 taxAmount={offer.tax_amount}
                                 totalAmount={offer.total_amount}
-                            />}
-                        </span>
+                                baseCurrency={offer.base_currency}
+                            />
+                         </span>
                     ))}
-                    <button className='btn btn-outline-primary' onClick={fetchOffersHandler}>Press me</button>
                 </div>
             </div>
         </div>
     );
-
 };
 
 export default OffersComponent;

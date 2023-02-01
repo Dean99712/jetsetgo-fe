@@ -1,7 +1,3 @@
-//Variables
-$baseColor: #27939f !global;
-$secondary-color: #06b6d4;
-$header-height: 75px;
 .bookFlight-Container {
   position: absolute;
   top: 0;
@@ -12,10 +8,11 @@ $header-height: 75px;
   height: 100vh;
   background: url("../images/shutterstock_170076830-NY.jpg") no-repeat center center fixed;
 }
+
 /* Form-Container */
 .search_form {
   position: absolute;
-  top: calc((0px + $header-height) + 25%);
+  top: calc(75px + 25%);
   left: 20%;
   user-select: none;
 }
@@ -28,37 +25,32 @@ $header-height: 75px;
   flex-wrap: wrap;
   justify-content: center;
   align-content: baseline;
-
-  &:nth-child(0) {
-    border: none;
-    outline: none;
-  }
-
-  .btn-search-form {
-    background-color: #FFFF;
-    display: flex;
-    padding: 10px;
-    font-weight: 400;
-    width: calc(100% / 3);
-    justify-content: center;
-    align-items: center;
-    border-style: none;
-    border-left: 3px #efefef solid;
-    color: #0000007F;
-
-    &:hover {
-      color: black;
-
-      & .nav-icon {
-        color: $secondary-color;
-      }
-    }
-
-    &:focus {
-      font-weight: 600;
-      color: $secondary-color;
-    }
-  }
+}
+.nav-icons:nth-child(0) {
+  border: none;
+  outline: none;
+}
+.nav-icons .btn-search-form {
+  background-color: white;
+  display: flex;
+  padding: 10px;
+  font-weight: 400;
+  width: 33.3333333333%;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-left: 3px #efefef solid;
+  color: rgba(0, 0, 0, 0.4980392157);
+}
+.nav-icons .btn-search-form:hover {
+  color: black;
+}
+.nav-icons .btn-search-form:hover .nav-icon {
+  color: #06b6d4;
+}
+.nav-icons .btn-search-form:focus {
+  font-weight: 600;
+  color: #06b6d4;
 }
 
 .nav-icon {
@@ -96,21 +88,18 @@ $header-height: 75px;
   font-weight: lighter;
   border-bottom: 2px black solid;
   padding-bottom: 20px;
-
-  &:hover {
-    border-bottom: 2px $baseColor solid;
-  }
-
-  &:focus {
-    border-bottom: 3px $baseColor solid;
-  }
-  .input_passengers {
-    position: absolute;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
+}
+.form-search-input:hover {
+  border-bottom: 2px #27939f solid;
+}
+.form-search-input:focus {
+  border-bottom: 3px #27939f solid;
+}
+.form-search-input .input_passengers {
+  position: absolute;
+}
+.form-search-input .input_passengers:hover {
+  cursor: pointer;
 }
 
 .date_departure_date {
@@ -122,38 +111,34 @@ $header-height: 75px;
   outline: none;
   font-weight: lighter;
   border-bottom: 2px black solid;
-
-  & ~ label {
-    position: absolute;
-    top: 7.8em;
-    left: 65em;
-  }
-
-  &:hover {
-    border-bottom: 2px $baseColor solid;
-  }
-
-  &:focus {
-    border-bottom: 3px $baseColor solid;
-  }
 }
-//Form Locations Label
+.date_departure_date ~ label {
+  position: absolute;
+  top: 7.8em;
+  left: 65em;
+}
+.date_departure_date:hover {
+  border-bottom: 2px #27939f solid;
+}
+.date_departure_date:focus {
+  border-bottom: 3px #27939f solid;
+}
+
 .form-label-location {
   position: absolute;
   font-size: 14px;
   top: 9em;
-
-  &.origin {
-    left: 31.7em;
-  }
-
-  &.departure_date {
-    top: 9em;
-    left: 63.4em;
-  }
 }
+.form-label-location.origin {
+  left: 31.7em;
+}
+.form-label-location.departure_date {
+  top: 9em;
+  left: 63.4em;
+}
+
 .switch-locations-icon {
-  color: $baseColor;
+  color: #27939f;
 }
 
 /* Second Row*/
@@ -165,12 +150,13 @@ $header-height: 75px;
   padding-top: 2rem;
 }
 
-//Form Submit Button
 .submit-form-button {
   border: none;
-  background-color: $baseColor;
+  background-color: #27939f;
   color: #FFF;
   font-weight: 600;
   font-size: 20px;
   padding: 1em;
 }
+
+/*# sourceMappingURL=BookFlightComponent.css.map */

@@ -1,0 +1,32 @@
+.passengers-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.duration-title {
+  display: flex;
+}
+
+.duration-container {
+  align-self: start;
+}
+.duration-container .loading {
+  position: relative;
+  top: 2em;
+  background: #27939f;
+  text-align: center;
+  font-size: 20em;
+}
+.duration-container .list {
+  display: flex;
+  flex-flow: column;
+}
+
+.time {
+  font-weight: 700;
+  font-size: 18px;
+  padding-bottom: 0.6em;
+}
+
+/*# sourceMappingURL=OfferCard.css.map */
