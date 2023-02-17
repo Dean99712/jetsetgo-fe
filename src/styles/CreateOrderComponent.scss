@@ -1,0 +1,84 @@
+$width: 71.466vw;
+
+.createOrder-containerAll {
+  height: 200vh;
+  background: #F5F7FB;
+}
+
+.flight-order-summery--container {
+  position: relative;
+  top: 75px;
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  align-items: start;
+  background: url("../assets/images/AdobeStock_329022667.jpeg") center center;
+  background-size: cover;
+
+  .inner-summery-container {
+    display: grid;
+    background: transparent;
+    width: calc($width + 4em);
+    padding: 2em;
+
+    form {
+      position: relative;
+      top: 30em;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1em;
+    }
+  }
+}
+
+.contact-details-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em;
+  border-radius: 5px;
+  background: #FFFFFF;
+
+  h6 {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  input {
+    padding: 10px;
+    outline: 1px solid #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+
+    &[type=number]::-webkit-inner-spin-button,
+    [type=number]::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .details-container {
+    display: flex;
+    gap: 5em;
+    justify-content: space-between;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    flex: 0.5;
+  }
+}
+
+.passengers-container {
+  //grid-column: span 2;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+#submit-button {
+
+}

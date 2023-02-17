@@ -1,0 +1,29 @@
+.offers-page-background {
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  padding: 2em;
+  top: 75px;
+}
+
+.flights-selection {
+  margin-bottom: 2em;
+}
+.flights-selection .departure-type {
+  display: flex;
+  gap: 20px;
+  align-content: center;
+}
+.flights-selection span {
+  padding: 0 10px;
+  font-weight: 300;
+}
+.flights-selection h5 {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 12px;
+}
+.flights-selection h3 {
+  font-weight: 800;
+}
+
+/*# sourceMappingURL=FlightsOfferComponent.css.map */

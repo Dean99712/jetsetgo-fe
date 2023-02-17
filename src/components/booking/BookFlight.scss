@@ -1,0 +1,251 @@
+//$base-color: #4078AB;
+//$base-color: #00CCFF;
+$base-color: #015AFF;
+$variant-color: #5BAEBC;
+$secondary-color: #B5E1E4;
+$secondaryVariant-color: #ffb03b;
+$under-lineColor: #dcdcdc;
+$width: 71.466vw;
+
+.bookContainer-all {
+  display: flex;
+  box-sizing: border-box;
+  height: 200vh;
+  justify-content: center;
+}
+
+.mainPage-body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  background: url('../../assets/images/AdobeStock_432879300.jpeg') center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+
+  & h1, h5 {
+    font-family: "brother-1816", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: left;
+  }
+
+  & h1 {
+    font-size: 64px;
+    color: #334a60;
+  }
+
+  & h5 {
+    font-weight: 100;
+    font-style: italic;
+    font-size: 20px;
+    color: rgba(51, 74, 96, 0.7);
+  }
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+  padding: 0.5em;
+  border-radius: 50%;
+  background: #ECAA44;
+  color: #FFFFFF;
+}
+#passenger-icon {
+  color: #2E79E9;
+  background: none;
+  height: 30px;
+  width: 30px;
+
+}
+
+.form-type-container {
+  display: flex;
+  gap: 2em;
+
+  .form-type.active {
+    color: $base-color;
+    border-bottom: $base-color 2px solid;
+  }
+
+  & h3 {
+    font-size: 16px;
+    padding: 0 0 1em 0;
+    margin: 0;
+  }
+}
+
+.main-title {
+  position: absolute;
+  top: 30%;
+}
+
+.form-container {
+  position: sticky;
+  height: fit-content;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  font-weight: 400;
+  display: flex;
+  top: 65%;
+  align-content: center;
+  flex-direction: column;
+  line-height: 1;
+  margin: 1em;
+
+  form {
+    position: sticky;
+    border-radius: 20px;
+    width: $width;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    height: fit-content;
+    padding: 2em;
+    box-shadow: 0 2px 5px rgba(225, 225, 225, 0.6);
+
+    &  input {
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      &[type=date]::-webkit-calendar-picker-indicator {
+
+
+      }
+    }
+
+    & label {
+      padding-bottom: 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+.first-row {
+  display: flex;
+  gap: 1em;
+}
+
+.search-location,
+.search-date,
+.passenger-counter {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+
+  & label {
+    font-weight: 500;
+  }
+
+  &.search-location {
+    width: fit-content;
+  }
+
+  &.search-date {
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 0.7em;
+    width: 450px;
+
+    & label {
+      padding-bottom: 0;
+      flex: 0.5;
+    }
+
+    & input {
+      flex: 1;
+    }
+  }
+
+  &.passenger-counter {
+
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  & input {
+    font-weight: lighter;
+  }
+}
+
+.search-input {
+  display: flex;
+  width: 200px;
+  height: 75px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 10px;
+  gap: 1em;
+  transition: outline linear 100ms;
+
+  &:hover {
+    background: #f3f3f3;
+  }
+
+  & input {
+    background: transparent;
+    font-size: 20px;
+    border: none;
+    outline: none;
+  }
+
+  & label {
+    font-size: 10px;
+  }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+////Nav Icons Section
+.nav-icons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+
+  & button {
+    border: none;
+    padding: 1em;
+    width: 100%;
+  }
+}
+
+input {
+  font-weight: 400;
+  font-size: 2rem;
+  flex: 1
+}
+
+.submit-form-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: $secondaryVariant-color;
+  outline: none;
+  border-radius: 10px;
+  padding: 20px;
+  color: #FFFFFF;
+  transition: all linear 200ms;
+
+  #search-icon {
+    font-size: 20px;
+  }
+
+  &:hover {
+    outline: 1px solid $secondaryVariant-color;
+    background: transparent;
+    color: $secondaryVariant-color;
+  }
+}
+

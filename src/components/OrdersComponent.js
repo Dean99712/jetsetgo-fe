@@ -3,6 +3,7 @@ import "../styles/OrdersComponent.scss"
 import {Link} from "react-router-dom";
 import OffersService from "../services/OffersService";
 
+
 const OrdersComponent = () => {
 
     const [dataItems, setUsers] = useState([]);
@@ -10,7 +11,6 @@ const OrdersComponent = () => {
     useEffect(() => {
 
     return () => {
-
         OffersService.getAllOffers()
             .then(response => {
                 setUsers(response.data);

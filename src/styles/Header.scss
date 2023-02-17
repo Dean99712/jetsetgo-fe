@@ -1,47 +1,94 @@
-$base-color: #27939f;
-$header-height: 75px;
 
-.header-container {
-  display: flex;
-  position: fixed;
+$base-color: #2973ff;
+$header-height: 75px;
+$font-color: #FFFFFF;
+$secondaryVariant-color: #ECAA44;
+$width: 71.466vw;
+
+.header-containerAll {
   width: 100%;
   top: 0;
+  box-sizing: border-box;
+  position: fixed;
   height: $header-height;
-  background-color: #FFFFFF;
-  justify-content: space-between;
+  background-color: transparent;
   padding: 1em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+}
+.header-container {
+  width: $width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: lighter;
-  box-shadow: 0 0 1em 1px #D5D5D57A;
-  z-index: 5;
+
+  .logo {
+    align-self: auto;
+    height: 50px;
+    width: 150px;
+  }
 
   //Middle Titles
   .header-middle-titles {
+    flex: 0.4;
     display: flex;
-    gap: 6em;
-    justify-content: center;
-    align-content: end;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 50px;
+    gap: 1em;
 
     .header-middle-title {
-      font-size: 24px;
-      font-weight: 400;
-      border-left: 2px #d5d5d5 solid;
-      padding: 0 1em;
-      text-align: center;
-      &:nth-last-child(3) {
-        border: none;
-      }
+      color: $font-color;
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      transition: all 300ms linear;
 
       &:hover {
-        color: $base-color;
-        cursor: pointer;;
+
       }
     }
   }
 }
 
-.btn-login {
+.log-in-buttons {
+  display: flex;
+  gap: 0.5em;
+}
+
+.btn-signin {
   border: none;
   padding: 10px 2em;
   background: $base-color;
-  color: #FFFFFF;
+  color: $font-color;
+  font-weight: 600;
+  line-height: 1.5;
+  text-underline: none;
+  transition: all linear 100ms;
+  border-radius: 10px;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.btn-signup {
+  border: none;
+  padding: 10px 2em;
+  background: transparent;
+  outline: 1px #21313f solid;
+  color: #21313f;
+  font-weight: 600;
+  line-height: 1.5;
+  text-underline: none;
+  transition: all linear 100ms;
+  border-radius: 5px;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
 }

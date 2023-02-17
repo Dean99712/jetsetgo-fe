@@ -1,9 +1,8 @@
 .card-container {
   display: flex;
-  width: 1200px;
-  height: 150px;
+  flex-wrap: wrap;
   padding: 1em;
-  margin: 10px;
-  justify-content: space-around;
-  box-shadow: 0 0 0.5em 0 #d5d5d5;
+  margin: 1em 0;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
 }

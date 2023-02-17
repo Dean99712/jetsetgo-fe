@@ -1,0 +1,39 @@
+//$base-color: #015AFF;
+//$variant-color: #5BAEBC;
+//$base-color: #7AC1D3;
+//$secondary-color: #B5E1E4;
+//$secondaryVariant-color: #ECAA44;
+//$under-lineColor: #dcdcdc;
+
+//$base-color: #015AFF;
+$variant-color: #5BAEBC;
+$base-color: #4078AB;
+
+$secondary-color: #00CCFF;
+
+$secondaryVariant-color: #ECAA44;
+$under-lineColor: #dcdcdc;
+
+.loading-container {
+    position: fixed;
+    left: 0;
+    top: -100px;
+    height: calc(100vh + 100px);
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.loader {
+    align-self: center;
+    color: $secondary-color;
+}

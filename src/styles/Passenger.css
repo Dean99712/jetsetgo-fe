@@ -1,0 +1,68 @@
+.passenger-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  width: 71.466vw;
+  flex-wrap: wrap;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.form-passenger-details {
+  display: flex;
+  flex-direction: column;
+}
+.form-passenger-details .passenger-type {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 1em;
+}
+.form-passenger-details .passenger-type .passenger-icon {
+  height: 25px;
+  width: 25px;
+  color: #FFFFFF;
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.form-passenger-details {
+  flex: 1;
+}
+
+.passenger-item {
+  padding: 1em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.passenger-item select {
+  width: 100px;
+  outline: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  height: 50px;
+}
+.passenger-item select option {
+  background: #FFFFFF;
+  border-radius: 5px;
+}
+.passenger-item select option:hover {
+  background: #eeeeee;
+}
+.passenger-item input {
+  border-radius: 5px;
+  outline: 1px solid #e0e0e0;
+  border: none;
+  font-size: 24px;
+}
+
+.passenger-details {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=Passenger.css.map */

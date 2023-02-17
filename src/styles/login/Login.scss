@@ -1,0 +1,13 @@
+.login-container {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.right-columnContainer {
+  height: 100vh;
+  width: 100vw;
+  background: url("../../assets/images/AdobeStock_89260265.png") no-repeat center fixed ;
+}

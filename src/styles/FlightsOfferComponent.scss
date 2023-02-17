@@ -1,0 +1,26 @@
+.offers-page-background {
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  padding: 2em;
+  top: calc(0px + 75px);
+}
+.flights-selection {
+  margin-bottom: 2em;
+  .departure-type {
+    display: flex;
+    gap: 20px;
+    align-content: center;
+  }
+  & span {
+    padding: 0 10px;
+    font-weight: 300;
+  }
+  & h5 {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+  }
+  & h3 {
+    font-weight: 800;
+  }
+}

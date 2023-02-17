@@ -1,25 +1,85 @@
 import React from 'react';
 import "../styles/Header.scss"
 import {Navbar} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 const Header = () => {
-    return (
-        <div>
-            <Navbar className="header-container">
-                <div className="log-in-button">
-                    <button className="btn-login">Log in</button>
-                </div>
 
+    const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const goToLoginPage = () => {
+        return navigate('/login')
+    }
+
+    const renderHeader = () => {
+        return <Navbar className="header-containerAll">
+            <div className="header-container">
+                <div className="log-in-buttons">
+                    <button className="btn-signin" onClick={() => goToLoginPage()}>Sign in</button>
+                    <button className="btn-signup">Sign in</button>
+                </div>
+                {/**/}
                 <div className="header-middle-titles">
-                    <h3 className="header-middle-title">Book a Flight</h3>
-                    <h3 className="header-middle-title">Get Ready</h3>
-                    <h3 className="header-middle-title">Service & Information</h3>
+                    <span><button className="header-middle-title left">All flights</button></span>
+                    <span><button className="header-middle-title middle">Schedule</button></span>
+                    <span><button className="header-middle-title right">Your orders</button></span>
                 </div>
                 <div>
-                    <h1 className="logo"><Link to={"/"}/>Logo</h1>
+                    <Link to={"/"}>
+                        <img src={require('./../assets/images/Logo.png')} className="logo"
+                             alt="some text"/>
+                    </Link>
                 </div>
-            </Navbar>
+            </div>
+        </Navbar>
+    }
+
+    const renderMainHeader = () => {
+        return <Navbar className="header-containerAll">
+            <div className="header-container">
+                <div className="log-in-buttons">
+                    <button className="btn-signin" onClick={() => goToLoginPage()}>Sign in</button>
+                    <button className="btn-signup">Sign in</button>
+                </div>
+                {/**/}
+                <div className="header-middle-titles">
+                    <span><button className="header-middle-title left">All flights</button></span>
+                    <span><button className="header-middle-title middle">Schedule</button></span>
+                    <span><button className="header-middle-title right">Your orders</button></span>
+                </div>
+                <div>
+                    <Link to={"/"}>
+                        <img src={require('./../assets/images/Logowhite.png')} className="logo"
+                             alt="some text"/>
+                    </Link>
+                </div>
+            </div>
+        </Navbar>
+    }
+
+    // if (location.pathname === '/login') {
+    //     return <div>Shalom</div>
+    // } else if (location.pathname === '/booking/flights') {
+    //     return renderHeader()
+    // } else if (location.pathname === '/fare_options'){
+    //     return renderHeader()
+    // }
+
+    switch (location.pathname) {
+        case '/login':
+            return <div>Shalom</div>
+        case '/booking/flights':
+            return renderHeader()
+        default :
+             renderHeader()
+    }
+
+    return (
+        <div>
+            {renderMainHeader()}
+            {/*{location.pathname === "/" ? renderMainHeader() : <div>What sup</div>}*/}
         </div>
     );
 };

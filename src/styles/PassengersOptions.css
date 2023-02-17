@@ -1,10 +1,12 @@
 /* Passengers Options Menu*/
 .options {
   position: absolute;
-  width: fit-content;
+  width: 367px;
   elevation: above;
+  padding: 5px;
   margin-top: 1em;
-  box-shadow: 0 0 8px 1px rgba(210, 210, 210, 0.55);
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgba(199, 199, 199, 0.55);
   z-index: 6;
   background: #FFFFFF;
 }
@@ -23,36 +25,45 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
   gap: 1em;
+  padding: 10px;
 }
 .options .option-text {
   text-align: start;
   font-weight: 600;
 }
+.options .option-display-age {
+  width: 100px;
+  padding-left: 10px;
+  text-align: left;
+}
 .options .option-counter-number {
   font-weight: 400;
   font-size: 1.4em;
+  width: 40px;
+  padding: 0 0.3em;
+  text-align: center;
 }
 
 /* Passengers Counter Button*/
 .option-counter-button {
+  background: #00CCFF;
+  color: #FFFFFF;
   border-radius: 50%;
   width: 50px;
-  z-index: 6;
   height: 50px;
+  z-index: 6;
   border: none;
+  transition: 100ms;
 }
-
-.option-counter-button {
-  background-color: #27939f;
+.option-counter-button:active {
+  background: #00b4e1;
   color: #FFFFFF;
-  transition: 300ms;
 }
-
 .option-counter-button:disabled {
   color: rgba(58, 58, 58, 0.34);
   background-color: #eeeeee;
+  outline: none;
 }
 
 /*# sourceMappingURL=PassengersOptions.css.map */
