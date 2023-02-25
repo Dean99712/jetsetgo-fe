@@ -1,0 +1,75 @@
+.fare {
+  border-radius: 7px;
+  font-family: Poppins, sans-serif;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 350px;
+  transition: outline-width ease-in-out 200ms;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+
+  &:hover {
+    outline: 1px solid #42a2ff;
+    cursor: pointer;
+  }
+  &:active {
+    outline: 2px solid #42a2ff;
+    cursor: pointer;
+  }
+
+  .fare-top {
+    height: 250px;
+    padding: 1em;
+
+    h6 {
+      font-weight: 600;
+      margin-bottom: 1em;
+    }
+    h5 {
+      font-size: 14px;
+    }
+
+    ul {
+      padding: 0;
+      margin: 1em 0;
+
+      li {
+        font-size: 14px;
+        display: flex;
+        margin: 1em 0;
+        gap: 1em;
+        justify-content: left;
+        align-items: baseline;
+        list-style: none;
+        p {
+          margin: 0;
+        }
+        svg {
+          width: 20px;
+          color: rgba(56, 56, 56, 0.75);
+        }
+      }
+    }
+  }
+  .fare-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-direction: row;
+    flex: 1;
+    padding: 1em;
+    gap: 0.5em;
+    background-color: #D5D5D57F;
+    p {
+      align-self: end;
+      font-size: 12px;
+      margin: 0;
+    }
+    h6 {
+      font-weight: 600;
+      align-self: end;
+      margin: 0;
+    }
+  }
+}

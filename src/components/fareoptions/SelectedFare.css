@@ -1,0 +1,88 @@
+.selected-fare_summary {
+  width: 400px;
+  padding: 1em;
+}
+.selected-fare_summary .fare-summary_top {
+  height: 300px;
+}
+.selected-fare_summary .fare-summary_top ul {
+  padding: 0;
+  margin: 1em 0;
+}
+.selected-fare_summary .fare-summary_top ul li {
+  font-size: 14px;
+  display: flex;
+  margin: 1em 0;
+  gap: 1em;
+  justify-content: left;
+  align-items: baseline;
+  list-style: none;
+}
+.selected-fare_summary .fare-summary_top ul li p {
+  margin: 0;
+  font-weight: 600;
+}
+.selected-fare_summary .fare-summary_top ul li svg {
+  width: 20px;
+  color: rgba(56, 56, 56, 0.75);
+}
+.selected-fare_summary .fare-summary_top .fare-summary_owner {
+  border-bottom: 1px solid rgba(206, 206, 206, 0.4980392157);
+  border-top: 1px solid rgba(206, 206, 206, 0.4980392157);
+  padding: 0.5em 0;
+  display: flex;
+  flex-direction: column;
+}
+.selected-fare_summary .fare-summary_top .fare-summary_owner div {
+  display: flex;
+  gap: 0.5em;
+}
+.selected-fare_summary .fare-summary_top .fare-summary_owner div img {
+  width: 25px;
+  height: 25px;
+}
+.selected-fare_summary .fare-summary_top .fare-summary_owner div p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.selected-fare_summary .fare-summary_bottom {
+  display: flex;
+  flex-direction: column;
+  margin: auto auto;
+  gap: 1em;
+  justify-content: space-around;
+  border-top: 1px solid rgba(206, 206, 206, 0.4980392157);
+}
+.selected-fare_summary .fare-summary_bottom h6 {
+  padding: 0.5em 0 0 0;
+  color: #777777;
+  margin: 0;
+}
+.selected-fare_summary .fare-summary_bottom h5 {
+  margin: 0;
+  font-weight: 700;
+}
+.selected-fare_summary .fare-summary_bottom button {
+  outline: none;
+  border: none;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 0.5em 1.5em;
+  background-color: #4688ff;
+  color: #FFFFFF;
+  transition: background-color ease-in-out 100ms;
+}
+.selected-fare_summary .fare-summary_bottom button:hover:not(:disabled) {
+  background-color: #2473ff;
+}
+.selected-fare_summary .fare-summary_bottom button:hover:not(:disabled) svg {
+  transition: transform ease-in-out 100ms;
+  transform: translateX(3px);
+}
+.selected-fare_summary .fare-summary_bottom button:disabled {
+  color: #ffffff;
+  background-color: #e3e3e3;
+}
+
+/*# sourceMappingURL=SelectedFare.css.map */

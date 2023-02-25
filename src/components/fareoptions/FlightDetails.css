@@ -1,0 +1,62 @@
+.flightDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  grid-column: span 1;
+  width: 560px;
+  background-color: #FFFFFF;
+  height: 150px;
+}
+.flightDetails .flight-details_title h5 {
+  font-size: 16px;
+}
+.flightDetails .flight-details_title span {
+  margin-left: 1em;
+  color: rgb(122, 122, 122);
+}
+.flightDetails .flight-details_section {
+  display: flex;
+  align-items: center;
+}
+.flightDetails .flight-details_section .flight-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.flightDetails .flight-details_section .flight-details h6 {
+  font-size: 18px;
+}
+.flightDetails .flight-details_section .flight-details p {
+  font-weight: 500;
+  color: rgba(79, 79, 79, 0.5);
+}
+.flightDetails .flight-details_section .flight-details.duration {
+  flex: 2;
+}
+.flightDetails .flight-details_section .flight-details.duration p {
+  margin: 0;
+}
+.flightDetails .flight-details_section .flight-details.duration span {
+  height: 1px;
+  width: calc(100% - 40px);
+  background-color: rgba(66, 162, 255, 0.25);
+}
+.flightDetails .flight-details_section .flight-details.duration svg {
+  position: relative;
+  top: -8px;
+  width: 15px;
+  height: 15px;
+  align-self: end;
+  color: #42a2ff;
+}
+.flightDetails .flight-details_section .flight-details.owner img {
+  align-self: auto;
+  width: 50px;
+  height: 50px;
+}
+
+/*# sourceMappingURL=FlightDetails.css.map */

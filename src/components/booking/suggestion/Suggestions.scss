@@ -1,0 +1,21 @@
+//.suggestions_container {
+//  font-family: Poppins, sans-serif;
+//}
+.airports-container {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+
+
+  & p {
+    padding: 10px 1em;
+    margin: 0;
+    font-weight: 500;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(213, 213, 213, 0.2);
+    }
+  }
+}

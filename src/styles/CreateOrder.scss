@@ -1,0 +1,92 @@
+$width: 71.466vw;
+
+.createOrder-containerAll {
+  height: 200vh;
+  background: #F5F7FB;
+}
+
+.flight-order-summery--container {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  align-items: start;
+  background: url("../assets/images/createorder/CreateOrderBackground.png") center center;
+  background-size: cover;
+
+  .inner-summery-container {
+    display: grid;
+    background: transparent;
+    width: calc($width + 4em);
+    padding: 2em;
+
+    form {
+      position: relative;
+      top: 30em;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1em;
+    }
+  }
+}
+.form-item {
+  font-family: Poppins, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    width: 250px;
+    margin-top: 0.5em;
+  }
+}
+
+.contact-details-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em;
+  border-radius: 5px;
+  background: #FFFFFF;
+
+  h6 {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    font-size: 18px;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  input {
+    padding: 0.8em;
+    font-size: 20px;
+    height: 65px;
+  }
+
+  .details-container {
+    display: flex;
+    gap: 5em;
+    justify-content: space-between;
+
+    & .form-item {
+      flex: 1;
+    }
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    flex: 0.5;
+  }
+}
+
+.passengers-container {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+#submit-button {
+
+}

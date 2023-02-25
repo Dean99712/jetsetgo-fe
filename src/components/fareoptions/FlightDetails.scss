@@ -1,0 +1,76 @@
+.flightDetails {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  grid-column: span 1;
+  width: 560px;
+  background-color: #FFFFFF;
+  height: 150px;
+
+  .flight-details_title {
+
+    h5 {
+      font-size: 16px;
+    }
+
+    span {
+      margin-left: 1em;
+      color: rgb(122, 122, 122);
+    }
+  }
+
+  .flight-details_section {
+    display: flex;
+    align-items: center;
+
+
+    .flight-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+
+      h6 {
+        font-size: 18px;
+      }
+
+      p {
+        font-weight: 500;
+        color: rgba(79, 79, 79, 0.5);
+      }
+
+      &.duration {
+        flex: 2;
+
+        p {
+          margin: 0;
+        }
+
+        span {
+          height: 1px;
+          width: calc(100% - 40px);
+          background-color: rgba(66, 162, 255, 0.25);
+        }
+
+        svg {
+          position: relative;
+          top: -8px;
+          width: 15px;
+          height: 15px;
+          align-self: end;
+          color: #42a2ff;
+        }
+      }
+
+      &.owner img {
+        align-self: auto;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}

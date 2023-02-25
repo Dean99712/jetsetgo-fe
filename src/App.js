@@ -1,40 +1,76 @@
 import './styles/App.scss';
 import * as React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import BookFlight from "./components/booking/BookFlight";
-import Header from "./components/Header";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css';
-import OrdersComponent from "./components/OrdersComponent";
 import {SkeletonTheme} from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import FlightsComponent from "./components/FlightsComponent";
+import Flights from "./components/flights/Flights";
 import './styles/FlightsOfferComponent.scss'
-import FareOptionsComponent from "./components/fareoptions/FareOptionsComponent";
+import Error from "./components/Error";
+import Root from "./components/Root";
+import {AuthProvider} from "./context/AuthProvider";
 import Login from "./components/login/Login";
-import Footer from "./components/Footer";
+import OrderSummary from "./components/ordersummary/OrderSummary";
+import Unauthorized from "./components/Unauthorized";
+import RequireAuth from "./components/RequireAuth";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import FareOptions from "./components/fareoptions/FareOptions";
 import CreateOrderComponent from "./components/ordercreate/CreateOrderComponent";
+import Orders from "./components/Orders";
 
 function App() {
 
+    const ROLES = {
+        Admin: 'ADMIN',
+        User: 'USER'
+    }
+
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element: <Root/>,
+            errorElement: <Error/>,
+            children: [
+
+                //Public Authentication
+                {path: 'login', element: <Login/>},
+                {path: 'unauthorized', element: <Unauthorized/>},
+
+                //Public Routes
+                {path: '/', index: true, element: <BookFlight/>},
+                {path: 'flights', element: <Flights/>},
+                {path: 'fares', element: <FareOptions/>},
+                {path: 'createOrder', element: <CreateOrderComponent/>},
+                {path: 'orderSummary', element: <OrderSummary/>},
+
+
+                //Authenticated Routes
+                {
+                    element: <RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]}/>,
+                    children: [
+                        {path: 'orderSummary', element: <OrderSummary/>},
+                        {path: 'orders', element: <Orders/>},
+                    ]
+                },
+                {
+                    element: <RequireAuth allowedRoles={[ROLES.Admin]}/>,
+                    children: [
+                        {path: "admin", element: <AdminDashboard/>}
+                    ]
+                }
+            ]
+        }
+    ])
+
     return (
-        <div>
+        <AuthProvider>
             <SkeletonTheme baseColor={"#b4b4b4"} highlightColor={"#e8e8e8"}>
-                <Router>
-                    <Header/>
-                    <Routes>
-                        <Route path="/" element={<BookFlight/>}></Route>
-                        <Route path="/orders" element={<OrdersComponent/>}></Route>
-                        <Route path="booking/flights" element={<FlightsComponent/>}></Route>
-                        <Route path="/fare_options" element={<FareOptionsComponent/>}></Route>
-                        <Route path="/flight_checkout" element={<CreateOrderComponent/>}></Route>
-                        <Route path="/login" element={<Login/>}></Route>
-                    </Routes>
-                    <Footer/>\
-                </Router>
+                <RouterProvider router={router}/>
             </SkeletonTheme>
-        </div>
+        </AuthProvider>
     );
 }
 

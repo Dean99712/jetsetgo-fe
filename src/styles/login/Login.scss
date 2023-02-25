@@ -1,13 +1,73 @@
 .login-container {
-  width: 100vw;
-  height: calc(100vh - 100px);
-  position: absolute;
+  font-family: Poppins, sans-serif;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  background-color: #FFFFFF;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.error-text {
+  animation: wiggle ease-in-out 300ms;
 }
 
 .right-columnContainer {
-  height: 100vh;
-  width: 100vw;
-  background: url("../../assets/images/AdobeStock_89260265.png") no-repeat center fixed ;
+  & img {
+    width: calc(100vw - 650px);
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+  }
+}
+
+.form_user-login {
+  width: 100%;
+  padding: 10em 3em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+
+  & h6 {
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 1em;
+    color: rgba(33, 49, 63, 0.75);
+  }
+
+  & .login-submitButton {
+    width: 100%;
+    padding: 1em 1.5em;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    background-color: #000000;
+    color: white;
+    transition: all ease-in-out 300ms;
+
+    &:hover {
+      background-color: #343434;
+    }
+  }
+
+  input:not(input[type=checkbox]) {
+    width: calc(560px - 1.5em);
+    padding: 1.2em;
+    font-size: 20px;
+  }
+}
+
+@keyframes wiggle {
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

@@ -1,0 +1,33 @@
+.error_page {
+  font-family: Poppins, sans-serif;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.error_page h5 {
+  margin: 1em 0;
+  font-weight: 800;
+  font-size: 40px;
+}
+.error_page img {
+  width: 820px;
+  height: 312.5px;
+}
+.error_page a {
+  text-decoration: none;
+  color: #FFFFFF;
+  border-radius: 25px;
+  background-color: #2C447D;
+  padding: 0.5em 1.5em;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=Error.css.map */

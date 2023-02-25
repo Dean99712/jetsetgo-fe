@@ -1,0 +1,25 @@
+.input:not(input[type=checkbox]) {
+  font-family: Poppins, sans-serif;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid rgba(208, 208, 208, 0.5);
+  transition: outline-color ease-in-out 200ms;
+}
+.input:not(input[type=checkbox]):hover {
+  outline: 1px solid rgba(135, 195, 255, 0.5);
+}
+.input:not(input[type=checkbox])::placeholder {
+  font-size: 20px;
+  font-weight: 300;
+  color: #b2b2b2;
+}
+.input:not(input[type=checkbox]):required:after {
+  content: "*";
+  color: indianred;
+}
+
+.input[type=date]::-webkit-calendar-picker-indicator {
+  color: #b6b6b6;
+}
+
+/*# sourceMappingURL=InputComponent.css.map */

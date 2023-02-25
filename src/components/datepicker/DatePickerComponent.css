@@ -22,11 +22,11 @@
   outline: none;
 }
 .mdp-input input{
-  width: 130%;
-  background: #f5f5f5;
+  width: 100%;
+  background: transparent;
   border: none;
   padding-right: 10px;
-  height: 35px;
+  height: 100%;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -34,27 +34,31 @@
   cursor: pointer;
 }
 
+.mdp-input input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 .mdp-container {
   float: left;
   position: absolute;
-  left:0;
-  top: 40px;
-  width: 300px;
+  left:-155px;
+  top: 70px;
+  width: 450px;
   min-height: 350px;
   background: #fff;
-  //box-shadow: 10px 10px 40px rgba(0,0,0,0.2);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   border-radius: 20px;
   overflow: hidden;
   padding: 25px 30px;
 }
-.mdpc-head{
-  float: left;
+.mdpc-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
   width: 100%;
   height: 53px;
 }
 .mdpc-body{
-  float: left;
   width: 100%;
   margin-top: 20px;
 }
@@ -150,7 +154,7 @@
   height: 30px;
   font-size: 27px;
   color: #666;
-  font-weight: 200;
+  font-weight: 400;
   text-align: center;
 }
 .mdpchc-month{
@@ -159,7 +163,7 @@
   height: 15px;
   font-size: 13px;
   color: #666;
-  font-weight: 200;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -190,7 +194,7 @@
 .cc-month{
   height: 30px;
   width: 100%;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
   line-height: 30px;
   color: #666;
@@ -253,14 +257,16 @@
 }
 
 .c-day-container.disabled .cdc-day span{
-  color: #ddd;
+  color: #d5d5d5;
 }
 .c-day-container.disabled .cdc-day span{
   background: #fff!important;
 }
 .c-day-container.highlight .cdc-day span{
-  background: #efdbca;
+  color: #FFFFFF;
+  background: #48c1ff;
 }
 .c-day-container.highlight-green .cdc-day span{
-  background: #d4e2cb;
+  color: #FFFFFF;
+  background: #0096ff;
 }

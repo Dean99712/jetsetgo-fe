@@ -7,7 +7,7 @@ $secondaryVariant-color: #ffb03b;
 $under-lineColor: #dcdcdc;
 $width: 71.466vw;
 
-.bookContainer-all {
+.bookflight {
   display: flex;
   box-sizing: border-box;
   height: 200vh;
@@ -19,7 +19,7 @@ $width: 71.466vw;
   height: 100vh;
   width: 100vw;
   left: 0;
-  background: url('../../assets/images/AdobeStock_432879300.jpeg') center;
+  background: url('../../assets/images/HomePage.jpg') center;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ $width: 71.466vw;
     font-family: "brother-1816", sans-serif;
     font-weight: 700;
     font-style: normal;
-    text-align: left;
+    text-align: center;
   }
 
   & h1 {
@@ -88,7 +88,7 @@ $width: 71.466vw;
   background-color: #FFFFFF;
   font-weight: 400;
   display: flex;
-  top: 65%;
+  top: 75%;
   align-content: center;
   flex-direction: column;
   line-height: 1;
@@ -109,10 +109,6 @@ $width: 71.466vw;
       width: 100%;
       font-size: 16px;
       font-weight: 600;
-      &[type=date]::-webkit-calendar-picker-indicator {
-
-
-      }
     }
 
     & label {
@@ -212,31 +208,20 @@ $width: 71.466vw;
   display: flex;
   justify-content: space-between;
   align-content: center;
-
-  & button {
-    border: none;
-    padding: 1em;
-    width: 100%;
-  }
 }
-
-input {
-  font-weight: 400;
-  font-size: 2rem;
-  flex: 1
-}
-
 .submit-form-button {
   display: flex;
   align-items: center;
   gap: 10px;
   border: none;
   background: $secondaryVariant-color;
+  font-weight: 500;
+  font-size: 14px;
   outline: none;
   border-radius: 10px;
   padding: 20px;
   color: #FFFFFF;
-  transition: all linear 200ms;
+  transition: all ease-in-out 200ms;
 
   #search-icon {
     font-size: 20px;

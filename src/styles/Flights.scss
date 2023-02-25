@@ -1,0 +1,225 @@
+$base-color: #0086ff;
+$variant-color: #5BAEBC;
+$secondary-color: #B5E1E4;
+$line-color: #dcdcdc;
+$secondaryVariant-color: #ECAA44;
+$background-color: #F5F7FB;
+$width: 71.466vw;
+
+.offers-background {
+  height: 75vh;
+  background: url("../assets/images/flightsoffers/TerminalBackground.png") center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+
+  .offers-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 35em;
+  }
+
+  .offer-filter-container {
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    padding-bottom: 1em;
+
+    .offers-filter {
+      border-radius: 50px;
+      background: #FFFFFF;
+      display: flex;
+      align-items: baseline;
+      padding: 0.5em;
+      flex: 0.3;
+
+      button {
+        font-weight: 400;
+        border: none;
+
+        &:first-child {
+          border: none;
+        }
+      }
+
+      .filter-item {
+        flex: 1;
+        border-left: 1px solid #e3e3e3;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+      }
+    }
+  }
+}
+
+.offers {
+  width: $width;
+  background: #FFFFFF;
+  height: 200px;
+
+  & p {
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+.items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .slice-day {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(33, 49, 63, 0.5);
+  }
+
+  .slice-time {
+    margin-bottom: 10px;;
+    font-weight: 700;
+    font-size: 20px;
+
+    & span {
+      color: rgba(33, 49, 63, 0.5);
+    }
+  }
+
+  & a {
+    font-size: 12px;
+    color: $base-color;
+    text-decoration: none;
+  }
+
+  &.offer-select {
+    align-items: end;
+    justify-content: center;
+    border-left: 1px dashed $line-color;
+    letter-spacing: 2px;
+    margin-top: 1.5em;
+
+    h5 {
+      font-size: 20px;
+      font-weight: 800;
+
+
+      > span {
+        color: #b6b6b6;
+      }
+    }
+
+    .button-viewDeals {
+      background: #ECAA44;
+      padding: 0.5em 2em;
+      border-radius: 10px;
+      outline: none;
+      margin: auto 0;
+      border: none;
+      color: #FFFFFF;
+      transition: all 200ms ease-in-out;
+
+      &:hover {
+        color: #ECAA44;
+        background: #FFFFFF;
+        outline: 2px solid #ECAA44;
+      }
+    }
+
+  }
+
+  &.flight-destination-details {
+    justify-content: center;
+    gap: 0.5em;
+  }
+}
+
+.flight-owner-details {
+  justify-content: center;
+  justify-self: end;
+  gap: 2em;
+  border-right: 1px solid #e3e3e3;
+}
+
+#flight-duration {
+  color: #334a60;
+  font-size: 14px;
+  margin: 0;
+}
+
+.flights-median {
+  position: relative;
+  width: 150px;
+  border: 2px dashed transparent;
+  border-top-color: #bdbdbd;
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    top: -5px;
+    right: -10px;
+    border: 1px solid #4e96ff;
+    border-radius: 50%;
+    box-shadow: -150px 0 0 #4e96ff;
+  }
+
+  svg {
+    position: relative;
+    top: -13px;
+    left: 61px;
+    color: #42a2ff;
+  }
+}
+
+.flight-details-button {
+  border-radius: 30px;
+  border: 1px solid #dedede;
+  padding: 0.5em 1em;
+  font-weight: 500;
+  color: $base-color;
+}
+
+p.slice-title {
+  font-size: 16px;
+  color: rgb(58, 58, 58);
+  font-weight: 600;
+}
+
+.slice-subtitle {
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+#times {
+  background-color: #015AFF;
+}
+
+#more {
+  background-color: #8774DD;
+}
+
+#load-more_button {
+  align-self: end;
+  margin: 2em 0;
+  padding: 1em 5em;
+  background-color: #FFFFFF;
+  border: none;
+  color: #015AFF;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 50px;
+
+  &:disabled {
+    color: #d5d5d5;
+  }
+}

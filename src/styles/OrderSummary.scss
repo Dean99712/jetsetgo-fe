@@ -1,0 +1,49 @@
+$width: 71.68vw;
+
+.orderSummary {
+  height: 75vh;
+  background-size: cover;
+  background: url("../assets/images/ordersummary/OrderSummaryBackground.png") center no-repeat ;
+}
+
+.summary {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.orderSummary-container {
+  width: $width;
+  position: relative;
+  display: grid;
+  gap: 2em;
+  top: 40em;
+  left: 50%;
+  height: 750px;
+  transform: translate(-50%, -50%);
+  grid-template-columns: repeat(3, 1fr);
+
+  .summary-top {
+
+    & h6 {
+      text-transform: capitalize;
+      font-size: 20px;
+      padding-bottom: 1em ;
+      border-bottom: 1px solid rgba(199, 199, 199, 0.5);
+    }
+  }
+
+  .order-summary {
+
+  }
+  .passengers-summary {
+    //grid-column: span 2;
+  }
+  .payment-summary {
+    grid-row: span 3;
+    align-items: center;
+    grid-column: span 3;
+  }
+
+
+}
