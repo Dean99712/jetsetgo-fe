@@ -1,0 +1,34 @@
+.error_page {
+  font-family: Poppins, sans-serif;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h5 {
+    margin: 1em 0;
+    font-weight: 800;
+    font-size: 40px;
+  }
+
+  img {
+    width: calc(3280px / 4);
+    height: calc(1250px / 4);
+  }
+
+  a {
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 25px;
+    background-color: #2C447D;
+    padding: 0.5em 1.5em;
+    font-weight: 600;
+    font-size: 20px;
+  }
+}

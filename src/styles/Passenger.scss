@@ -1,13 +1,11 @@
-
 $width: 71.466vw;
 
 .passenger-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2em;
-  width: $width;
-  //flex: 1;
+  padding: 2em 0;
+  width: calc($width - 5em);
   flex-wrap: wrap;
   background: #FFFFFF;
   border-radius: 10px;
@@ -20,6 +18,7 @@ $width: 71.466vw;
   .passenger-type {
     display: flex;
     align-items: center;
+    font-weight: 700;
     gap: 1em;
     border-bottom: 1px solid #eeeeee;
     padding-bottom: 1em;
@@ -39,36 +38,56 @@ $width: 71.466vw;
 .passenger-item {
   padding: 1em 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 0.5em;
 
+  &.gender {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    .title {
+      font-weight: 600;
+    }
+    .gender-selection {
+      display: flex;
+      gap: 0.5em;
+    }
+  }
   & select {
-    width: 100px;
+    padding: 1.2em;
+    font-size: 16px;
+    transition: outline-color ease-in-out 200ms;
     outline: none;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
-    height: 50px;
+
     & option {
+      color: #424242;
       background: #FFFFFF;
       border-radius: 5px;
-
-      &:hover {
-        background: #eeeeee;
-      }
     }
   }
 
   input {
-    //padding: 10px;
-    border-radius: 5px;
-    outline: 1px solid #e0e0e0;
-    border: none;
-    font-size: 24px;
+    padding: 0.8em;
+    font-size: 20px;
+  }
+
+  & [type="date"] {
+    font-weight: 300;
+    font-size: 20px;
+    color: #d5d5d5;
   }
 }
 .passenger-details {
   display: flex;
   gap: 1em;
+  margin-top: 2em;
+  align-items: center;
   justify-content: space-between;
-
+}
+.passenger-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

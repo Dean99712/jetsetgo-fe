@@ -1,0 +1,69 @@
+.input:not(input[type=checkbox],
+ input[type=radio]) {
+  position: relative;
+  font-family: Poppins, sans-serif;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid rgba(208, 208, 208, 0.5);
+  transition: outline-color ease-in-out 200ms;
+
+  &:hover {
+    outline: 1px solid rgba(135, 195, 255, 0.5);
+  }
+
+  &::placeholder {
+    font-size: 20px;
+    font-weight: 300;
+    color: #b2b2b2;
+  }
+
+  &:required:after {
+    content: "*";
+    color: indianred;
+  }
+  &:required:after {
+    content: "*";
+    position: relative;
+    top: 100px;
+    color: #DC3545;
+    height: 500px;
+    width: 500px;;
+  }
+}
+
+.input[type=radio] {
+  appearance: none;
+  outline: 1px solid #dedede;
+  border-radius: 50%;
+
+  &:checked {
+    outline: none;
+    background-color: #3497ff;
+  }
+  &:focus {
+    outline: 1px solid rgba(135, 195, 255, 0.5);
+
+  }
+}
+select {
+  position: relative;
+  padding: 0.9em;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid rgba(208, 208, 208, 0.5);
+  transition: outline-color ease-in-out 200ms;
+  font-size: 18px;
+  width: fit-content;
+
+  &:hover {
+    cursor: pointer;
+    outline: 1px solid rgba(135, 195, 255, 0.5);
+  }
+}
+
+option {
+  position: relative;
+}
+.input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #b6b6b6;
+}

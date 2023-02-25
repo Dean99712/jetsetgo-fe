@@ -1,0 +1,115 @@
+.orderSummary {
+  height: 75vh;
+  background-size: cover;
+  background: url("../assets/images/ordersummary/OrderSummaryBackground.png") center no-repeat;
+}
+
+.summary {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.orderSummary-container {
+  width: 71.68vw;
+  position: relative;
+  display: grid;
+  gap: 1em;
+  top: 37em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  grid-template-columns: repeat(3, 1fr);
+}
+.orderSummary-container .summary-top h6 {
+  text-transform: capitalize;
+  font-size: 18px;
+  color: #282828;
+  padding-bottom: 1em;
+  border-bottom: 1px solid rgba(199, 199, 199, 0.4980392157);
+}
+
+.order-summary {
+  height: fit-content;
+  grid-column-start: 3;
+}
+.order-summary .summary_order-details {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid #2E79E9;
+  padding: 0.5em;
+  align-items: baseline;
+}
+.order-summary .summary_order-details h6:nth-child(2) {
+  color: #2E79E9;
+}
+
+.summary-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.passengers-summary {
+  grid-column: span 2;
+  height: fit-content;
+}
+.passengers-summary .passenger-name_details {
+  display: flex;
+  gap: 10em;
+}
+.passengers-summary .summary_passenger-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.passengers-summary .summary_passenger-details p {
+  color: #7E89A3;
+  margin: 0;
+  padding: 0;
+}
+.passengers-summary .summary_passenger-details .summary_passenger-title {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.passengers-summary .summary_passenger-details .summary_passenger-text {
+  color: #2C3158;
+  font-weight: 500;
+}
+
+.payment-summary {
+  height: fit-content;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.payment-summary .payment {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.payment-summary .payment:nth-child(3) {
+  border-top: 1px dashed rgba(199, 199, 199, 0.75);
+  padding: 1em 0;
+  margin-bottom: 1em;
+}
+.payment-summary .payment .title {
+  color: #2C3158;
+}
+.payment-summary .payment .price {
+  color: #7E89A3;
+}
+
+.to-orders_button {
+  padding: 1em;
+  text-align: center;
+  outline: 1px solid #2E79E9;
+  border-radius: 10px;
+  background-color: transparent;
+  font-weight: 500;
+  color: #2E79E9;
+  border: none;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=OrderSummary.css.map */

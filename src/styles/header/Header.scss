@@ -1,0 +1,144 @@
+$base-color: #2973ff;
+$header-height: 85px;
+$font-color: #FFFFFF;
+$secondaryVariant-color: #ECAA44;
+$width: 71.466vw;
+
+.header{
+  font-family: Poppins, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  height: $header-height;
+  background-color: transparent;
+  z-index: 10;
+  transition: all ease-in-out 300ms;
+}
+
+.header-container {
+  flex-direction: row-reverse;
+  width: $width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 100;
+
+  .main-logo {
+    height: 50px;
+    width: 150px;
+    transition: all ease-in-out 100ms;
+  }
+  .logo {
+    height: 65px;
+    width: 80px;
+  }
+
+  //Middle Titles
+  .header_middle-titles {
+    flex: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 50px;
+    gap: 2em;
+
+    .header_middle-title {
+      color: $font-color;
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      padding-bottom: 0.5em;
+      transition: border-bottom-width 100ms ease-out,
+      transform ease-out 100ms;
+
+      &:hover {
+        transform: translateY(-3px);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+.log-in-buttons {
+  display: flex;
+  gap: 0.5em;
+  min-width: 350px;
+  max-width: 700px;
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 2em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+#user-icon {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  padding: 0.75em;
+  border-radius: 50%;
+  margin-left: 2em;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+#nav_search-icon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid white;
+  padding: 0.9em;
+  border-radius: 50%;
+  color: #FFFFFF;
+  z-index: 10;
+
+  transition: transform 100ms ease-in-out;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.btn-signIn {
+  border: none;
+  padding: 10px 2em;
+  background: $base-color;
+  color: $font-color;
+  font-weight: 600;
+  line-height: 1.5;
+  text-underline: none;
+  transition: all linear 100ms;
+  border-radius: 10px;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.btn-signup {
+  border: none;
+  padding: 10px 2em;
+  background: transparent;
+  outline: 1px #ffffff solid;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.5;
+  text-underline: none;
+  transition: all linear 100ms;
+  border-radius: 5px;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}

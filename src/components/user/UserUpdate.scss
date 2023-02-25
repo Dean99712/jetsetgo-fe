@@ -1,0 +1,93 @@
+$width : 71.68vw;
+.UserUpdate {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  justify-content: start;
+  align-items: center;
+
+  & img {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+  }
+}
+.user-update_form {
+  position: relative;
+  top: -30em;
+  display: flex;
+  padding: 2em;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: calc($width / 2);
+  height: 800px;
+  background-color: #FFFFFF;
+  gap: 2em;
+  border-radius: 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  & > div {
+    display: flex;
+    flex: 1;
+    align-self: start;
+    flex-direction: column;
+    align-items: end;
+    gap: 1em;
+
+  }
+  & img {
+    margin-bottom: 2em;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+  }
+  #user-icon {
+    margin-bottom: 2em;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    color: #b7b7b7;
+    border: 3px solid #DCDCDC;
+    padding: 1.7em;
+  }
+  img:hover, svg:hover {
+    cursor: pointer;
+    & + .hide {
+      display: block;
+    }
+  }
+  input {
+    width: 100%;
+    padding: 1em;
+  }
+  .submit-update {
+    color: #FFFFFF;
+    outline: none;
+    align-self: end;
+    border: none;
+    background-color: #2E79E9;
+    padding: 0.5em 1.5em;
+    border-radius: 7px;
+    line-height: 2;
+    &:disabled {
+      width: 100px;
+      background-color: #d5d5d5;
+    }
+  }
+}
+
+.hide {
+  display: none;
+  width: fit-content;
+  position: absolute;
+  top: 160px;
+  right: 220px;
+
+  svg {
+    color: #d5d5d5;
+    height: 30px;
+    width: 30px;
+  }
+}

@@ -1,33 +1,57 @@
-.fares-containerAll {
-  box-sizing: border-box;
-  display: flex;
+.fare-options_container {
+  top: -19px;
   position: absolute;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background: #F5F7FB;
-}
-
-.fare-options--container {
-  position: relative;
   width: 100vw;
   height: 80vh;
-  background: url("../../assets/images/fareoptions/AdobeStock_171807534.jpeg") center center fixed;
-  background-size: cover;
+  background: url("../../assets/images/fareoptions/FaresBackground.png") center no-repeat;
+  background-size: contain;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.fare-options--container .fares-container {
+.fare-options_container .flight-fares {
   position: relative;
-  width: 75vw;
-  border-radius: 30px;
+  top: 18em;
   display: grid;
+  width: 71.466vw;
+  gap: 1em;
+  grid-template-columns: repeat(4, 1fr);
+}
+.fare-options_container .flight-fares .fares {
+  position: relative;
+  display: flex;
   background: transparent;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  gap: 1em;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 1px 1px 2em;
+  overflow-x: auto;
+}
+.fare-options_container .flight-fares .fares::-webkit-scrollbar {
+  width: 6px;
+}
+.fare-options_container .flight-fares .fares::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.fare-options_container .flight-fares .fares::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 50px;
+  transition: all ease-in-out 400ms;
+}
+.fare-options_container .flight-fares .fares::-webkit-scrollbar-thumb:hover {
+  background-color: #afafaf;
+}
+.fare-options_container .flight-fares .selected-fare_summary {
+  position: relative;
+  top: -10em;
+  border-radius: 10px;
+  justify-self: end;
+  width: 250px;
+  height: 460px;
+  grid-column-start: 4;
+  background-color: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 }
 
 /*# sourceMappingURL=FareOptions.css.map */

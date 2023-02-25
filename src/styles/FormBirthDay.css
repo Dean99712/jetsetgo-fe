@@ -1,0 +1,11 @@
+.form_birth-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.form_birth-container div {
+  display: flex;
+  gap: 1em;
+}
+
+/*# sourceMappingURL=FormBirthDay.css.map */

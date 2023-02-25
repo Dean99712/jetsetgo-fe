@@ -1,0 +1,86 @@
+.flightDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  width: 700px;
+  background-color: #FFFFFF;
+  height: 150px;
+}
+.flightDetails .flight-details_title h5 {
+  font-size: 14px;
+}
+.flightDetails .flight-details_title span {
+  font-weight: 700;
+  margin-left: 1em;
+  color: #B1BBCD;
+}
+.flightDetails .flight-details_section {
+  display: flex;
+  align-items: center;
+}
+.flightDetails .flight-details_section .flight-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.flightDetails .flight-details_section .flight-details h6 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.flightDetails .flight-details_section .flight-details p {
+  font-weight: 700;
+  color: #B1BBCD;
+}
+.flightDetails .flight-details_section .flight-details.duration {
+  flex: 2;
+  gap: 0.3em;
+}
+.flightDetails .flight-details_section .flight-details.duration p {
+  color: #21313f;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
+.flightDetails .flight-details_section .flight-details.duration span {
+  color: #B1BBCD;
+}
+.flightDetails .flight-details_section .flight-details.duration div {
+  border-bottom: 1px dotted black;
+  width: calc(100% - 40px);
+}
+.flightDetails .flight-details_section .flight-details.duration div:before {
+  content: "";
+  height: 150px;
+  width: 150px;
+  background-color: #2E79E9;
+  position: relative;
+}
+.flightDetails .flight-details_section .flight-details.duration svg {
+  position: relative;
+  top: -20px;
+  width: 15px;
+  height: 15px;
+  align-self: end;
+  color: #42a2ff;
+  border-radius: 50%;
+  padding: 0.4em;
+  background-color: #FFFFFF;
+  border: 1px solid #B1BBCD;
+}
+.flightDetails .flight-details_section .flight-details.duration .flight {
+  position: relative;
+  top: -29px;
+  color: #21313f;
+  font-size: 12px;
+}
+.flightDetails .flight-details_section .flight-details.owner img {
+  align-self: auto;
+  width: 50px;
+  height: 50px;
+}
+
+/*# sourceMappingURL=FlightDetails.css.map */

@@ -1,0 +1,74 @@
+.fare {
+  border-radius: 7px;
+  font-family: Poppins, sans-serif;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 350px;
+  transition: outline-width ease-in-out 200ms;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+}
+.fare:hover {
+  outline: 1px solid #2E72CF;
+  cursor: pointer;
+}
+.fare:active {
+  outline: 2px solid #2E72CF;
+  cursor: pointer;
+}
+.fare .fare-top {
+  height: 250px;
+  padding: 1em;
+}
+.fare .fare-top h6 {
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+.fare .fare-top h5 {
+  font-size: 14px;
+}
+.fare .fare-top ul {
+  padding: 0;
+  margin: 1em 0;
+}
+.fare .fare-top ul li {
+  font-size: 14px;
+  display: flex;
+  margin: 1em 0;
+  gap: 1em;
+  justify-content: left;
+  align-items: baseline;
+  list-style: none;
+}
+.fare .fare-top ul li p {
+  margin: 0;
+  font-weight: 500;
+}
+.fare .fare-top ul li svg {
+  width: 20px;
+  color: rgba(56, 56, 56, 0.75);
+}
+.fare .fare-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-direction: row;
+  flex: 1;
+  padding: 1em;
+  gap: 0.5em;
+  background-color: rgba(213, 213, 213, 0.4980392157);
+}
+.fare .fare-bottom p {
+  align-self: end;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+}
+.fare .fare-bottom h6 {
+  font-weight: 600;
+  align-self: end;
+  margin: 0;
+}
+
+/*# sourceMappingURL=Fare.css.map */

@@ -1,0 +1,73 @@
+.register {
+  height: 100vh;
+  display: flex;
+
+  section {
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .form-register {
+    padding: 5em 3em 0 3em;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+    div {
+      display: flex;
+      gap: 1em;
+
+      &:nth-child(4) {
+        flex-direction: column;
+      }
+    }
+
+    .form-title {
+      font-weight: 400;
+      font-size: 32px;
+      margin-bottom: 1em;
+      color: #21313FBF;
+      text-align: center;
+
+    }
+
+    input {
+      flex: 1;
+      padding: 0.8em;
+      font-size: 20px;
+    }
+  }
+}
+
+.register_background {
+  display: flex;
+  width: calc(100% - 680px);
+  background: url('../../assets/images/login/RegisterBackground.jpeg') center;
+  background-size: cover;
+}
+
+.register_button {
+  width: 100%;
+  padding: 1em 1.5em;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  background-color: #000000;
+  color: white;
+  transition: all ease-in-out 300ms;
+
+  &:hover {
+    background-color: #343434;
+  }
+
+  &:disabled {
+    background-color: #d5d5d5;
+  }
+}
+
+.gender_container {
+  display: flex;
+  flex-direction: column;
+}

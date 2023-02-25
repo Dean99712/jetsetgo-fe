@@ -15,7 +15,7 @@ export default class DatePicker extends Component {
 
     constructor(props) {
         super(props);
-        inputRef = props.departureDate
+        inputRef = props.inputRef
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth();
@@ -25,7 +25,6 @@ export default class DatePicker extends Component {
             selectedDay: todayTimestamp,
             monthDetails: this.getMonthDetails(year, month)
         }
-        console.log(props.departureDate)
     }
 
     componentDidMount() {
@@ -213,13 +212,12 @@ export default class DatePicker extends Component {
             </div>
         )
     }
-
     render() {
         return (
             <div className='DatePicker'>
-                <div className='mdp-input'  onClick={()=> this.showDatePicker(true)}>
-                    <input type='date' onChange={this.updateDateFromInput} ref={inputRef}
-                           // ref={this.props.departureDate}
+                <div className='mdp-input' onClick={()=> this.showDatePicker(true)}>
+                    <input type='date' onChange={this.updateDateFromInput} name={this.props.name} ref={inputRef}
+                           value={this.props.value}
                     />
                 </div>
                 {this.state.showDatePicker ? (

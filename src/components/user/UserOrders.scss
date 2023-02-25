@@ -1,0 +1,40 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.data-grid {
+  border-radius: 20px;
+  padding: 1em;
+}
+div.grid {
+  position: relative;
+  top: 1em;
+  height: 550px;
+  width: 71.466vw;;
+
+}
+.orders-title {
+  font-size: 30px;
+  margin-bottom: 1.5em;
+  font-weight: 700;
+  text-align: center;
+  color: #21313f;
+}
+.action_button {
+  color: #FFFFFF;
+  outline: none;
+  font-weight: 600;
+  border: none;
+  line-height: 2;
+  padding: 0.5em 1.5em;
+  border-radius: 7px;
+
+  &.cancel {
+    background-color: #098dec;
+  }
+  &.delete {
+    background-color: #f63e3e;
+  }
+}

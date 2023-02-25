@@ -1,15 +1,14 @@
-import axios from "axios";
+import axios from "../api/axios";
 
-const OFFERS_BASE_URL = 'http://localhost:8080/api/offer_request'
-const CREATE_OFFER_URL = `${OFFERS_BASE_URL}/createOffer`
-const GET_OFFERS_URL = `${OFFERS_BASE_URL}/offers`
+const CREATE_OFFER_URL = `/offer_request/createOffer`
+const GET_OFFERS_URL = `/offers`
 
-class OfferRequestService {
-
-    createOfferRequest(dataItem) {
+   export const createOfferRequest = (dataItem) => {
         return axios.post(CREATE_OFFER_URL, dataItem
         )
     }
-}
 
-export default new OfferRequestService();
+export const getAllOffers = () => {
+    return axios.get(GET_OFFERS_URL)
+        .then(res => res.data)
+}

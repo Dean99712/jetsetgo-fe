@@ -2,93 +2,102 @@ import React from 'react';
 import '../../styles/Passenger.scss'
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons/faCircleUser";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import InputComponent from "../InputComponent";
 
-const Passenger = (props) => {
+const Passenger = ({formik, index}) => {
 
-    const colors = ["#ECAA44", "#0086ff"];
+    const color = "#0086ff";
 
-    const passengers = props.passengers;
-    const formik = props.formik
+    return (
+        <div className="passenger-container">
+            <div className="form-passenger-details">
+                <div className="passenger-type">
+                    <FontAwesomeIcon className="passenger-icon" style={{color: color}}
+                                     icon={faCircleUser}/>
+                    <h6
+                        className="passengerType">Passenger {index + 1}</h6>
+                </div>
+                <section className="section-passenger-details">
+                    <div className="passenger-details">
 
-    const renderInfantId = (passenger, index) => {
-        if (passengers.includes(passenger)) {
-        }
-            // for (let i = 0; i <= passengers.length; i++) {
-            //     if (passenger.type === "infant_without_seat") {
-            //         console.log("True",passenger.type, index)
-            //        return console.log(passenger.id)
-            //     }
-            // }
-            // if (passenger.type === "infant_without_seat") {
-            //     console.log(passenger.id);
-            //     return <input className="form-input"
-            //                   type="text"
-            //                   name={`passengers.${[index]}."infant_passenger_id`}
-            //                   value={passenger.id}
-            //                   onChange={formik.handleChange}
-            //     />;
-            // }
-        };
 
-        return (
-                passengers.map((passenger, index) => (
-                    <div className="passenger-container">
-                        <div className="form-passenger-details">
-                            <div className="passenger-type">
-                                <FontAwesomeIcon className="passenger-icon" style={{color: colors[index]}}
-                                                 icon={faCircleUser}/>
-                                <h6
-                                    className="passengerType">Passenger {index + 1}</h6>
+                        <div className="passenger-item passenger-title">
+                            <div className="form-item">
+                                <select
+                                    name={`passengers.${[index]}.title`}
+                                    value={formik.values.passengers.title}
+                                    onChange={formik.handleChange}
+                                    required
+                                >
+                                    <option autoCapitalize="true" className="text-" value="">Title</option>
+                                    <option value="mr">Mr</option>
+                                    <option value="ms">Ms</option>
+                                    <option value="dr">Dr</option>
+                                    <option value="prof">Prof</option>
+                                </select>
+                                {(formik.errors.passengers?.[index]?.title && formik.touched.passengers?.[index]?.title)
+                                    &&
+                                    <p className="text-danger error-message">{formik.errors.passengers?.[index]?.title}</p>
+                                }
                             </div>
-                            <section className="section-passenger-details">
-                                <div className="passenger-details">
+                        </div>
 
-                                    <div className="passenger-item">
-                                        <label className="fw-semibold">Title</label>
-                                        <select
-                                            name={`passengers.${[index]}.title`}
-                                            value={formik.values.passengers.title}
-                                            onChange={formik.handleChange}>
+                        <div className="passenger-item">
+                            <div className="form-item">
+                                <InputComponent
+                                    type={"text"}
+                                    required={true}
+                                    name={`passengers.${[index]}.given_name`}
+                                    value={formik.values.passengers.given_name}
+                                    onChange={formik.handleChange}
+                                    handleBlur={formik.handleBlur}
+                                    placeholder="First name"
+                                />
+                                {(formik.errors.passengers?.[index]?.given_name && formik.touched.passengers?.[index]?.given_name)
+                                    &&
+                                    <p className="text-danger error-message">{formik.errors.passengers?.[index]?.given_name}</p>
+                                }
+                            </div>
 
-                                            <option autoCapitalize="true" value=""></option>
-                                            <option value="mr">Mr</option>
-                                            <option value="ms">Ms</option>
-                                            <option value="dr">Dr</option>
-                                            <option value="prof">Prof</option>
-                                        </select>
-                                    </div>
-                                    <div className="passenger-item">
-                                        <label className="fw-semibold">First Name</label>
-                                        <input className="form-input"
-                                               type="text"
-                                               name={`passengers.${[index]}.given_name`}
-                                               value={formik.values.passengers.given_name}
-                                               onChange={formik.handleChange}
-                                        />
-                                        {renderInfantId(passenger, index)}
-                                    </div>
-                                    <div className="passenger-item">
-                                        <label className="fw-semibold">Last Name</label>
-                                        <input className="form-input"
-                                               name={`passengers.${[index]}.family_name`}
-                                               value={formik.values.family_name}
-                                               onChange={formik.handleChange}
-                                               type="text"/>
-                                    </div>
-                                    <div className="passenger-item">
-                                        <label className="fw-semibold">Date of Birth</label>
+                        </div>
+                        <div className="passenger-item">
+                            <div className="form-item">
+                                <InputComponent
+                                    type="text"
+                                    name={`passengers.${[index]}.family_name`}
+                                    value={formik.values.passengers.family_name}
+                                    onChange={formik.handleChange}
+                                    handleBlur={formik.handleBlur}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Last name"
+                                />
+                                {(formik.errors.passengers?.[index]?.family_name && formik.touched.passengers?.[index]?.family_name)
+                                    &&
+                                    <p className="text-danger error-message">{formik.errors.passengers?.[index]?.family_name}</p>}
+                            </div>
 
-                                        <input className="form-input"
-                                               id="DatePickerInput"
-                                               name={`passengers.${[index]}.born_on`}
-                                               value={formik.values.born_on}
-                                               onChange={formik.handleChange}
-                                               max={new Date().toString()}
-                                               type="date"/>
-                                    </div>
-                                    <div className="passenger-item">
-                                        <h6>Gender</h6>
-                                        <span>
+                        </div>
+                        <div className="passenger-item">
+
+                            <div className="form-item">
+
+                                <InputComponent
+                                    type={"date"}
+                                    name={`passengers.${[index]}.born_on`}
+                                    value={formik.values.passengers.born_on}
+                                    onChange={formik.handleChange}
+                                    handleBlur={formik.handleBlur}
+                                    placeholder="Date of birth"
+                                />
+                                {(formik.errors.passengers?.[index]?.born_on && formik.touched.passengers?.[index]?.born_on)
+                                    &&
+                                    <p className="text-danger error-message">{formik.errors.passengers?.[index]?.born_on}</p>}
+                            </div>
+
+                        </div>
+                        <div className="passenger-item gender">
+                            <h6 className="title">Gender</h6>
+                            <span className="gender-selection">
                                 <input className="form-input"
                                        name={`passengers.${[index]}.gender`}
                                        value="m"
@@ -102,19 +111,17 @@ const Passenger = (props) => {
                                        type="radio"/>
                                 <label>Female</label>
                             </span>
-                                    </div>
-                                    <div className="passenger-details">
-                                        <input type="hidden"
-                                               name={`passengers.email`}
-                                               value={formik.values.passengers.email}
-                                               onChange={formik.handleChange}
-                                        />
-                                    </div>
-                                </div>
-                            </section>
+                            {(formik.errors.passengers?.[index]?.gender && formik.touched.passengers?.[index]?.gender)
+                                &&
+                                <p className="text-danger error-message">{formik.errors.passengers?.[index]?.gender}</p>}
                         </div>
                     </div>
-                )))
-    };
+                </section>
+            </div>
+        </div>
+    )
 
-    export default Passenger;
+
+};
+
+export default Passenger;

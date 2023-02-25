@@ -1,0 +1,132 @@
+$width: 71.68vw;
+$primary-header--color: #282828;
+$border--color: #2E79E9;
+$primary-text--color: #2C3158;
+$secondary-text--color: #7E89A3;
+
+.orderSummary {
+  height: 75vh;
+  background-size: cover;
+  background: url("../assets/images/ordersummary/OrderSummaryBackground.png") center no-repeat;
+}
+
+.summary {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.orderSummary-container {
+  width: $width;
+  position: relative;
+  display: grid;
+  gap: 1em;
+  top: 37em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  grid-template-columns: repeat(3, 1fr);
+
+  .summary-top h6 {
+    text-transform: capitalize;
+    font-size: 18px;
+    color: $primary-header--color;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #C7C7C77F;
+  }
+}
+
+.order-summary {
+  height: fit-content;
+  grid-column-start: 3;
+
+  .summary_order-details {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 1px solid $border--color;
+    padding: 0.5em;
+    align-items: baseline;
+
+    h6:nth-child(2) {
+      color: $border--color;
+    }
+
+  }
+}
+.summary-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.passengers-summary {
+  grid-column: span 2;
+  height: fit-content;
+
+  .passenger-name_details {
+    display: flex;
+    gap: 10em;
+  }
+
+  .summary_passenger-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    //gap: 0.5em;
+
+    p {
+      color: $secondary-text--color;
+      margin: 0;
+      padding: 0;
+    }
+
+    .summary_passenger-title {
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .summary_passenger-text {
+      color: $primary-text--color;
+      font-weight: 500;
+
+    }
+  }
+}
+
+.payment-summary {
+  height: fit-content;
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  .payment {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    &:nth-child(3) {
+      border-top: 1px dashed rgba(199, 199, 199, 0.75);
+      padding: 1em 0;
+      margin-bottom: 1em;
+    }
+
+    .title {
+      color: $primary-text--color;
+    }
+
+    .price {
+      color: $secondary-text--color;
+    }
+  }
+}
+
+.to-orders_button {
+  padding: 1em;
+  text-align: center;
+  outline: 1px solid $border--color;
+  border-radius: 10px;
+  background-color: transparent;
+  font-weight: 500;
+  color: $border--color;
+  border: none;
+  text-decoration: none;
+}

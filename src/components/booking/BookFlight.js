@@ -2,19 +2,33 @@ import React, {useRef, useState} from "react";
 import "./BookFlight.scss"
 import "../../styles/PassengersOptions.scss"
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/axios";
 import FullPageLoader from "../FullPageLoader";
-import PassengersOptionsComponent from "../PassengersOptionsComponent";
-import OneRoadForm from "../oneroadtrip/OneRoadTrip";
+import PassengersOptionsComponent from "./PassengersOptionsComponent";
+import OneRoadForm from "./oneroadtrip/OneRoadTrip";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {Tab} from "@mui/material";
+import {TabContext, TabList, TabPanel} from "@mui/lab";
+import RoundTrip from "./roundtrip/RoundTrip";
+import {motion as m} from 'framer-motion';
+
 
 const BookFlight = () => {
 
+    const CREATE_OFFER = '/offer_request/createOffer'
+
+    const navigation = useNavigate()
+    const [value, setValue] = useState("1");
+
+    const handleTabChange = (event, newValue) => {
+        setValue(newValue)
+    };
+
     const origin = useRef()
     const destination = useRef()
-    const departure_date = useRef()
+    const departure_date = useRef();
 
     const [isLoading, setIsLoading] = useState(false)
     const [offerRequestId, setOfferRequestId] = useState(null);
@@ -24,6 +38,7 @@ const BookFlight = () => {
     const [options, setOptions] = useState({
         adult: 1,
         child: 0,
+        infant_without_seat: 0
     });
 
     const handelOption = (name, operation) => {
@@ -58,25 +73,18 @@ const BookFlight = () => {
         handelOption(type, "d")
     };
 
-    const navigate = useNavigate();
-
     const handelSubmit = async (e) => {
-
         e.preventDefault()
 
         async function createOfferRequest() {
-
-            let slices = [
-                {
-                    origin: origin.current?.value,
-                    destination: destination.current?.value,
-                    departure_date: departure_date.current?.value,
-                }
-            ]
-
+            let slices = [{
+                origin: origin.current?.value,
+                destination: destination.current?.value,
+                departure_date: departure_date.current?.value,
+            }]
             try {
                 setIsLoading(true)
-                const response = await axios.post("http://localhost:8080/api/offer_request/createOffer", {
+                const response = await axios.post(CREATE_OFFER, {
                     data: {
                         slices,
                         passengers,
@@ -87,49 +95,72 @@ const BookFlight = () => {
                 console.log(error)
             }
         }
-
         await createOfferRequest();
     }
 
     function navigateToOffers() {
         if (offerRequestId) {
             setIsLoading(false);
-            return navigate(`booking/flights`, {state: {id: offerRequestId}});
+            return navigation('flights', {state: {id: offerRequestId}})
         }
     }
 
     return (
-        <div className="bookContainer-all">
-            <div className="mainPage-body" onMouseDown={() => openOptions}>
+        <div className="bookflight">
+            <m.div className="mainPage-body" onMouseDown={() => openOptions}>
                 <div className="main-title">
-                    <h1>Book Your Flight Today </h1>
-                    <h5>we are working with all of the great airline companies to ensure you an excellent
-                        flight </h5>
+                    <m.h1
+                        initial={{position: "relative",top: 600, opacity: 0}}
+                        animate={{opacity: 1, top: 0, animationDelay: 300}}
+                        transition={{type: "spring", stiffness: 250, damping: 20, duration: 0.5}}
+                    >Book Your Flight Today </m.h1>
+                    <m.h5
+                        initial={{position: "relative",top: 600, opacity: 0}}
+                        animate={{opacity: 1, top: 0}}
+                        transition={{type: "spring", stiffness: 250, damping: 20, duration: 0.5}}
+                    >we are working with all of the great airline companies to ensure you an excellent
+                        flight </m.h5>
                 </div>
 
                 {isLoading && <FullPageLoader/>}
 
-                <div className="form-container">
+                <m.div
+                    initial={{position: "relative",bottom: -500, opacity: 0}}
+                    animate={{opacity: 1, top: "75%"}}
+                    transition={{type: "spring", stiffness: 250, damping: 20, delay: 0.3, duration: 0.3}}
+                    className="form-container">
 
                     <form onSubmit={(e) => handelSubmit(e)}>
-                        <div className="form-type-container">
-                            <h3 className="form-type active">One Way</h3>
-                            <h3 className="form-type">Round Trip</h3>
-                            <h3 className="form-type">Multi-City</h3>
-                        </div>
-                        {/*Location Container*/}
-                        <section className="first-row">
-                            <div className="form-type-container">
-                                <OneRoadForm
-                                    origin={origin}
-                                    destination={destination}
-                                    departureDate={departure_date}
-                                    options={options}
-                                    navigateToOffers={navigateToOffers}
-                                    onSubmit={handelSubmit}
-                                />
-                            </div>
-                            <span>
+
+                        <TabContext value={value}>
+                            <TabList onChange={handleTabChange}>
+                                <Tab className="text-capitalize fw-bold" label="One Way" value="1"/>
+                                <Tab className="text-capitalize fw-bold" label="Round Trip" value="2"/>
+                                <Tab className="text-capitalize fw-bold" label="Multi-City" value="3"/>
+                            </TabList>
+                            <section className="first-row">
+                                <div className="form-type-container">
+                                    <TabPanel value="1" className="p-0">
+                                        <OneRoadForm
+                                            origin={origin}
+                                            destination={destination}
+                                            departureDate={departure_date}
+                                            options={options}
+                                            navigateToOffers={navigateToOffers}
+                                            onSubmit={handelSubmit}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value="2" className="p-0">
+                                        <RoundTrip
+                                            origin={origin}
+                                            destination={destination}
+                                            departureDate={departure_date}
+                                            onSubmit={handelSubmit}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value="3" className="p-0">Panel Three</TabPanel>
+                                </div>
+                                <span>
                                     <div className="search-input passenger-counter"
                                          onClick={() => setOpenOptions(!openOptions)}
                                          id="passengers_options-container">
@@ -149,27 +180,27 @@ const BookFlight = () => {
                                         </div>
                                     </div>
 
-                                {/*Options menu Adult*/}
-                                {openOptions && <PassengersOptionsComponent
-                                    onRemovePassenger={handelRemovePassenger}
-                                    onAddPassenger={handelAddPassenger}
-                                    onCloseOptions={setOpenOptions}
-                                    options={options}
-                                />
-                                }
+                                    {openOptions && <PassengersOptionsComponent
+                                        onRemovePassenger={handelRemovePassenger}
+                                        onAddPassenger={handelAddPassenger}
+                                        onCloseOptions={setOpenOptions}
+                                        options={options}
+                                    />
+                                    }
                                 </span>
-                            <button type={"submit"} className="form-btn submit-form-button"
-                                    onClick={navigateToOffers()}
-                            ><FontAwesomeIcon id="search-icon" icon={faSearch}/>
-                                Find me a flight
-                            </button>
-                        </section>
+                                <button type={"submit"} className="form-btn submit-form-button"
+                                        onClick={navigateToOffers()}
+                                ><FontAwesomeIcon id="search-icon" icon={faSearch}/>
+                                    Find me a flight
+                                </button>
+                            </section>
+                        </TabContext>
                     </form>
-                </div>
-            </div>
+
+                </m.div>
+            </m.div>
         </div>
     );
-
 };
 
 export default BookFlight

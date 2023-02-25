@@ -1,87 +1,202 @@
-import React from 'react';
-import "../styles/Header.scss"
+import React, {useEffect, useRef, useState} from 'react';
+import "../styles/header/Header.scss"
 import {Navbar} from "react-bootstrap";
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-regular-svg-icons";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import '../styles/header/HeaderBackground.scss'
+import LogoMainWhite from './../assets/images/LogoMainWhite.png'
+import LogoMain from './../assets/images/LogoMain.png'
+import Logo from './../assets/images/LogoOnly.png'
+import SearchBar from "./SearchBar";
+import {motion as m} from 'framer-motion';
+
 
 const Header = () => {
 
     const navigate = useNavigate()
-
     const location = useLocation()
 
+    const {auth, setAuth} = useAuth()
+    const {user} = auth
+
+    const [openSearch, setOpenSearch] = useState(false);
+
+    const [searchIcon, setSearchIcon] = useState('nav_search-icon');
+    const [headerBackground, setHeaderBackground] = useState('');
+    const [headerButtonBackground, setHeaderButtonBackground] = useState('btn-signup');
+    const [middleTitleBackground, setMiddleTitleBackground] = useState('header_middle-title');
+    const [logo, setLogo] = useState(LogoMainWhite);
+    const [userIconWBg, setUserIconWBg] = useState('user-icon');
+
     const goToLoginPage = () => {
-        return navigate('/login')
+        return navigate('login', {replace: true})
     }
 
-    const renderHeader = () => {
-        return <Navbar className="header-containerAll">
-            <div className="header-container">
-                <div className="log-in-buttons">
-                    <button className="btn-signin" onClick={() => goToLoginPage()}>Sign in</button>
-                    <button className="btn-signup">Sign in</button>
-                </div>
+    const logout = () => {
+        setAuth({})
+        window.localStorage.removeItem('accessToken')
+    }
+    const addBackground = () => {
+        if (window.scrollY >= 100) {
+            setHeaderBackground('w-bg')
+            setLogo(LogoMain)
+            setMiddleTitleBackground('middle-title_bg')
+            setUserIconWBg('user-icon_bg')
+            setHeaderButtonBackground('btn-signup_bg')
+            setSearchIcon('search-icon_bg')
+        } else {
+            setHeaderBackground('')
+            setLogo(LogoMainWhite)
+            setMiddleTitleBackground('header_middle-title')
+            setUserIconWBg('user-icon')
+            setHeaderButtonBackground('btn-signup')
+            setSearchIcon('nav_search-icon')
+        }
+    }
+
+    const inputRef = useRef(null);
+
+    window.addEventListener('scroll', addBackground)
+
+    const mainHeader = () => {
+        return <Navbar
+            className={`header ${headerBackground}`}>
+            <m.div
+                initial={{position: "absolute"}}
+                className="header-container">
+                {!auth.user ?
+                    <div className="log-in-buttons">
+                        <FontAwesomeIcon id={searchIcon} style={{display: openSearch ? "none" : "block"}}
+                                         onClick={() => setOpenSearch(!openSearch)} icon={faSearch}/>
+                        {openSearch && <SearchBar
+                            openSearch={{openSearch, setOpenSearch}}
+                            inputRef={inputRef}
+                        />}
+                        <button className="btn-signIn" onClick={() => goToLoginPage()}>Sign in</button>
+                        <button onClick={() => navigate('/register', {replace: true})}
+                                className={`${headerButtonBackground}`}>Sign up
+                        </button>
+                    </div>
+                    :
+                    <div className="log-in-buttons">
+                        <FontAwesomeIcon id={searchIcon}
+                                         style={{display: openSearch ? "none" : "block"}}
+                                         onClick={() => setOpenSearch(!openSearch)} icon={faSearch}/>
+                        {openSearch && <SearchBar
+                            openSearch={{openSearch, setOpenSearch}}
+                            inputRef={inputRef}
+                        />}
+                        <button className="btn-signIn" onClick={() => logout()}>Logout
+                        </button>
+                        {!user.profile_picture ?
+                            <FontAwesomeIcon onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                                             id={`${userIconWBg}`} icon={faUser}/> :
+                            <img src={user?.profile_picture} onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                                 alt="user profile picture"/>}
+                    </div>
+                }
                 {/**/}
-                <div className="header-middle-titles">
-                    <span><button className="header-middle-title left">All flights</button></span>
-                    <span><button className="header-middle-title middle">Schedule</button></span>
-                    <span><button className="header-middle-title right">Your orders</button></span>
+                <div className="header_middle-titles">
+                    <button className={`${middleTitleBackground} left`}>All flights</button>
+                    <button className={`${middleTitleBackground} middle`}>Schedule</button>
+                    {auth.user
+                        ?
+                        location.pathname !== `/user/${auth?.user}/orders`
+                            ?
+                            <button onClick={() => navigate(`/user/${auth?.user?.user_id}/orders`)}
+                                    className={`${middleTitleBackground} right`}>Your orders</button>
+                            : null
+                        :
+                        null
+                    }
                 </div>
                 <div>
                     <Link to={"/"}>
-                        <img src={require('./../assets/images/Logo.png')} className="logo"
+                        <img src={logo} className="main-logo"
+                             alt="some text"/>
+                    </Link>
+                </div>
+            </m.div>
+        </Navbar>;
+    };
+
+    const secondaryHeader = () => {
+        return <Navbar className="header w-bg">
+            <div className="header-container">
+                {!auth.user ?
+                    <div className="log-in-buttons">
+                        <FontAwesomeIcon id="search-icon_bg"
+                                         style={{display: openSearch ? "none" : "block"}}
+                                         onClick={() => setOpenSearch(!openSearch)}
+                                         icon={faSearch}/>
+                        {openSearch && <SearchBar
+                            openSearch={{openSearch, setOpenSearch}}
+                            inputRef={inputRef}
+                        />}
+                        <button className="btn-signIn" onClick={() => goToLoginPage()}>Sign in</button>
+                        <button className="btn-signup_bg" onClick={() => navigate('register', {replace: true})}>Sign
+                            up
+                        </button>
+                    </div>
+                    :
+                    <div className="log-in-buttons">
+                        <FontAwesomeIcon id='search-icon_bg'
+                                         style={{display: openSearch ? "none" : "block"}}
+                                         onClick={() => setOpenSearch(!openSearch)}
+                                         icon={faSearch}/>
+                        {openSearch && <SearchBar
+                            openSearch={{openSearch, setOpenSearch}}
+                            inputRef={inputRef}
+                        />}
+                        <button className="btn-signIn" onClick={() => logout()}>Logout
+                        </button>
+                        {!user?.profile_picture ?
+                            <FontAwesomeIcon id="user-icon_bg" onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                                             icon={faUser}/> :
+                            <img src={user?.profile_picture} onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                                 alt="user profile picture"/>}
+                    </div>
+                }
+                <div className="header_middle-titles">
+                    <button className="middle-title_bg left">All flights</button>
+                    <button className="middle-title_bg middle">Schedule</button>
+                    {auth.user?.user_id
+                        ?
+                        location.pathname !== `/user/${auth.user?.user_id}/orders` ?
+                            <button onClick={() => navigate(`/user/${auth.user?.user_id}/orders`)}
+                                    className="middle-title_bg right">Your orders</button>
+                            : null
+                        :
+                        null
+                    }
+                </div>
+                <div>
+                    <Link to={"/"}>
+                        <img src={Logo} className="logo"
                              alt="some text"/>
                     </Link>
                 </div>
             </div>
-        </Navbar>
-    }
+        </Navbar>;
 
-    const renderMainHeader = () => {
-        return <Navbar className="header-containerAll">
-            <div className="header-container">
-                <div className="log-in-buttons">
-                    <button className="btn-signin" onClick={() => goToLoginPage()}>Sign in</button>
-                    <button className="btn-signup">Sign in</button>
-                </div>
-                {/**/}
-                <div className="header-middle-titles">
-                    <span><button className="header-middle-title left">All flights</button></span>
-                    <span><button className="header-middle-title middle">Schedule</button></span>
-                    <span><button className="header-middle-title right">Your orders</button></span>
-                </div>
-                <div>
-                    <Link to={"/"}>
-                        <img src={require('./../assets/images/Logowhite.png')} className="logo"
-                             alt="some text"/>
-                    </Link>
-                </div>
-            </div>
-        </Navbar>
-    }
+    };
 
-    // if (location.pathname === '/login') {
-    //     return <div>Shalom</div>
-    // } else if (location.pathname === '/booking/flights') {
-    //     return renderHeader()
-    // } else if (location.pathname === '/fare_options'){
-    //     return renderHeader()
-    // }
 
     switch (location.pathname) {
+        case '/register':
+            return
         case '/login':
-            return <div>Shalom</div>
-        case '/booking/flights':
-            return renderHeader()
+            return
+        case '/':
+            return mainHeader()
+        case '/orderSummary':
+            return mainHeader()
         default :
-             renderHeader()
+            return secondaryHeader()
     }
-
-    return (
-        <div>
-            {renderMainHeader()}
-            {/*{location.pathname === "/" ? renderMainHeader() : <div>What sup</div>}*/}
-        </div>
-    );
 };
 
 export default Header;

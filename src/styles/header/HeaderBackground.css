@@ -1,0 +1,77 @@
+.w-bg {
+  background: #FFFFFF;
+  box-shadow: rgba(0, 157, 255, 0.5) 0 1px 2px;
+}
+
+#user-icon_bg {
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(101, 201, 255, 0.5);
+  padding: 0.75em;
+  border-radius: 50%;
+  margin-left: 2em;
+  color: rgba(0, 122, 178, 0.5);
+  transition: transform 200ms ease-in-out;
+}
+#user-icon_bg:hover {
+  cursor: pointer;
+}
+
+#nav_search-icon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid white;
+  padding: 0.9em;
+  border-radius: 50%;
+  color: #FFFFFF;
+  transition: transform 100ms ease-in-out;
+}
+#nav_search-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.middle-title_bg {
+  color: #002442;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  padding-bottom: 0.5em;
+  transition: border-bottom-width 100ms ease-out, transform ease-out 100ms;
+}
+.middle-title_bg:hover {
+  transform: translateY(-3px);
+  border-bottom: 2px solid rgba(103, 181, 255, 0.5);
+}
+
+.btn-signup_bg {
+  border: none;
+  padding: 10px 2em;
+  background: transparent;
+  outline: 1px #a3ceff solid;
+  color: #a3ceff;
+  font-weight: 600;
+  line-height: 1.5;
+  text-underline: none;
+  transition: all linear 100ms;
+  border-radius: 5px;
+}
+.btn-signup_bg:hover {
+  transform: translateY(-3px);
+}
+
+#search-icon_bg {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #a3ceff;
+  padding: 0.9em;
+  border-radius: 50%;
+  color: #a3ceff;
+  transition: transform 100ms ease-in-out;
+}
+#search-icon_bg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+/*# sourceMappingURL=HeaderBackground.css.map */

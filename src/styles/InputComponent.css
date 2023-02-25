@@ -1,0 +1,71 @@
+.input:not(input[type=checkbox],
+input[type=radio]) {
+  position: relative;
+  font-family: Poppins, sans-serif;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid rgba(208, 208, 208, 0.5);
+  transition: outline-color ease-in-out 200ms;
+}
+.input:not(input[type=checkbox],
+input[type=radio]):hover {
+  outline: 1px solid rgba(135, 195, 255, 0.5);
+}
+.input:not(input[type=checkbox],
+input[type=radio])::placeholder {
+  font-size: 20px;
+  font-weight: 300;
+  color: #b2b2b2;
+}
+.input:not(input[type=checkbox],
+input[type=radio]):required:after {
+  content: "*";
+  color: indianred;
+}
+.input:not(input[type=checkbox],
+input[type=radio]):required:after {
+  content: "*";
+  position: relative;
+  top: 100px;
+  color: #DC3545;
+  height: 500px;
+  width: 500px;
+}
+
+.input[type=radio] {
+  appearance: none;
+  outline: 1px solid #dedede;
+  border-radius: 50%;
+}
+.input[type=radio]:checked {
+  outline: none;
+  background-color: #3497ff;
+}
+.input[type=radio]:focus {
+  outline: 1px solid rgba(135, 195, 255, 0.5);
+}
+
+select {
+  position: relative;
+  padding: 0.9em;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid rgba(208, 208, 208, 0.5);
+  transition: outline-color ease-in-out 200ms;
+  font-size: 18px;
+  width: fit-content;
+}
+select:hover {
+  cursor: pointer;
+  outline: 1px solid rgba(135, 195, 255, 0.5);
+}
+
+option {
+  position: relative;
+}
+
+.input[type=date]::-webkit-calendar-picker-indicator {
+  color: #b6b6b6;
+}
+
+/*# sourceMappingURL=InputComponent.css.map */
