@@ -21,7 +21,7 @@
   align-items: center;
   font-weight: lighter;
 }
-.header-container .logo {
+.header-container .main-logo {
   height: 50px;
   width: 150px;
   transition: all ease-in-out 100ms;
@@ -50,6 +50,11 @@
 .log-in-buttons {
   display: flex;
   gap: 0.5em;
+}
+.log-in-buttons img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 #user-icon {

@@ -4,7 +4,7 @@ import "../../styles/PassengersOptions.scss"
 import {useNavigate} from "react-router-dom";
 import axios from "../../api/axios";
 import FullPageLoader from "../FullPageLoader";
-import PassengersOptionsComponent from "./PassengersOptionsComponent";
+// import PassengersOptionsComponent from "./PassengersOptionsComponent";
 import OneRoadForm from "./oneroadtrip/OneRoadTrip";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
@@ -180,13 +180,13 @@ const BookFlight = () => {
                                         </div>
                                     </div>
 
-                                    {openOptions && <PassengersOptionsComponent
-                                        onRemovePassenger={handelRemovePassenger}
-                                        onAddPassenger={handelAddPassenger}
-                                        onCloseOptions={setOpenOptions}
-                                        options={options}
-                                    />
-                                    }
+                                    {/*{openOptions && <PassengersOptionsComponent*/}
+                                    {/*    onRemovePassenger={handelRemovePassenger}*/}
+                                    {/*    onAddPassenger={handelAddPassenger}*/}
+                                    {/*    onCloseOptions={setOpenOptions}*/}
+                                    {/*    options={options}*/}
+                                    {/*/>*/}
+                                    {/*}*/}
                                 </span>
                                 <button type={"submit"} className="form-btn submit-form-button"
                                         onClick={navigateToOffers()}
