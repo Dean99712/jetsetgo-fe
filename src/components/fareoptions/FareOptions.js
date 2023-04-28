@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import '../../components/fareoptions/FareOptions.scss';
 import Fare from "./Fare";
@@ -6,7 +6,6 @@ import moment from "moment/moment";
 import FlightDetails from "./FlightDetails";
 import SelectedFare from "./SelectedFare";
 import useFlight from "../../hooks/useFlight";
-import {createOrder} from "../../services/OrderService";
 
 const FareOptions = () => {
 
@@ -38,7 +37,7 @@ const FareOptions = () => {
     const navigateToCreateOrder = (offer) => {
         setFlight({fare: offer, passengers});
         if (flight) {
-            return navigate(`/createOrder`, {state: {fare: offer}})
+            return navigate(`/createOrder`, {state: {fare: offer}, replace: true})
         }
     };
 
@@ -57,7 +56,7 @@ const FareOptions = () => {
                         key={fare.id}
                         fare={fare}
                         convertCurrency={convertCurrency}
-                        selected={{setSelected}}
+                        selected={{setSelected, selected}}
                     />
                 ))}</div>
 

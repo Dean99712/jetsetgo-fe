@@ -1,8 +1,8 @@
 import * as yup from "yup";
 
 const passRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}$/;
-const nameRules = /^[A-Za-z ]*$/;
-const phoneRules = /^[0-9]{0,14}$/
+const nameRules = /^[A-Za-z]*$/;
+const phoneRules = /^[0-9]{0,7}$/
 const required = "Required!"
 
 export const loginValidation = yup.object().shape({
@@ -23,16 +23,24 @@ export const registerValidation = yup.object().shape({
             .min(3, "name must be at least 3 characters")
             .required('Given name is required'),
     phone_number:
-        yup.string()
-            .matches(phoneRules, "Invalid phone number")
-            .max(13, "phone number cannot be more than 13 characters")
-            .required('Phone number is required'),
+        yup.object().shape({
+            mobile_operator: yup.string().required(required),
+            number: yup.string().matches(phoneRules, "must contain only numbers").required(required)
+        }),
     password:
         yup.string()
-            .matches(passRules)
-            .max(13)
-            .required(required)
+            .matches(passRules, "Password must contain a special character and a number")
+            .max(20, "max 20 characters")
+            .required(required),
+    confirm_password:
+    yup.string().oneOf([yup.ref('password'), null], "password do not match!"),
+    bornOn: yup.object().shape({
+        days: yup.string().required(required),
+        months: yup.string().required(required),
+        years: yup.string().required(required),
+    })
 })
+
 
 export const passengersValidations = yup.object().shape({
     passengers: yup.array().of(

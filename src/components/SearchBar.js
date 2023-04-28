@@ -22,20 +22,38 @@ const SearchBar = ({openSearch, inputRef, handleClick}) => {
                 width: 0,
             }}
             animate={{
-                width: 350
+                width: 290
             }}
             transition={{
                 type: "spring",
                 stiffness: 250,
                 damping: 20,
                 duration: 0.5
-            }}>
+            }}
+            exit={{
+                width: "45px",
+                height: "45px",
+                border: "1px solid #a3ceff",
+                borderRadius: "50%",
+                color: "#a3ceff",
+                transition:{
+                    stiffness: 300,
+                    duration: 1
+                }
+            }}
+        >
             <motion.h6 style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}
                        animate={{fontSize: 20}}>
                 <FontAwesomeIcon id={"search_icon"} style={{zIndex: 10}}
                                  icon={faSearch}/>
-                <motion.input ref={inputRef} type="text" minLength={0} maxLength={25}
-                              style={{border: "none", outline: "none", fontSize: "16px"}}/>
+                <motion.input
+                    initial={{
+                        width: 0
+                    }}
+                    animate={{
+                        width: 210
+                    }}
+                    className="search-bar_input" type="text" ref={inputRef}/>
                 <FontAwesomeIcon
                     id={"close"} onClick={() => setOpenSearch(false)}
                     icon={faClose}/>

@@ -19,6 +19,7 @@ export const getUserByEmail = async (data) => {
 }
 
 export const updateUser = async (data) => {
-    return await axios.patch(`${UPDATE_USER_URL}/${data.email}`, data)
+    return await axios.patch(`${UPDATE_USER_URL}/${data.email}`, data
+    )
         .then(res => res.data)
 }

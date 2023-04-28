@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../../styles/CreateOrder.scss'
 import {useFormik} from "formik";
@@ -10,14 +10,23 @@ import useAuth from "../../hooks/useAuth";
 import {notification} from "../../App";
 import useFlight from "../../hooks/useFlight";
 import StepperComponent from "../StepperComponent";
+import {CircularProgress} from "@mui/material";
+import useUser from "../../hooks/useUser";
 
 const CreateOrder = () => {
 
     const {auth} = useAuth();
-    const {flight} = useFlight()
+    const {user: currentUser} = useUser();
+    const {flight} = useFlight();
 
+    const token = auth?.accessToken;
+    const user = currentUser?.user
     const {passengers, fare} = flight;
     const {id, total_amount} = fare;
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [serverErrors, setServerErrors] = useState('');
+
     const navigate = useNavigate()
     const payments = [{
         type: "balance",
@@ -26,27 +35,43 @@ const CreateOrder = () => {
     }];
 
     const onSubmit = async () => {
+        setIsLoading(true)
         mutate({
             type: "instant",
             services: [],
             selected_offers: [id],
             payments,
             passengers: values.passengers,
-            email: auth?.user?.email
+            email: user?.email,
+            token: token
         });
-
-        if (error.response.status === 500) {
-            console.log('ERROR 500')
-        } else if (error.response.status === 401) {
-            console.log('ERROR 401')
-        }
-
-        notification('Success!', 'Order has been created successfully!', 'success')
-        return navigate('orderSummary', {replace: true})
     }
 
-    const {data, mutate, isLoading, isSuccess, isError, error} = useMutation({
-        mutationFn: createOrder
+    const {mutate, isError} = useMutation({
+        mutationFn: createOrder,
+        onSuccess: (data) => {
+            if (data !== null) {
+                setIsLoading(false)
+                const order = data?.data
+                notification("Success!", "Order has been successfully created", "success");
+                navigate("/orderSummary", {state: {order}, replace: true});
+            }
+        },
+        onError: (error) => {
+            switch (error.response.status) {
+                case 401:
+                    setIsLoading(false)
+                    return setServerErrors("Unauthorized")
+                case 400:
+                    setIsLoading(false)
+                    return setServerErrors("Bad request");
+                case 500:
+                    setIsLoading(false)
+                    return setServerErrors("Something went wrong... please try again later");
+                default:
+                    return
+            }
+        }
     })
 
     const {values, handleChange, handleSubmit, errors, handleBlur, touched, handleReset} = useFormik({
@@ -61,9 +86,8 @@ const CreateOrder = () => {
             <div className='flight-order-summery--container'>
                 <div className="inner-summery-container">
                     <form onSubmit={handleSubmit}>
-                        {/*{isError ? <div className="errors"><h6>{apiErrors}</h6></div> : null}*/}
+                        {isError ? <div className="error-text"><h6>{serverErrors}</h6></div> : null}
                         <div className="passengers-container">
-
                             <StepperComponent
                                 formik={{
                                     values,
@@ -114,7 +138,10 @@ const CreateOrder = () => {
                                 </div>
                             </div>
                         </div>
-                        <button type={"submit"}>Create order</button>
+                        <button id="submit-button" disabled={isLoading} type={"submit"}>{isLoading ?
+                            <CircularProgress sx={{
+                                color: "#FFFFFF"
+                            }}/> : "Create order"}</button>
                     </form>
                 </div>
             </div>

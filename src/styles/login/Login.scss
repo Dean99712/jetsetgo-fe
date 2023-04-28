@@ -53,6 +53,9 @@
     &:hover {
       background-color: #343434;
     }
+    &:disabled {
+      background-color: #505050;
+    }
   }
 
   input:not(input[type=checkbox]) {
@@ -93,7 +96,7 @@
   }
 }
 
-@keyframes wiggle {
+ @keyframes wiggle {
 
   25% {
     transform: translateX(-5px);

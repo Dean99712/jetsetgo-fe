@@ -9,12 +9,12 @@
   transition: outline-width ease-in-out 200ms;
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 
+  &.selected {
+    outline: 1px solid #2E72CF;
+  }
+
   &:hover {
     outline: 1px solid #2E72CF;
-    cursor: pointer;
-  }
-  &:active {
-    outline: 2px solid #2E72CF;
     cursor: pointer;
   }
 
@@ -26,6 +26,7 @@
       font-weight: 600;
       margin-bottom: 1em;
     }
+
     h5 {
       font-size: 14px;
     }
@@ -42,10 +43,12 @@
         justify-content: left;
         align-items: baseline;
         list-style: none;
+
         p {
           margin: 0;
           font-weight: 500;
         }
+
         svg {
           width: 20px;
           color: rgba(56, 56, 56, 0.75);
@@ -53,6 +56,7 @@
       }
     }
   }
+
   .fare-bottom {
     display: flex;
     justify-content: space-between;
@@ -62,12 +66,14 @@
     padding: 1em;
     gap: 0.5em;
     background-color: #D5D5D57F;
+
     p {
       align-self: end;
       font-size: 12px;
       font-weight: 600;
       margin: 0;
     }
+
     h6 {
       font-weight: 600;
       align-self: end;

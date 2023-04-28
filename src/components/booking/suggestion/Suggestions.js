@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import '../suggestion/Suggestions.scss'
 import axios from "axios";
+import {CircularProgress} from "@mui/material";
+import {motion as m} from 'framer-motion';
 
-const Suggestions = ({query, setQuery, ref, iataCode, setIataCode}) => {
+const Suggestions = ({query, setQuery, setLocation, placeholder}) => {
 
+
+    const [isOpen, setIsOpen] = useState(false);
     const [airports, setAirports] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const getSearchQuery = query => {
         const url = `http://localhost:8080/api/city/suggestions?q=${query}`;
@@ -12,6 +17,8 @@ const Suggestions = ({query, setQuery, ref, iataCode, setIataCode}) => {
     };
 
     const searchCity = async () => {
+        setIsLoading(true)
+        setIsOpen(true)
         if (!query || query.trim() === "") return;
 
         const URL = getSearchQuery(query);
@@ -21,32 +28,56 @@ const Suggestions = ({query, setQuery, ref, iataCode, setIataCode}) => {
             });
         if (response.data) {
             setAirports(response.data?.response?.airports)
-            setIataCode(response.data?.response?.airports?.iata_code)
         }
+        setIsLoading(false)
     }
 
-    const onChangeHandler = e => {
+    const onChangeHandler = async e => {
         e.preventDefault();
-        setQuery(e.target.value)
-        searchCity()
+        setQuery(e.target.value);
+        await searchCity()
     };
 
     return (
-        <div className="suggestions_container">
+        <m.div
+            initial={{
+                display: "none",
+
+            }}
+            animate={{
+                display: "block"
+            }}
+            className="suggestions_container">
             <input
                 type="text"
-                ref={ref}
                 onChange={onChangeHandler}
                 value={query}
+                placeholder={placeholder}
             />
-            {query.length < 2 || airports <= 1 ? <></> : <div className="airports-container">
-                {airports?.map(airport => (
-                    <span>
-                        <p onClick={() => setQuery(airport.iata_code)} >{airport.name}</p>
-                    </span>
-                ))}
+            {<div className={isOpen ? "airports-container" : "hide-suggestions"}>
+                {isLoading
+                    ?
+                    <CircularProgress sx={{
+                        position: "relative",
+                        left: "35%",
+                        top: "25%",
+                        transform: "translate(-50%, -50%)"
+                    }}/>
+                    :
+                    isOpen && airports?.length >= 0
+                        ? airports?.map(airport => (
+                            <div className="suggestions" onClick={() => {
+                                setIsOpen(false)
+                                setLocation(airport?.iata_code)
+                                setQuery(airport?.iata_code)
+                            }}><h6 className={"suggestion"}>{airport.name}</h6>
+                            </div>
+                        ))
+                        :
+                        <h6>Keep typing...</h6>
+                }
             </div>}
-        </div>
+        </m.div>
     );
 };
 

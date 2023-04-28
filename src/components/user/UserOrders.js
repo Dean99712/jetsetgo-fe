@@ -2,17 +2,38 @@ import React, {useEffect, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
 import {useMutation} from "@tanstack/react-query";
 import './UserOrders.scss'
-import {cancelUserOrder, deleteUserOrder} from "../../services/OrderService";
+import {cancelUserOrder, deleteUserOrder, getOrdersByEmail} from "../../services/OrderService";
 import {Modal, Typography} from "@mui/material";
 import {notification} from "../../App";
 import useAuth from "../../hooks/useAuth";
 import {motion as m} from 'framer-motion';
+import useUser from "../../hooks/useUser";
 
 const UserOrders = () => {
 
+    const {auth} = useAuth();
+    const {user: currentUser} = useUser();
+    const user = currentUser?.user;
+
+    const [orders, setOrders] = useState([]);
+
     const [itemId, setItemId] = useState('');
-    const {auth} = useAuth()
-    const {user: {orders}} = auth;
+
+    useEffect(() => {
+       const getOrders = async () => {
+            const response = await getOrdersByEmail({
+                email: user?.email,
+                token: auth?.accessToken
+            });
+            setOrders(response.data)
+        }
+         getOrders()
+             .catch(e => {
+                 if (e.status === 400) {
+                     console.log(e.message)
+                 }
+             })
+    }, [])
 
     const style = {
         position: 'absolute',
@@ -29,7 +50,7 @@ const UserOrders = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
-    const {mutate: cancel, isError, error: e} = useMutation(
+    const {mutate: cancel} = useMutation(
         cancelUserOrder,
         {
             onError: (error) => {
@@ -63,6 +84,7 @@ const UserOrders = () => {
             token: auth?.accessToken
         })
     }
+
     const handleDelete = (id) => {
         mutate({
             order_id: id
@@ -103,8 +125,9 @@ const UserOrders = () => {
                         :
                         <button onClick={() => handleItemChanges(params.row.id)} className="action_button cancel">Cancel
                             Order</button>)
-            }}
-    ,];
+            }
+        }
+        ,];
 
     const handleClose = () => {
         setOpenModal(false)
@@ -121,7 +144,7 @@ const UserOrders = () => {
                         open={openModal}
                         onClose={handleClose}
                     >
-                        <m.Box style={style} >
+                        <m.Box style={style}>
                             <Typography id="modal-modal-title" variant="h5" component="h1">
                                 {modalTitle}
                             </Typography>

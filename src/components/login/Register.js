@@ -10,6 +10,7 @@ import {CircularProgress} from "@mui/material";
 import FormBirthDate from "../FormBirthDate";
 import {useNavigate} from "react-router-dom";
 import {notification} from "../../App";
+import {registerValidation} from "../../validations/validationSchema";
 
 const Register = () => {
 
@@ -20,23 +21,24 @@ const Register = () => {
 
     const [serverErrors, setServerErrors] = useState('Something went wrong');
 
-    const {data, mutate, isLoading, isError} = useMutation(["register"], register, {
+    const {mutate, isLoading, isError} = useMutation(register, {
         onSuccess: () => {
-            if (data?.statusCodeValue === 201) {
-                console.log('User has been created successfully')
-                setServerErrors('User has been created successfully')
-            }
+            notification("Success!", "User created successfully", "success")
+            navigate('/', {replace: true})
         },
-        onError: () => {
-            if (data.statusCodeValue === 401) {
-                setServerErrors(data?.body)
-                console.log(data?.body)
-
-            } else if (data?.statusCodeValue === 400) {
-                setServerErrors(data?.body)
+        onError: (error) => {
+            switch (error.response.status) {
+                case 401:
+                    return setServerErrors("Email is already exist")
+                case 400:
+                    return setServerErrors("Bad request");
+                case 500 :
+                    return setServerErrors("Something went wrong... Please try again later")
+                default :
+                    setServerErrors("Something went wrong")
             }
         }
-    })
+    });
 
     const onSubmit = () => {
         mutate({
@@ -49,11 +51,6 @@ const Register = () => {
             password: values.password,
             confirm_password: values.confirm_password
         })
-
-        if (values) {
-            notification("Success!", "User created successfully", "success")
-            return navigate('/', {replace: true})
-        }
     }
 
     const {values, errors, handleChange, handleBlur, handleSubmit, touched} = useFormik({
@@ -74,7 +71,8 @@ const Register = () => {
             password: "",
             confirm_password: ""
         },
-        onSubmit
+        onSubmit,
+        validationSchema: registerValidation
     })
 
     let phone_number = values.phone_number.mobile_operator + values.phone_number.number
@@ -96,43 +94,59 @@ const Register = () => {
             <div className="register_background"></div>
             <section>
                 <form className="form-register" onSubmit={handleSubmit}>
-                    {isError && <p className="error-text">{serverErrors}</p>}
+                    {isError && <p className="error-text p-2">{serverErrors}</p>}
                     <h6 className="form-title">Create and account</h6>
                     <div>
-                        <InputComponent
-                            name="given_name"
-                            onChange={handleChange}
-                            handleBlur={handleBlur}
-                            type="text"
-                            value={values.given_name}
-                            placeholder="First name"
-                        />
-                        <InputComponent
-                            name="family_name"
-                            onChange={handleChange}
-                            handleBlur={handleBlur}
-                            type="text"
-                            value={values.family_name}
-                            placeholder="Last name"
-                        />
+                        <div className="register-item">
+                            <InputComponent
+                                name="given_name"
+                                onChange={handleChange}
+                                handleBlur={handleBlur}
+                                type="text"
+                                value={values.given_name}
+                                placeholder="First name"
+                            />
+                            {errors.given_name && touched.given_name ?
+                                <p className="text-danger">{errors.given_name}</p> : null}
+                        </div>
+                        <div className="register-item">
+                            <InputComponent
+                                name="family_name"
+                                onChange={handleChange}
+                                handleBlur={handleBlur}
+                                type="text"
+                                value={values.family_name}
+                                placeholder="Last name"
+                            />
+                            {errors.family_name && touched.family_name ?
+                                <p className="text-danger">{errors.family_name}</p> : null}
+                        </div>
                     </div>
                     <div>
-                        <InputComponent
-                            name="password"
-                            onChange={handleChange}
-                            handleBlur={handleBlur}
-                            type="password"
-                            value={values.password}
-                            placeholder="password"
-                        />
-                        <InputComponent
-                            name="confirm_password"
-                            onChange={handleChange}
-                            handleBlur={handleBlur}
-                            type="password"
-                            value={values.confirm_password}
-                            placeholder="confirm password"
-                        />
+                        <div className="register-item">
+                            <InputComponent
+                                name="password"
+                                onChange={handleChange}
+                                handleBlur={handleBlur}
+                                type="password"
+                                value={values.password}
+                                placeholder="password"
+                            />
+                            {errors.password && touched.password ?
+                                <p className="text-danger">{errors.password}</p> : null}
+                        </div>
+                        <div className="register-item">
+                            <InputComponent
+                                name="confirm_password"
+                                onChange={handleChange}
+                                handleBlur={handleBlur}
+                                type="password"
+                                value={values.confirm_password}
+                                placeholder="confirm password"
+                            />
+                            {errors.confirm_password && touched.confirm_password ?
+                                <p className="text-danger">{errors.confirm_password}</p> : null}
+                        </div>
                     </div>
                     <div className="gender_container">
                         <h6>Gender</h6>
@@ -143,6 +157,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     handleBlur={handleBlur}
                                     type="radio"
+                                    required
                                     value="male"
                                 />
                                 <label>Male</label>
@@ -153,50 +168,67 @@ const Register = () => {
                                     onChange={handleChange}
                                     handleBlur={handleBlur}
                                     type="radio"
+                                    required
                                     value="female"
                                 />
                                 <label>Female</label>
                             </div>
                         </div>
                     </div>
-                    <InputComponent
-                        name="email"
-                        onChange={handleChange}
-                        handleBlur={handleBlur}
-                        type="email"
-                        value={values.email}
-                        placeholder="email"
-                    />
-                    <div>
-                        <select
-                            name="phone_number.mobile_operator"
-                            onChange={handleChange}
-                            value={values.phone_number.mobile_operator}
-                        >
-                            {mobileOperators.map(value => (
-                                <option value={value}>{value}</option>
-                            ))}
-                            <FontAwesomeIcon icon={faArrowDown}/>
-                        </select>
+
+                    <div className="register-item">
                         <InputComponent
-                            name="phone_number.number"
+                            name="email"
                             onChange={handleChange}
                             handleBlur={handleBlur}
-                            type="text"
-                            value={values.phone_number.number}
-                            placeholder="phone number"
-                            max={7}
+                            type="email"
+                            value={values.email}
+                            placeholder="email"
+                        />
+                        {errors.email && touched.email ? <p className="text-danger">{errors.email}</p> : null}
+                    </div>
+
+                    <div>
+                        <div className="register-item">
+                            <select
+                                name="phone_number.mobile_operator"
+                                onChange={handleChange}
+                                value={values.phone_number.mobile_operator}
+                            >
+                                {mobileOperators.map(value => (
+                                    <option value={value}>{value}</option>
+                                ))}
+                                <FontAwesomeIcon icon={faArrowDown}/>
+                            </select>
+                        </div>
+                        <div className="register-item">
+                            <InputComponent
+                                name="phone_number.number"
+                                onChange={handleChange}
+                                handleBlur={handleBlur}
+                                type="text"
+                                value={values.phone_number.number}
+                                placeholder="phone number"
+                                max={7}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="register-item">
+                        <FormBirthDate
+                            values={values.bornOn}
+                            bornOn={born_on}
+                            handleChange={handleChange}
+                            errors={errors.bornOn}
                         />
                     </div>
-                    <FormBirthDate
-                        values={values.bornOn}
-                        bornOn={born_on}
-                        handleChange={handleChange}
-                    />
-                    <button type="submit" className="register_button" disabled={errors?.length >= 1}>
+                    <button type="submit" className="register_button" disabled={isLoading && errors}>
                         {isLoading
                             ?
-                            <CircularProgress/>
+                            <CircularProgress sx={{
+                                color: "#FFFFFF"
+                            }}
+                            />
                             :
                             "Submit"
                         }

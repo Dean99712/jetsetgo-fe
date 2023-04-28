@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import axios from "../../api/axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -13,10 +12,10 @@ import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons/faSortDown";
 import Button from "../Button";
 import {convertDuration} from "../fareoptions/FareOptions";
+import {getOfferById} from "../../services/OfferRequestService";
 
 const Flights = () => {
 
-        const GET_OFFER_BY_ID = '/offers/getOfferById'
 
         const [offers, setOffers] = useState([]);
         const [groupedOffers, setGroupedOffers] = useState([]);
@@ -37,28 +36,20 @@ const Flights = () => {
 
             const fetchData = async () => {
                 setIsLoading(true)
-                const response = await axios.get(GET_OFFER_BY_ID, {
-                    params: {
-                        offer_request_id: id,
-                        limit: limit,
-                        sort: sort,
-                        max_connections: maxConnections
+                const response = await getOfferById(
+                    {
+                        id,
+                        limit,
+                        sort,
+                        maxConnections
                     }
-                })
+                )
                 setOffers(response.data.data);
                 setIsLoading(false)
             };
             fetchData();
 
         }, [limit, maxConnections, sort]);
-
-        useEffect(() => {
-
-            const fetchedDataHandler = () => {
-
-            }
-            fetchedDataHandler();
-        }, []);
 
         useEffect(() => {
             if (offers.length > 0) {
@@ -183,7 +174,7 @@ const Flights = () => {
         }
 
         const navigateToPassengersDetails = (flight) => {
-            navigate(`/fares`, {state:{fare: flight, passengers}})
+            navigate(`/fares`, {state: {fare: flight, passengers}, replace: true})
         };
 
         return (
@@ -208,13 +199,14 @@ const Flights = () => {
                     {isLoading && <CardSkeleton cards={5}/>}
 
                     <div>{!isLoading && Object.entries(groupedOffers).map(([key, offers], index) => (
-                            <div key={index}>
-                                {renderFirstOffer(key, offers)}
-                            </div>))}
+                        <div key={index}>
+                            {renderFirstOffer(key, offers)}
+                        </div>))}
                         {offers.length <= 0 &&
-                        <Card className="offers ">
-                            <h6 className="text-center flex-grow-1 align-self-center fs-5">We're sorry, No offers available</h6>
-                        </Card>}
+                            <Card className="offers ">
+                                <h6 className="text-center flex-grow-1 align-self-center fs-5">We're sorry, No offers
+                                    available</h6>
+                            </Card>}
                     </div>
                     {!isLoading && <button id="load-more_button" disabled={limit > offers.length} onClick={loadMore}>Load
                         more</button>}

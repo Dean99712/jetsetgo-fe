@@ -3,21 +3,23 @@ import '../../styles/OrderSummary.scss'
 import BoardingPass from "./BoardingPass";
 import {Link, useLocation} from "react-router-dom";
 import {convertCurrency} from "../flights/Flights";
-import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
 
 const OrderSummary = () => {
 
     const location = useLocation()
-    const {data: order} = location.state
 
-    const {auth} = useAuth()
-    const passengers = order.passengers[0]
+    const {order} = location.state
+    const {user: currentUser} = useUser()
+    const user = currentUser?.user
+
+    const passengers = order?.passengers[0]
 
     return (
         <div className="orderSummary">
-            <div className="orderSummary-container">
 
+            <div className="orderSummary-container">
                 <div className="summary passengers-summary">
 
                     <div className="summary-top">
@@ -82,12 +84,11 @@ const OrderSummary = () => {
                             <p className="title">total amount</p>
                             <p className="price">{convertCurrency(order?.total_amount)}</p>
                         </span>
-                        <Link className="to-orders_button" to={`/user/${auth.user}/orders`}>Your orders</Link>
+                        <Link className="to-orders_button" to={`/user/${user?.user_id}/orders`}>Your orders</Link>
                     </div>
                 </div>
 
             </div>
-
         </div>
     );
 };

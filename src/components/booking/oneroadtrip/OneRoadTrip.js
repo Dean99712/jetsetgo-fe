@@ -2,10 +2,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlaneArrival, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "../../datepicker/DatePickerComponent";
 import '../oneroadtrip/OneRoadTrip.scss'
+import {useState} from "react";
+import Suggestions from "../suggestion/Suggestions";
 
-const OneRoadTrip = props => {
+const OneRoadTrip = (props) => {
 
     function onChange(timestamp) {}
+
+    const inputRef = props.useRef;
+
+    const {setOrigin} = props.origin;
+    const {setDestination} = props.destination
+
+    const [originQuery, setOriginQuery] = useState('');
+    const [destinationQuery, setDestinationQuery] = useState('');
 
     return (
         <div className="one-road">
@@ -14,13 +24,11 @@ const OneRoadTrip = props => {
                 <div className="search-input" id="origin-container">
                     <div><FontAwesomeIcon className="icon" icon={faPlaneDeparture}/></div>
                     <div>
-                        <input
-                            type="text"
-                            name={`slices.origin`}
-                            placeholder="From"
-                            maxLength={3}
-                            autoComplete="off"
-                            ref={props.origin}
+                        <Suggestions
+                            query={originQuery}
+                            setQuery={setOriginQuery}
+                            setLocation={setOrigin}
+                            placeholder={"From"}
                         />
                         <label>Where From?</label>
                     </div>
@@ -32,24 +40,15 @@ const OneRoadTrip = props => {
                         <FontAwesomeIcon className="icon" icon={faPlaneArrival}/>
                     </div>
                     <div>
-                        <input
-                            type="text"
-                            name={`slices.destination`}
-                            placeholder="To"
-                            maxLength={3}
-                            autoComplete="off"
-                            ref={props.destination}
+                        <Suggestions
+                            query={destinationQuery}
+                            setQuery={setDestinationQuery}
+                            setLocation={setDestination}
+                            placeholder={"To"}
                         />
                         <label>Where to?</label>
                     </div>
 
-                    {/*Suggestion*/}
-
-                    {/*<Suggestions*/}
-                    {/*    query={destinationQuery}*/}
-                    {/*    setQuery={setDestinationQuery}*/}
-                    {/*    ref={props.destination}*/}
-                    {/*/>*/}
                 </div>
                 {/*Departure Date*/}
             </div>

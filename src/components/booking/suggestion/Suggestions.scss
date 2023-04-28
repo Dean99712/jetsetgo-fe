@@ -1,21 +1,34 @@
-//.suggestions_container {
-//  font-family: Poppins, sans-serif;
-//}
+
 .airports-container {
+  position: absolute;
   margin-top: 10px;
   border-radius: 10px;
   width: fit-content;
-  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-
-
-  & p {
-    padding: 10px 1em;
-    margin: 0;
-    font-weight: 500;
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(213, 213, 213, 0.2);
-    }
-  }
+  min-width: 200px;
+  height: 200px;
+  min-height: fit-content;
+  overflow: auto;
+  padding: 1em;
+  background-color: #FFFFFF;
+  transform: translate(-63px, 40px);
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
 }
+.hide-suggestions {
+  display: none;
+}
+ .suggestions div {
+      padding: 10px 1em;
+      margin: 0;
+      font-weight: 500;
+      background-color: #FFFFFF;
+
+  }
+ .suggestion {
+   padding: 0.7em 0;
+   width: 100%;
+   border-bottom: 1px solid rgba(199, 199, 199, 0.5);
+
+   &:hover {
+     cursor: pointer;
+   }
+ }

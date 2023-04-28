@@ -29,7 +29,7 @@ const Fare = ({fare, convertCurrency, selected}) => {
     } = fare
 
     return (
-        <div className="fare" onClick={() => setSelected({fare})}>
+        <div className={`fare ${selected?.selected?.fare?.id === fare?.id ? "selected" : ""}`} onClick={() => setSelected({fare})}>
             <div className="fare-top">
                 <h5>{fare_brand_name}</h5>
                 <h6>{cabin_class_marketing_name}</h6>

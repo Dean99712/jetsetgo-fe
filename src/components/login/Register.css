@@ -2,6 +2,10 @@
   height: 100vh;
   display: flex;
 }
+.register p {
+  margin: 0;
+  padding: 0;
+}
 .register section {
   height: 100vh;
   max-height: 100vh;
@@ -17,8 +21,9 @@
 .register .form-register div {
   display: flex;
   gap: 1em;
+  align-items: start;
 }
-.register .form-register div:nth-child(4) {
+.register .form-register div:nth-child(5) {
   flex-direction: column;
 }
 .register .form-register .form-title {
@@ -32,6 +37,23 @@
   flex: 1;
   padding: 0.8em;
   font-size: 20px;
+}
+
+.register-item {
+  display: flex;
+  flex-direction: column;
+}
+.register-item:not(:nth-child(5)) {
+  max-height: 110px;
+  max-width: 285px;
+}
+.register-item:nth-child(6) {
+  justify-content: center;
+  align-self: stretch;
+  width: 100%;
+}
+.register-item:nth-child(6) input {
+  width: 100%;
 }
 
 .register_background {

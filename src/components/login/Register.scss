@@ -2,6 +2,11 @@
   height: 100vh;
   display: flex;
 
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
   section {
     height: 100vh;
     max-height: 100vh;
@@ -18,8 +23,9 @@
     div {
       display: flex;
       gap: 1em;
+      align-items: start;
 
-      &:nth-child(4) {
+      &:nth-child(5) {
         flex-direction: column;
       }
     }
@@ -37,6 +43,23 @@
       flex: 1;
       padding: 0.8em;
       font-size: 20px;
+    }
+  }
+}
+
+.register-item {
+  display: flex;
+  flex-direction: column;
+  &:not(:nth-child(5)) {
+    max-height: 110px;
+    max-width: 285px;
+  }
+  &:nth-child(6) {
+    justify-content: center;
+    align-self: stretch;
+    width: 100%;
+    & input {
+      width: 100%;
     }
   }
 }

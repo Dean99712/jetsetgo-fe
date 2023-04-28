@@ -25,7 +25,7 @@ import UserOrders from "./components/user/UserOrders";
 import {FlightProvider} from "./context/FlightProvider";
 import UserUpdate from "./components/user/UserUpdate";
 import CreateOrder from "./components/ordercreate/CreateOrder";
-import Test from "./components/Test";
+import {UserProvider} from "./context/UserProvider";
 
 function App() {
 
@@ -50,27 +50,19 @@ function App() {
                 {path: '/', index: true, element: <BookFlight/>},
                 {path: 'flights', element: <Flights/>},
                 {path: 'fares', element: <FareOptions/>},
-
-                {path: 'createOrder', element: <CreateOrder/>},
-                {path: 'orders', element: <Orders/>},
                 {path: 'orderSummary', element: <OrderSummary/>},
-                {path: 'user/:id/orders', element: <UserOrders/>},
-                {path: 'user/:id', element: <UserUpdate/>},
-                {path: 'test', element: <Test/>},
-
 
                 // Authenticated Routes
-
-                // {
-                //     element: <RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]}/>,
-                //     children: [
-                //         {path: 'createOrder', element: <CreateOrder/>},
-                //         {path: 'orders', element: <Orders/>},
-                //         {path: 'orderSummary', element: <OrderSummary/>},
-                //         {path: 'user/:id/orders', element: <UserOrders/>},
-                //         {path: 'user/:id', element: <UserUpdate/>},
-                //     ]
-                // }
+                {
+                    element: <RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]}/>,
+                    children: [
+                        {path: 'createOrder', element: <CreateOrder/>},
+                        {path: 'orders', element: <Orders/>},
+                        {path: 'orderSummary', element: <OrderSummary/>},
+                        {path: 'user/:id/orders', element: <UserOrders/>},
+                        {path: 'user/:id', element: <UserUpdate/>},
+                    ]
+                }
             ]
         },
         {
@@ -89,11 +81,13 @@ function App() {
 
     return (
         <FlightProvider>
-            <AuthProvider>
-                <SkeletonTheme baseColor={"#b4b4b4"} highlightColor={"#e8e8e8"}>
-                    <RouterProvider router={router}/>
-                </SkeletonTheme>
-            </AuthProvider>
+            <UserProvider>
+                <AuthProvider>
+                    <SkeletonTheme baseColor={"#b4b4b4"} highlightColor={"#e8e8e8"}>
+                        <RouterProvider router={router}/>
+                    </SkeletonTheme>
+                </AuthProvider>
+            </UserProvider>
         </FlightProvider>
 
     );

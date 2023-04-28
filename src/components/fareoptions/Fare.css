@@ -9,12 +9,11 @@
   transition: outline-width ease-in-out 200ms;
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 }
+.fare.selected {
+  outline: 1px solid #2E72CF;
+}
 .fare:hover {
   outline: 1px solid #2E72CF;
-  cursor: pointer;
-}
-.fare:active {
-  outline: 2px solid #2E72CF;
   cursor: pointer;
 }
 .fare .fare-top {

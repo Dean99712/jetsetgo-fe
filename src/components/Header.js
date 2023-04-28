@@ -12,6 +12,7 @@ import LogoMain from './../assets/images/LogoMain.png'
 import Logo from './../assets/images/LogoOnly.png'
 import SearchBar from "./SearchBar";
 import {motion as m} from 'framer-motion';
+import useUser from "../hooks/useUser";
 
 
 const Header = () => {
@@ -20,7 +21,8 @@ const Header = () => {
     const location = useLocation()
 
     const {auth, setAuth} = useAuth()
-    const {user} = auth
+    const {user: currentUser, setUser} = useUser();
+    const user = currentUser?.user
 
     const [openSearch, setOpenSearch] = useState(false);
 
@@ -36,9 +38,10 @@ const Header = () => {
     }
 
     const logout = () => {
+        setUser({})
         setAuth({})
         window.localStorage.removeItem('accessToken')
-    }
+    };
     const addBackground = () => {
         if (window.scrollY >= 100) {
             setHeaderBackground('w-bg')
@@ -67,7 +70,27 @@ const Header = () => {
             <m.div
                 initial={{position: "absolute"}}
                 className="header-container">
-                {!auth.user ?
+                {user
+                    ?
+                    <div className="log-in-buttons">
+                        <FontAwesomeIcon id={searchIcon}
+                                         style={{display: openSearch ? "none" : "block"}}
+                                         onClick={() => setOpenSearch(!openSearch)} icon={faSearch}/>
+                        {openSearch && <SearchBar
+                            openSearch={{openSearch, setOpenSearch}}
+                            inputRef={inputRef}
+                        />}
+                        <button className="btn-signIn" onClick={() => logout()}>Logout
+                        </button>
+                        {!user.profile_picture
+                            ?
+                            <FontAwesomeIcon onClick={() => navigate(`/user/${user?.user_id}`, {replace: true})}
+                                             id={`${userIconWBg}`} icon={faUser}/>
+                            :
+                            <img src={user?.profile_picture} onClick={() => navigate(`/user/${user?.user_id}`)}
+                                 alt="user profile picture"/>}
+                    </div>
+                    :
                     <div className="log-in-buttons">
                         <FontAwesomeIcon id={searchIcon} style={{display: openSearch ? "none" : "block"}}
                                          onClick={() => setOpenSearch(!openSearch)} icon={faSearch}/>
@@ -80,33 +103,16 @@ const Header = () => {
                                 className={`${headerButtonBackground}`}>Sign up
                         </button>
                     </div>
-                    :
-                    <div className="log-in-buttons">
-                        <FontAwesomeIcon id={searchIcon}
-                                         style={{display: openSearch ? "none" : "block"}}
-                                         onClick={() => setOpenSearch(!openSearch)} icon={faSearch}/>
-                        {openSearch && <SearchBar
-                            openSearch={{openSearch, setOpenSearch}}
-                            inputRef={inputRef}
-                        />}
-                        <button className="btn-signIn" onClick={() => logout()}>Logout
-                        </button>
-                        {!user.profile_picture ?
-                            <FontAwesomeIcon onClick={() => navigate(`/user/${auth.user?.user_id}`)}
-                                             id={`${userIconWBg}`} icon={faUser}/> :
-                            <img src={user?.profile_picture} onClick={() => navigate(`/user/${auth.user?.user_id}`)}
-                                 alt="user profile picture"/>}
-                    </div>
                 }
                 {/**/}
                 <div className="header_middle-titles">
                     <button className={`${middleTitleBackground} left`}>All flights</button>
                     <button className={`${middleTitleBackground} middle`}>Schedule</button>
-                    {auth.user
+                    {user
                         ?
                         location.pathname !== `/user/${auth?.user}/orders`
                             ?
-                            <button onClick={() => navigate(`/user/${auth?.user?.user_id}/orders`)}
+                            <button onClick={() => navigate(`/user/${user?.user_id}/orders`, {replace: true})}
                                     className={`${middleTitleBackground} right`}>Your orders</button>
                             : null
                         :
@@ -126,7 +132,7 @@ const Header = () => {
     const secondaryHeader = () => {
         return <Navbar className="header w-bg">
             <div className="header-container">
-                {!auth.user ?
+                {!user ?
                     <div className="log-in-buttons">
                         <FontAwesomeIcon id="search-icon_bg"
                                          style={{display: openSearch ? "none" : "block"}}
@@ -154,19 +160,21 @@ const Header = () => {
                         <button className="btn-signIn" onClick={() => logout()}>Logout
                         </button>
                         {!user?.profile_picture ?
-                            <FontAwesomeIcon id="user-icon_bg" onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                            <FontAwesomeIcon id="user-icon_bg"
+                                             onClick={() => navigate(`/user/${user?.user_id}`, {replace: true})}
                                              icon={faUser}/> :
-                            <img src={user?.profile_picture} onClick={() => navigate(`/user/${auth.user?.user_id}`)}
+                            <img src={user?.profile_picture}
+                                 onClick={() => navigate(`/user/${user?.user_id}`, {replace: true})}
                                  alt="user profile picture"/>}
                     </div>
                 }
                 <div className="header_middle-titles">
                     <button className="middle-title_bg left">All flights</button>
                     <button className="middle-title_bg middle">Schedule</button>
-                    {auth.user?.user_id
+                    {user?.user_id
                         ?
-                        location.pathname !== `/user/${auth.user?.user_id}/orders` ?
-                            <button onClick={() => navigate(`/user/${auth.user?.user_id}/orders`)}
+                        location.pathname !== `/user/${user?.user_id}/orders` ?
+                            <button onClick={() => navigate(`/user/${user?.user_id}/orders`, {replace: true})}
                                     className="middle-title_bg right">Your orders</button>
                             : null
                         :

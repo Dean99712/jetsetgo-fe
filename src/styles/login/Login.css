@@ -50,6 +50,9 @@
 .form_user-login .login-submitButton:hover {
   background-color: #343434;
 }
+.form_user-login .login-submitButton:disabled {
+  background-color: #505050;
+}
 .form_user-login input:not(input[type=checkbox]) {
   width: calc(560px - 1.5em);
   padding: 1.2em;

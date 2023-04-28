@@ -11,7 +11,7 @@ $width: 71.466vw;
   font-family: Poppins, sans-serif;
   display: flex;
   box-sizing: border-box;
-  height: 200vh;
+  height: 150vh;
   justify-content: center;
 }
 
@@ -159,9 +159,7 @@ $width: 71.466vw;
   }
 
   &.passenger-counter {
-
     justify-content: center;
-
     &:hover {
       cursor: pointer;
     }
@@ -202,8 +200,9 @@ $width: 71.466vw;
     flex-direction: column;
   }
 }
-
-////Nav Icons Section
+.passengers-input:hover {
+  cursor: pointer;
+}
 .nav-icons {
   display: flex;
   justify-content: space-between;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../../styles/login/Login.scss'
-import {LOGIN_URL, loginUser} from "../../services/AuthService";
+import {LOGIN_URL} from "../../services/AuthService";
 import {useLocation, useNavigate} from "react-router-dom";
 import Background from '../../assets/images/login/AdobeStock_239406450.jpeg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -14,6 +14,7 @@ import useAuth from "../../hooks/useAuth";
 import {notification} from "../../App";
 import {useFormik} from "formik";
 import {loginValidation} from "../../validations/validationSchema";
+import useUser from "../../hooks/useUser";
 
 const Login = () => {
 
@@ -22,36 +23,41 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const {setAuth} = useAuth()
+    const {setUser} = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    const [apiErrors, setApiErrors] = useState('');
+    const [serverErrors, setServerErrors] = useState('');
 
     const postLogin = async () => {
         setIsLoading(true)
-        const response = await axios.post(LOGIN_URL, {
-            email: values.email,
-            password: values.password
-        })
-        if (response.status === 200) {
+        try {
+            const response = await axios.post(LOGIN_URL, {
+                email: values.email,
+                password: values.password
+            })
             await getUserByEmail(response.data?.token)
-            console.log("Status 200");
-            setApiErrors('')
-            setIsError(false)
-            setIsLoading(false)
-        } else if (response.status === 401) {
-            setIsError(true)
-            setApiErrors('Wrong username or password')
-            setIsLoading(false)
-        } else if (response.status === 400) {
-            setApiErrors('Bad request');
-            setIsError(true);
-            setIsLoading(false)
-        }else if (response.status === 500) {
-            setIsError(true);
-            setIsLoading(false)
-            setApiErrors('Oops... Something went wrong!');
+            setServerErrors(null);
+            setIsError(false);
+            setIsLoading(false);
+        } catch (error) {
+            if (error.response.status === 401) {
+                setIsError(true);
+                setIsLoading(false);
+                setServerErrors("Wrong username or password")
+            }
+            if (error.response.status === 400) {
+                setIsError(true);
+                setIsLoading(false);
+                setServerErrors("Bad Request")
+            }
+            if (error.response.status === 500) {
+                setIsError(true);
+                setIsLoading(false);
+                setServerErrors("Something went wrong...")
+            }
         }
+        setIsLoading(false);
     }
 
     const {values, errors, handleChange, handleBlur, touched} = useFormik({
@@ -67,24 +73,35 @@ const Login = () => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        if (response.status === 200) {
+        try {
             const accessToken = token;
-            const user = response.data
+            const email = response.data?.email;
+            const user = response.data;
             const role = response.data?.role;
-            const roles = [role]
-            setAuth({user, roles, accessToken});
+            const roles = [role];
+            setUser({user})
+            setAuth({email, roles, accessToken});
             window.localStorage.setItem('accessToken', token);
+            setIsError(false)
             setIsLoading(false);
-            navigate(from, {replace: true})
             notification("Success!", "Login Successfully!", "success", true, 1500);
-        } else if (response.status === 401) {
-            setApiErrors('Unauthorized!')
-            setIsError(true)
-            setIsLoading(false);
-        } else if (response.status === 400) {
-            setApiErrors('Bad request');
-            setIsError(true);
-            setIsLoading(false);
+            navigate(from, {replace: true});
+        } catch (error) {
+
+            if (error.response.status === 401) {
+                setServerErrors('Unauthorized!')
+                setIsError(true)
+                setIsLoading(false);
+            } else if (error.response.status === 400) {
+                setServerErrors('Bad request');
+                setIsError(true);
+                setIsLoading(false);
+            } else if (error.response.status === 500) {
+                setServerErrors('Something went wrong... ' +
+                    'please try again later');
+                setIsError(true);
+                setIsLoading(false);
+            }
         }
         setIsLoading(false);
     }
@@ -98,7 +115,7 @@ const Login = () => {
         <div className='login-container'>
             <form className="form_user-login" onSubmit={handleSubmit}>
                 <h6>Login to continue</h6>
-                {isError && <p className="error-text">{apiErrors}</p>}
+                {isError ? <p className="error-text">{serverErrors}</p> : null}
                 <div>
                     <InputComponent
                         type="text"
@@ -128,7 +145,7 @@ const Login = () => {
                 </div>
                 <button type={"submit"} disabled={isLoading} className="login-submitButton">{
                     isLoading
-                        ? <CircularProgress/>
+                        ? <CircularProgress sx={{color: "#FFFFFF"}}/>
                         :
                         'Login'
                 }</button>

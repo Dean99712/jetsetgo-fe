@@ -1,145 +1,139 @@
 import React from 'react';
 import '../styles/Footer.scss'
-import {useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import PlaneSvg from '../assets/svg/PlaneSVG.svg'
+import Logo from '../assets/images/LogoMainWhite.png'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFacebook, faInstagram, faLinkedin} from "@fortawesome/free-brands-svg-icons";
-import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
+import {
+    faFacebookF,
+    faGithub,
+    faGoogle,
+    faLinkedin
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
 
-    const renderMainFooter = () => {
-        return <footer className="bg-light text-center text-dark">
+    const navigate = useNavigate()
 
-            <div className="container p-4">
-                <section className="mb-4">
+    const flights = [
+        {name: "all flights", path: "/allFlights"},
+        {name: "schedule", path: "/schedule"}
+    ];
 
-                </section>
+    const navigations = [
+        {name: "Home", path: "/"},
+        {name: "Login", path: "/login"},
+        {name: "Register", path: "/register"},
+    ];
+    const contacts = [
+        {
+            name: "facebook",
+            link: "",
+            logo: faFacebookF
+        },
+        {
+            name: "github",
+            link: "https://github.com/Dean99712?tab=repositories",
+            logo: faGithub,
+        },
+        {
+            name: "email",
+            link: "dean2910997@gmail.com",
+            logo: faGoogle
+        },
+        {
+            name: "linkedin",
+            link: " https://www.linkedin.com/in/dean-uziel-16979722a/",
+            logo: faLinkedin,
+        }
+    ];
+    const renderFooter = () => {
 
-                <section className="">
-                    <form action="">
-                        <div className="row d-flex justify-content-center">
-                            <div className="col-auto">
-                                <p className="pt-2">
-                                    <strong>Sign up for our newsletter</strong>
-                                </p>
-                            </div>
+        return <div className="footer-container">
 
-                            <div className="col-md-5 col-12">
+            <div className="subscribe-inquiries">
+                <img className="plane-svg" src={PlaneSvg} alt="Plane Svg"/>
+                <h6 className="title">Subscribe to our news</h6>
+                <button onClick={() => navigate('/register')} className="submit-inquiry">Join us</button>
+            </div>
 
-                                <div className="form-outline form-white mb-4">
-                                    <input type="email" id="form5Example21" className="form-control"/>
-                                    <label className="form-label" htmlFor="form5Example21">Email address</label>
+            <div>
+                <span className="footer-icons">
+                    <FontAwesomeIcon className="footer-icon" icon={faFacebookF}/>
+                    <FontAwesomeIcon className="footer-icon" icon={faGithub}/>
+                    <FontAwesomeIcon className="footer-icon" icon={faGoogle}/>
+                    <FontAwesomeIcon className="footer-icon" icon={faLinkedin}/>
+                </span>
+            </div>
+
+            <div className="footer_bottom">
+                <div className="footer_row">
+                    <img className="footer-logo" src={Logo} alt="logo"/>
+                    <p className="footer_logo-text">™2023. All rights reserved</p>
+                </div>
+                <div className="footer_row">
+                    <h6 className="text-uppercase row-title">Navigation</h6>
+                    <ul>
+                        {navigations.map(navigation => {
+                            return (
+                                <li><Link to={navigation.path}>{navigation.name}</Link></li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <div className="footer_row">
+                    <h6 className="text-uppercase row-title">Flights</h6>
+                    <ul>
+                        {flights.map(flight => {
+                            return (
+                                <li className="text-capitalize"><a target="_self" href={flight.path}>{flight.name}></a></li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <div className="footer_row">
+                    <h6 className="text-uppercase row-title">About us</h6>
+                    <ul>
+                        <li><Link to={'/about'}>More about us</Link></li>
+                    </ul>
+                </div>
+                <div className="footer_row">
+                    <h6 className="text-uppercase row-title">Social</h6>
+                    <ul>
+                        {contacts.map((contact, index) => {
+                            return (
+                                <div className="footer-column" key={index}>
+                                    <FontAwesomeIcon icon={contact.logo}/>
+                                    <li><Link className="text-capitalize" to={contact.link}>{contact.name}</Link></li>
                                 </div>
-                            </div>
-
-                            <div className="col-auto">
-
-                                <button type="submit" className="btn btn-outline-light mb-4">
-
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </form>
-                </section>
-
-                <section className="">
-
-                    <div className="row">
-
-                        <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">Social links</h5>
-
-                            <ul className="list-unstyled mb-0" style={{
-                                display:"flex", gap:"1em"
-                            }}>
-                                <li>
-                                    <FontAwesomeIcon icon={faFacebook}/><a href={''} style={{textDecoration:"none"}} className="text-white">Facebook</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faInstagram}/><a href={''} style={{textDecoration:"none"}} className="text-white">Instagram</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faGithub}/><a href={''} style={{textDecoration:"none"}} className="text-white">Github</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faLinkedin}/><a href={''} style={{textDecoration:"none"}} className="text-white">Linkedin</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">Social links</h5>
-                            <ul className="list-unstyled mb-0">
-                                <li>
-                                    <FontAwesomeIcon icon={faFacebook}/><a href={''} style={{textDecoration:"none"}} className="text-white">Facebook</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faInstagram}/><a href={''} style={{textDecoration:"none"}} className="text-white">Instagram</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faGithub}/><a href={''} style={{textDecoration:"none"}} className="text-white">Github</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faLinkedin}/><a href={''} style={{textDecoration:"none"}} className="text-white">Linkedin</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">Social links</h5>
-                            <ul className="list-unstyled mb-0">
-                                <li>
-                                    <FontAwesomeIcon icon={faFacebook}/><a href={''} style={{textDecoration:"none"}} className="text-white">Facebook</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faInstagram}/><a href={''} style={{textDecoration:"none"}} className="text-white">Instagram</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faGithub}/><a href={''} style={{textDecoration:"none"}} className="text-white">Github</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faLinkedin}/><a href={''} style={{textDecoration:"none"}} className="text-white">Linkedin</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">Social links</h5>
-                            <ul className="list-unstyled mb-0">
-                                <li>
-                                    <FontAwesomeIcon icon={faFacebook}/><a href={''} style={{textDecoration:"none"}} className="text-white">Facebook</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faInstagram}/><a href={''} style={{textDecoration:"none"}} className="text-white">Instagram</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faGithub}/><a href={''} style={{textDecoration:"none"}} className="text-white">Github</a>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faLinkedin}/><a href={''} style={{textDecoration:"none"}} className="text-white">Linkedin</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+                            )
+                        })}
+                    </ul>
+                </div>
             </div>
-
-            <div className="text-center p-3" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
-                © 2023 Copyright:
-                <a className="text-white" href="http://localhost:3000/"> JetSetGo</a>
-            </div>
-        </footer>
-    }
-
-    const location = useLocation();
-    if (location.pathname === "/") {
-        return renderMainFooter()
-    } else {
-        <div></div>
-    }
-    return (
-        <div className="footer-container">
-
         </div>
+            ;
+
+    };
+
+    const location = useLocation()
+    if (location.pathname === "/") {
+        return renderFooter()
+    } else return;
+
+    return (
+        renderFooter()
+        // <div className="footer-container">
+        //     <div className="subscribe-inquiries">
+        //         <h6 className="title">Subscribe to our news</h6>
+        //         <input type="text" className="inquiry-email"/>
+        //         <button className="submit-inquiry">Subscribe</button>
+        //         <div className="footer_bottom">
+        //             <h3 className="Footer_title">Footer</h3>
+        //
+        //         </div>
+        //     </div>
+        // </div>
     );
 };
 

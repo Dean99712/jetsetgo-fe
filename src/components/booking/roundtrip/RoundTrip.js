@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlaneArrival, faPlaneDeparture} from "@fortawesome/free-solid-svg-icons";
 import '../roundtrip/RoundTrip.scss'
-import {DatePicker} from "@mui/lab";
+import Suggestions from "../suggestion/Suggestions";
 
-const RoundTrip = ({departureDate, origin, destination}) => {
+const RoundTrip = ({origin, destination}) => {
 
-    function onChange(timestamp) {}
+    const {setOrigin} = origin
+    const {setDestination} = destination
+
+    const [originQuery, setOriginQuery] = useState('');
+    const [destinationQuery, setDestinationQuery] = useState('');
+
 
     return (
         <div className="round-trip">
@@ -17,13 +22,11 @@ const RoundTrip = ({departureDate, origin, destination}) => {
                         <FontAwesomeIcon className="icon" icon={faPlaneDeparture}/>
                     </div>
                     <div>
-                        <input
-                            type="text"
-                            name={`slices.origin`}
-                            placeholder="From"
-                            maxLength={3}
-                            autoComplete="off"
-                            ref={origin}
+                        <Suggestions
+                            query={originQuery}
+                            setQuery={setOriginQuery}
+                            setLocation={setOrigin}
+                            placeholder={"From"}
                         />
                         <label>Where From?</label>
                     </div>
@@ -35,30 +38,18 @@ const RoundTrip = ({departureDate, origin, destination}) => {
                         <FontAwesomeIcon className="icon" icon={faPlaneArrival}/>
                     </div>
                     <div>
-                        <input
-                            type="text"
-                            name={`slices.destination`}
-                            placeholder="To"
-                            maxLength={3}
-                            autoComplete="off"
-                            ref={destination}
+                        <Suggestions
+                            query={destinationQuery}
+                            setQuery={setDestinationQuery}
+                            setLocation={setDestination}
+                            placeholder={"To"}
                         />
                         <label>Where to?</label>
                     </div>
                 </div>
                 {/*Departure Date*/}
             </div>
-            <div className="search-input search-date">
-                <label>Departure Date</label>
-
-                <DatePicker
-                    onChange={onChange}
-                    inputRef={departureDate}/>
-
-                <DatePicker
-                    onChange={onChange}
-                    inputRef={departureDate}/>
-            </div>
+            {/*    Range Date Picker*/}
         </div>
     );
 };
