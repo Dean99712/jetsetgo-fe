@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Hello and welcome to JetSetGo!
+## Getting Started with The Project
+
+![My project-1 (1)](https://user-images.githubusercontent.com/92694814/235348352-1fc3421f-a2f8-4742-b64f-cc830f99607f.png)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -14,12 +18,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `First page`
+You will experiance our beutifull website and playfull animations, 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+### Features
+- Create an order to any Airline company in the world
+- Sign in and Sign up to our services
+- 
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
