@@ -7,7 +7,7 @@ import {register} from "../../services/AuthService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
 import {CircularProgress} from "@mui/material";
-import FormBirthDate from "../FormBirthDate";
+import BirthDate from "../BirthDate";
 import {useNavigate} from "react-router-dom";
 import {notification} from "../../App";
 import {registerValidation} from "../../validations/validationSchema";
@@ -215,7 +215,7 @@ const Register = () => {
 
                     </div>
                     <div className="register-item">
-                        <FormBirthDate
+                        <BirthDate
                             values={values.bornOn}
                             bornOn={born_on}
                             handleChange={handleChange}

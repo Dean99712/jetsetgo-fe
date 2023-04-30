@@ -17,9 +17,6 @@ import {toast, ToastContainer} from "react-toastify";
 
 const BookFlight = () => {
 
-
-    const inputRef = useRef(null);
-
     const navigation = useNavigate()
     const [value, setValue] = useState("1");
 
@@ -78,8 +75,9 @@ const BookFlight = () => {
 
     const handelSubmit = async (e) => {
         e.preventDefault()
+        setIsErrors(false)
 
-        async function createOfferRequest() {
+        const createOfferRequest = async () => {
             let slices = [{
                 origin,
                 destination,
@@ -117,7 +115,7 @@ const BookFlight = () => {
 
     function navigateToOffers() {
         if (isErrors) {
-            toast.error(serverErrors, {
+            return toast.error(serverErrors, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -136,7 +134,7 @@ const BookFlight = () => {
     return (
         <>
             <ToastContainer/>
-            {isLoading && !isErrors && <FullPageLoader/> }
+            {isLoading && !isErrors && <FullPageLoader/>}
 
             <div className="bookflight">
                 <m.div className="mainPage-body" onMouseDown={() => openOptions}>
@@ -178,7 +176,6 @@ const BookFlight = () => {
                                                 destination={{destination, setDestination}}
                                                 departureDate={departure_date}
                                                 options={options}
-                                                useRef={inputRef}
                                                 navigateToOffers={navigateToOffers}
                                                 onSubmit={handelSubmit}
                                             />
@@ -188,7 +185,6 @@ const BookFlight = () => {
                                                 origin={{origin, setOrigin}}
                                                 destination={{destination, setDestination}}
                                                 departureDate={departure_date}
-                                                useRef={inputRef}
                                                 onSubmit={handelSubmit}
                                             />
                                         </TabPanel>

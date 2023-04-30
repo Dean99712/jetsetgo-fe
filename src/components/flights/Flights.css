@@ -1,24 +1,27 @@
-.offers-background {
+.flights {
+  height: fit-content;
+}
+.flights .offers-background {
   height: 75vh;
   background: url("../../assets/images/flightsoffers/TerminalBackground.png") center no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
 }
-.offers-background .offers-container {
+.flights .offers-background .offers-container {
   position: relative;
   display: flex;
   flex-direction: column;
   top: 35em;
 }
-.offers-background .offer-filter-container {
+.flights .offers-background .offer-filter-container {
   border-radius: 50px;
   display: flex;
   justify-content: space-between;
   background: transparent;
   padding-bottom: 1em;
 }
-.offers-background .offer-filter-container .offers-filter {
+.flights .offers-background .offer-filter-container .offers-filter {
   border-radius: 50px;
   background: #FFFFFF;
   display: flex;
@@ -26,18 +29,22 @@
   padding: 0.5em;
   flex: 0.3;
 }
-.offers-background .offer-filter-container .offers-filter button {
+.flights .offers-background .offer-filter-container .offers-filter button {
   font-weight: 400;
   border: none;
 }
-.offers-background .offer-filter-container .offers-filter button:first-child {
+.flights .offers-background .offer-filter-container .offers-filter button:first-child {
   border: none;
 }
-.offers-background .offer-filter-container .offers-filter .filter-item {
+.flights .offers-background .offer-filter-container .offers-filter .filter-item {
+  position: relative;
   flex: 1;
   border-left: 1px solid #e3e3e3;
   background: transparent;
   display: flex;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
   align-items: center;
   gap: 1em;
 }
@@ -114,8 +121,8 @@
 
 .flight-owner-details {
   justify-content: center;
-  justify-self: end;
-  gap: 2em;
+  justify-self: center;
+  gap: 0.5em;
   border-right: 1px solid #e3e3e3;
 }
 

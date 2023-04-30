@@ -9,8 +9,6 @@ const OneRoadTrip = (props) => {
 
     function onChange(timestamp) {}
 
-    const inputRef = props.useRef;
-
     const {setOrigin} = props.origin;
     const {setDestination} = props.destination
 

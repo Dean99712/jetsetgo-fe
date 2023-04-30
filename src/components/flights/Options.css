@@ -1,0 +1,40 @@
+.filter-option {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  padding: 1em;
+  top: 4.3em;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  z-index: 20;
+}
+.filter-option ul {
+  padding: 0;
+  margin: 0;
+}
+.filter-option input {
+  width: 30px;
+}
+.filter-option input:hover {
+  cursor: pointer;
+}
+.filter-option li {
+  list-style: none;
+}
+.filter-option li:hover {
+  cursor: pointer;
+}
+.filter-option:after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 22px;
+  height: 15px;
+  width: 15px;
+  rotate: 45deg;
+  background-color: #ffffff;
+}
+
+/*# sourceMappingURL=Options.css.map */

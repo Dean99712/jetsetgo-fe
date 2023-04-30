@@ -1,30 +1,26 @@
-import InputComponent from "../InputComponent";
 import {useMutation} from "@tanstack/react-query";
-import {updateUser} from "../../services/UserService";
+import {getUserProfile, updateUser} from "../../services/UserService";
 import {useFormik} from "formik";
 import '../user/UserUpdate.scss'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser} from "@fortawesome/free-regular-svg-icons/faUser";
-import FormBirthDate from "../FormBirthDate";
-import React, {useRef, useState} from "react";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import React, {useEffect, useRef, useState} from "react";
 import {storage} from "../../firebase"
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import {v4} from "uuid"
-import {notification} from "../../App";
-import {Spinner} from "react-bootstrap";
 import Background from '../../assets/images/user/pexels-codioful-(formerly-gradienta)-7130469.jpg'
 import {useNavigate} from "react-router-dom";
-import useUser from "../../hooks/useUser";
 import useAuth from "../../hooks/useAuth";
 import {toast, ToastContainer} from "react-toastify";
+import UserUpdateForm from "./UserUpdateForm";
+import useUser from "../../hooks/useUser";
 
 const UserUpdate = () => {
 
     const navigate = useNavigate();
 
-    const {user: currentUser, setUser} = useUser();
     const {auth} = useAuth();
+    const {user: currentUser, setUser} = useUser()
+    const user = currentUser?.user
+    const [profileUser, setProfileUser] = useState({});
 
     const inputRef = useRef(null);
 
@@ -32,9 +28,17 @@ const UserUpdate = () => {
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState('');
-    const [selectedImage, setSelectedImage] = useState('');
 
-    const user = currentUser?.user;
+    useEffect(() => {
+        const userProfile = async () => {
+            const response = await getUserProfile({
+                email: auth?.email,
+                token: auth?.accessToken
+            })
+            setProfileUser(response.data);
+        };
+        userProfile()
+    }, []);
 
     const {mutate} = useMutation(updateUser,
         {
@@ -61,31 +65,33 @@ const UserUpdate = () => {
             .then(() => {
                 getDownloadURL(imageRef)
                     .then((url) => {
-                        setSelectedImage(url)
-                        setUser({
-                            user: {
-                                ...user,
-                                profile_picture: url
-                            }
-                        });
-                        mutate({
-                            email: auth?.email,
-                            profilePicture: url
-                        })
+                        if (url && selectedFile) {
+                            setUser({
+                                user: {
+                                    ...user,
+                                    profile_picture: url,
+                                }
+                            });
+                            mutate({
+                                email: auth?.email,
+                                profilePicture: url
+                            });
+                        }
+                        setSuccess(true);
+                        setIsLoading(false)
+                        toast.success("User updated Successfully");
                     })
-                toast.success("User updated Successfully");
             });
     };
 
     const {values, handleChange, handleSubmit} = useFormik({
         initialValues: {
-            givenName: user?.given_name,
-            familyName: user?.family_name,
-            bornOn: user.born_on,
-            phone_number: user?.phone_number
-
-        }, onSubmit: async () => {
-            await uploadImage()
+            givenName: "",
+            familyName: "",
+            bornOn: "",
+            phone_number: ""
+        },
+        onSubmit: async () => {
             const bornOn = new Date(values.bornOn.years,
                 values.bornOn.months,
                 values.bornOn.days
@@ -94,7 +100,9 @@ const UserUpdate = () => {
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit"
-                }).replaceAll("/", "-")
+                }).replaceAll("/", "-");
+
+            await uploadImage()
 
             mutate({
                 email: auth?.email,
@@ -103,9 +111,8 @@ const UserUpdate = () => {
                 phoneNumber: values.phone_number,
                 bornOn,
             });
-            setIsLoading(false);
         }
-    })
+    });
 
     return (
         <div className="user_update">
@@ -113,49 +120,24 @@ const UserUpdate = () => {
             <img src={Background} alt="background"/>
             {success
                 ?
-                <section className="user-update_form">
-                    <h6>Your details updated </h6>
-                    <button className="" onClick={() => navigate("/", {replace: true})}>Go to home</button>
+                <section className="user-update_form updated">
+                    <h6 className="updated_title">Your details updated</h6>
+                    <button className="btn btn-primary fw-bold back_button"
+                            onClick={() => navigate("/", {replace: true})}>Go to home
+                    </button>
                 </section>
                 :
-                <form className="user-update_form" onSubmit={handleSubmit}>
-                    {!user?.profile_picture
-                        ?
-                        <FontAwesomeIcon icon={faUser} id="user-icon" onClick={handleClick}/>
-                        : <img src={user?.profile_picture} onClick={handleClick} alt="img user"/>}
-                    <span className="hide">
-                    <FontAwesomeIcon icon={faCamera}/>
-                </span>
-                    <p className="selected-file">{selectedFile && selectedFile?.name}</p>
-                    <input style={{display: "none"}} ref={inputRef}
-                           onChange={(e) => setSelectedFile(e.target.files[0])}
-                           type="file"/>
-                    <InputComponent name="given_name" onChange={handleChange} value={values.given_name}
-                                    defaultValue={user.given_name}
-                                    placeholder="First name"
-
-                                    type="text"/>
-                    <InputComponent name="family_name" onChange={handleChange} value={values.family_name}
-                                    placeholder="Last name" type="text"
-                                    defaultValue={user.family_name}
-                    />
-
-                    <div>
-                        <InputComponent name="phone_number" onChange={handleChange} value={values.phone_number}
-                                        placeholder="Phone number"
-                                        defaultValue={user.phone_number}
-                                        type="text"/>
-
-                        <FormBirthDate
-                            handleChange={handleChange}
-                            values={values.bornOn}
-                            defaultValue={user.born_on}
-                        />
-                    </div>
-                    <button className="submit-update" disabled={isLoading} type={"submit"}>{isLoading ?
-                        <Spinner/> : 'Update'}</button>
-                </form>}
-
+                <UserUpdateForm
+                    user={profileUser}
+                    handleClick={handleClick}
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                    isLoading={isLoading}
+                    values={values}
+                    inputRef={inputRef}
+                    selectedFile={selectedFile}
+                    setSelectedFile={setSelectedFile}
+                />}
         </div>
     );
 };

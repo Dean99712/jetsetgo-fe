@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
 import '../styles/FormBirthDay.scss';
 
-const FormBirthDate = ({values, handleChange, handleBlur}) => {
+const BirthDate = ({values, handleChange, handleBlur}) => {
 
     const year = new Date().getFullYear()
     const years = []
@@ -36,10 +36,10 @@ const FormBirthDate = ({values, handleChange, handleBlur}) => {
                 <select
                     name="bornOn.days"
                     onChange={handleChange}
-                    value={values.days}
+                    value={values?.days}
                     onBlur={handleBlur}
                 >
-                    {days && days.length && days.map(value => (
+                    {days && days.length && days?.map(value => (
                         <option value={value}>{value}</option>
                     ))}
                     <FontAwesomeIcon icon={faArrowDown}/>
@@ -47,7 +47,7 @@ const FormBirthDate = ({values, handleChange, handleBlur}) => {
                 <select
                     name="bornOn.months"
                     onChange={handleChange}
-                    value={values.months}
+                    value={values?.months}
                     onBlur={handleBlur}
                 >
                     {Object.entries(months).map(([key, value]) => {
@@ -60,10 +60,10 @@ const FormBirthDate = ({values, handleChange, handleBlur}) => {
                 <select
                     name="bornOn.years"
                     onChange={handleChange}
-                    value={values.years}
+                    value={values?.years}
                     onBlur={handleBlur}
                 >
-                    {years.map(value => (
+                    {years?.map(value => (
                         <option value={value}>{value}</option>
                     ))}
                 </select>
@@ -72,4 +72,4 @@ const FormBirthDate = ({values, handleChange, handleBlur}) => {
     );
 };
 
-export default FormBirthDate;
+export default BirthDate;

@@ -26,6 +26,7 @@ import {FlightProvider} from "./context/FlightProvider";
 import UserUpdate from "./components/user/UserUpdate";
 import CreateOrder from "./components/ordercreate/CreateOrder";
 import {UserProvider} from "./context/UserProvider";
+import About from "./components/About";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
                 {path: 'flights', element: <Flights/>},
                 {path: 'fares', element: <FareOptions/>},
                 {path: 'orderSummary', element: <OrderSummary/>},
+                {path: 'about', element: <About/>},
 
                 // Authenticated Routes
                 {

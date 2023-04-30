@@ -21,11 +21,11 @@
   border-radius: 10px;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: 10em;
 }
 .footer-container .subscribe-inquiries .title {
   font-weight: 900;
-  font-size: 24px;
+  font-size: 32px;
 }
 .footer-container .subscribe-inquiries img.plane-svg {
   position: absolute;
@@ -37,10 +37,14 @@
   border-radius: 30px;
   background-color: #FFFFFF;
   color: #277be7;
-  padding: 0.2em 3em;
+  padding: 0.5em 3em;
   outline: none;
   border: none;
   font-weight: 700;
+  transition: scale ease-in-out 100ms;
+}
+.footer-container .subscribe-inquiries .submit-inquiry:hover {
+  scale: 1.05;
 }
 .footer-container .footer_bottom {
   width: 71.68vw;
@@ -57,12 +61,15 @@
   color: #FFFFFF;
   text-decoration: none;
 }
+.footer_row a:hover {
+  color: #a7ccff;
+}
 .footer_row .row-title {
   font-weight: 700;
 }
 .footer_row .footer-logo {
   width: 190px;
-  height: 70px;
+  height: 60px;
 }
 .footer_row .footer_logo-text {
   position: relative;
@@ -73,12 +80,16 @@
 
 .footer-icons {
   display: flex;
-  gap: 1em;
+  gap: 3em;
   margin-bottom: 3em;
 }
 .footer-icons .footer-icon {
   width: 25px;
   height: 25px;
+  transition: transform 300ms ease-in-out;
+}
+.footer-icons .footer-icon:hover {
+  transform: translateY(-5px);
 }
 
 .footer-column {

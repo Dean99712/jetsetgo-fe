@@ -53,7 +53,7 @@ const Footer = () => {
 
             <div className="subscribe-inquiries">
                 <img className="plane-svg" src={PlaneSvg} alt="Plane Svg"/>
-                <h6 className="title">Subscribe to our news</h6>
+                <h6 className="title">Subscribe to our club</h6>
                 <button onClick={() => navigate('/register')} className="submit-inquiry">Join us</button>
             </div>
 
@@ -86,7 +86,7 @@ const Footer = () => {
                     <ul>
                         {flights.map(flight => {
                             return (
-                                <li className="text-capitalize"><a target="_self" href={flight.path}>{flight.name}></a></li>
+                                <li className="text-capitalize"><a target="_self" href={flight.path}>{flight.name}</a></li>
                             )
                         })}
                     </ul>
@@ -119,22 +119,7 @@ const Footer = () => {
     const location = useLocation()
     if (location.pathname === "/") {
         return renderFooter()
-    } else return;
-
-    return (
-        renderFooter()
-        // <div className="footer-container">
-        //     <div className="subscribe-inquiries">
-        //         <h6 className="title">Subscribe to our news</h6>
-        //         <input type="text" className="inquiry-email"/>
-        //         <button className="submit-inquiry">Subscribe</button>
-        //         <div className="footer_bottom">
-        //             <h3 className="Footer_title">Footer</h3>
-        //
-        //         </div>
-        //     </div>
-        // </div>
-    );
+    } else return (<></>);
 };
 
 export default Footer;

@@ -16,10 +16,10 @@
   animation: wiggle ease-in-out 300ms;
 }
 
-.right-columnContainer img {
-  width: calc(100vw - 650px);
+.right-columnContainer {
+  width: calc(100% - 650px);
+  background: url("../../assets/images/login/AdobeStock_239406450.jpeg") center;
   background-size: cover;
-  position: relative;
   height: 100vh;
 }
 

@@ -1,0 +1,34 @@
+.about {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: auto;
+
+  .shape {
+    &.oval {
+      position: absolute;
+      height: 400px;
+      width: 500px;
+      background-color: #882929;
+      z-index: 1;
+    }
+  }
+
+  .about_content {
+    width: 71.68vw;
+    background-color: transparent;
+
+    .about_text {
+      z-index: 3;
+    }
+    
+    .about_header {
+      text-align: center;
+      font-weight: 900;
+      font-size: 36px;
+    }
+  }
+}

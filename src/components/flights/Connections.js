@@ -1,13 +1,13 @@
 import React from 'react';
-import './Options.scss'
 import {motion as m} from 'framer-motion';
+import './Options.scss'
 
+const Connections = ({maxConnections, setMaxConnections}) => {
 
-const PriceOptions = ({setSort}) => {
-
-    const priceOptions = [
-        {name: "Sort by the highest Price", action: "-total_amount"},
-        {name: "Sort by the lowest Price", action: "total_amount"}
+    const connectionsOptions = [
+        {name: "Direct Flight", action: maxConnections},
+        {name: `Flight with 1 stop`, action: maxConnections},
+        {name: `Flight with 2 stops`, action: maxConnections}
     ]
 
     return (
@@ -27,16 +27,17 @@ const PriceOptions = ({setSort}) => {
                    translateY: -20,
                    opacity: 0
                }}>
-
             <ul>
-                {priceOptions.map(option => {
+                {connectionsOptions.map((option, index) => {
                     return (
-                        <m.li whileTap={{ scale: 0.97}}><input type="radio" onClick={() => setSort(option.action)} name="price"/>{option.name}</m.li>
-                    );
-                })}
+                        <m.li whileTap={{ scale: 0.97 }}><input onClick={() => setMaxConnections(index)} name="connections" type="radio"/>
+                            {option.name}</m.li>
+                    )
+                })
+                }
             </ul>
         </m.div>
     );
 };
 
-export default PriceOptions;
+export default Connections;

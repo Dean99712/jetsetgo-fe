@@ -3,6 +3,7 @@ import '../../styles/Passenger.scss'
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons/faCircleUser";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import InputComponent from "../InputComponent";
+import BirthDate from "../BirthDate";
 
 const Passenger = ({formik, index}) => {
 
@@ -80,7 +81,6 @@ const Passenger = ({formik, index}) => {
                         <div className="passenger-item">
 
                             <div className="form-item">
-
                                 <InputComponent
                                     type={"date"}
                                     name={`passengers.${[index]}.born_on`}

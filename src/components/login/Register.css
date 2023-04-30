@@ -57,7 +57,6 @@
 }
 
 .register_background {
-  display: flex;
   width: calc(100% - 680px);
   background: url("../../assets/images/login/RegisterBackground.jpeg") center;
   background-size: cover;

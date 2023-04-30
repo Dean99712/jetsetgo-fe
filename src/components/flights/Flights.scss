@@ -6,55 +6,65 @@ $secondaryVariant-color: #ECAA44;
 $background-color: #F5F7FB;
 $width: 71.466vw;
 
-.offers-background {
-  height: 75vh;
-  background: url("../../assets/images/flightsoffers/TerminalBackground.png") center no-repeat;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
 
-  .offers-container {
-    position: relative;
+.flights {
+  height: fit-content;
+
+  .offers-background {
+    height: 75vh;
+    background: url("../../assets/images/flightsoffers/TerminalBackground.png") center no-repeat;
+    background-size: cover;
     display: flex;
-    flex-direction: column;
-    top: 35em;
-  }
+    justify-content: center;
 
-  .offer-filter-container {
-    border-radius: 50px;
-    display: flex;
-    justify-content: space-between;
-    background: transparent;
-    padding-bottom: 1em;
-
-    .offers-filter {
-      border-radius: 50px;
-      background: #FFFFFF;
+    .offers-container {
+      position: relative;
       display: flex;
-      align-items: baseline;
-      padding: 0.5em;
-      flex: 0.3;
+      flex-direction: column;
+      top: 35em;
+    }
 
-      button {
-        font-weight: 400;
-        border: none;
+    .offer-filter-container {
+      border-radius: 50px;
+      display: flex;
+      justify-content: space-between;
+      background: transparent;
+      padding-bottom: 1em;
 
-        &:first-child {
-          border: none;
-        }
-      }
-
-      .filter-item {
-        flex: 1;
-        border-left: 1px solid #e3e3e3;
-        background: transparent;
+      .offers-filter {
+        border-radius: 50px;
+        background: #FFFFFF;
         display: flex;
-        align-items: center;
-        gap: 1em;
+        align-items: baseline;
+        padding: 0.5em;
+        flex: 0.3;
+
+        button {
+          font-weight: 400;
+          border: none;
+
+          &:first-child {
+            border: none;
+          }
+        }
+
+        .filter-item {
+          position: relative;
+          flex: 1;
+          border-left: 1px solid #e3e3e3;
+          background: transparent;
+          display: flex;
+          font-family: Poppins, sans-serif;
+          font-weight: 400;
+          font-size: 14px;
+          align-items: center;
+          gap: 1em;
+        }
       }
     }
   }
 }
+
 
 .offers {
   width: $width;
@@ -141,8 +151,8 @@ $width: 71.466vw;
 
 .flight-owner-details {
   justify-content: center;
-  justify-self: end;
-  gap: 2em;
+  justify-self: center;
+  gap: 0.5em;
   border-right: 1px solid #e3e3e3;
 }
 

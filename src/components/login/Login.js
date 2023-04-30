@@ -139,10 +139,10 @@ const Login = () => {
                     />
                     {errors.password && touched.password ? <p className="text-danger">{errors.password}</p> : null}
                 </div>
-                <div className="form-user-details">
-                    <input type="checkbox" className="remember-me"/>
-                    <label className="remember-user ">remember me</label>
-                </div>
+                {/*<div className="form-user-details">*/}
+                {/*    <input type="checkbox" className="remember-me"/>*/}
+                {/*    <label className="remember-user ">remember me</label>*/}
+                {/*</div>*/}
                 <button type={"submit"} disabled={isLoading} className="login-submitButton">{
                     isLoading
                         ? <CircularProgress sx={{color: "#FFFFFF"}}/>
@@ -150,14 +150,12 @@ const Login = () => {
                         'Login'
                 }</button>
 
-                <div className="flex-row login-options">
-                    <FontAwesomeIcon id="ic-facebook" icon={faFacebook}/>
-                    <img src={GoogleSvg} alt="google"/>
-                </div>
+                {/*<div className="flex-row login-options">*/}
+                {/*    <FontAwesomeIcon id="ic-facebook" icon={faFacebook}/>*/}
+                {/*    <img src={GoogleSvg} alt="google"/>*/}
+                {/*</div>*/}
             </form>
-            <div className="right-columnContainer">
-                <img src={Background} alt="login background"/>
-            </div>
+            <div className="right-columnContainer"/>
         </div>
     );
 };

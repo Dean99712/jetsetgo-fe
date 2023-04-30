@@ -13,6 +13,7 @@ import Logo from './../assets/images/LogoOnly.png'
 import SearchBar from "./SearchBar";
 import {motion as m} from 'framer-motion';
 import useUser from "../hooks/useUser";
+import '../styles/header/HeaderMQ.scss'
 
 
 const Header = () => {
@@ -50,7 +51,7 @@ const Header = () => {
             setUserIconWBg('user-icon_bg')
             setHeaderButtonBackground('btn-signup_bg')
             setSearchIcon('search-icon_bg')
-        } else {
+        } else if (window.matchMedia("(max-width: 768px)")) {
             setHeaderBackground('')
             setLogo(LogoMainWhite)
             setMiddleTitleBackground('header_middle-title')
@@ -63,6 +64,9 @@ const Header = () => {
     const inputRef = useRef(null);
 
     window.addEventListener('scroll', addBackground)
+
+    window.matchMedia("(min-width: 768px)").removeEventListener("scroll", addBackground)
+
 
     const mainHeader = () => {
         return <Navbar

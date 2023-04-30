@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Box, Button, Paper, Step, StepContent, StepLabel, Stepper, Typography} from "@mui/material";
+import {Box, Button, Step, StepContent, StepLabel, Stepper, Typography} from "@mui/material";
 import Passenger from "./passenger/Passenger";
 
 const StepperComponent = ({formik, steps}) => {
@@ -15,7 +15,6 @@ const StepperComponent = ({formik, steps}) => {
     };
 
     const handleReset = () => {
-        formik.handleReset()
         setActiveStep(0);
     };
 
@@ -39,6 +38,7 @@ const StepperComponent = ({formik, steps}) => {
                                     <Button
                                         variant="contained"
                                         onClick={handleNext}
+                                        // disabled={formik?.errors?.passengers?.length > 0}
                                         sx={{ mt: 1, mr: 1 }}
                                     >
                                         {index === steps.length - 1 ? 'Finish' : 'Continue'}

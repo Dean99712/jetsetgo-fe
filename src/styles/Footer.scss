@@ -21,11 +21,11 @@
     border-radius: 10px;
     justify-content: space-between;
     align-items: center;
-    gap: 1em;
+    gap: 10em;
 
     .title {
       font-weight: 900;
-      font-size: 24px;
+      font-size: 32px;
     }
 
     img.plane-svg {
@@ -39,10 +39,14 @@
       border-radius: 30px;
       background-color: #FFFFFF;
       color: #277be7;
-      padding: 0.2em 3em;
+      padding: 0.5em 3em;
       outline: none;
       border: none;
       font-weight: 700;
+      transition: scale ease-in-out 100ms;
+      &:hover {
+        scale: 1.05;
+      }
     }
   }
 
@@ -63,6 +67,10 @@
   a {
     color: #FFFFFF;
     text-decoration: none;
+
+    &:hover {
+      color: #a7ccff;
+    }
   }
 
   .row-title {
@@ -71,7 +79,7 @@
 
   .footer-logo {
     width: 190px;
-    height: 70px;
+    height: 60px;
   }
 
   .footer_logo-text {
@@ -84,22 +92,26 @@
 
 .footer-icons {
   display: flex;
-  gap: 1em;
+  gap: 3em;
   margin-bottom: 3em;
 
   .footer-icon {
     width: 25px;
     height: 25px;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
 }
 
 .footer-column {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
   svg {
     max-width: 15px;
     width: 15px
   }
 
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
 }
