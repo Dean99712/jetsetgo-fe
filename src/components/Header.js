@@ -13,7 +13,6 @@ import Logo from './../assets/images/LogoOnly.png'
 import SearchBar from "./SearchBar";
 import {motion as m} from 'framer-motion';
 import useUser from "../hooks/useUser";
-import '../styles/header/HeaderMQ.scss'
 
 
 const Header = () => {
