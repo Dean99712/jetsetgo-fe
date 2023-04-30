@@ -5,7 +5,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/dean99712/jetsetgo-fe/search_bar?style=for-the-badge)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/dean99712/jetsetgo-fe/main?style=for-the-badge)
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=dean99712&show_icons=true)
 
