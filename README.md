@@ -6,6 +6,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/dean99712/jetsetgo-fe/search_bar?style=for-the-badge)
+
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=dean99712&show_icons=true)
 
 ## Available Scripts
@@ -20,13 +22,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `First page`
-You will experiance our beutifull website and playfull animations, 
+### `Main page`
+You will experiance our beutifull website and playfull animations,
+
 
 ### Features
 - Create an order to any Airline company in the world
 - Sign in and Sign up to our services
-- 
+- Update your orders
+- Update your profile
+
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -46,15 +51,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## :books: Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Bugs / Important info
+- In the first page you'll need to create a flight with one passenger for now (this will be fixed as soon as possible :pray: )
 
 ### Analyzing the Bundle Size
 
