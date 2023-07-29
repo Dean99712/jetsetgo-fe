@@ -46,6 +46,9 @@
   transform: translateY(-3px);
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
+.header-container .header_middle-titles .header_middle-title.active {
+  border-bottom: 1px solid #2E79E9;
+}
 
 .log-in-buttons {
   display: flex;

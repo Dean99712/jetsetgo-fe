@@ -5,9 +5,7 @@ const UPDATE_USER_URL = '/user/updateUser';
 const GET_USER_PROFILE = '/user/getUserProfile';
 
 export const updateUser = async (data) => {
-    return await axios.patch(`${UPDATE_USER_URL}/${data.email}`, data
-    )
-        .then(res => res.data)
+    return await axios.patch(`${UPDATE_USER_URL}/${data.email}`, data)
 }
 
 export const getUserProfile = async (data) => {

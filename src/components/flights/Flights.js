@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faArrowDown,
     faDollarSign,
     faFilter, faPlane, faSortUp,
 } from "@fortawesome/free-solid-svg-icons";

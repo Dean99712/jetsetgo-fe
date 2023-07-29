@@ -76,7 +76,7 @@ const Footer = () => {
                     <ul>
                         {navigations.map(navigation => {
                             return (
-                                <li><Link to={navigation.path}>{navigation.name}</Link></li>
+                                <li key={navigation.name}><Link to={navigation.path}>{navigation.name}</Link></li>
                             )
                         })}
                     </ul>
@@ -84,9 +84,9 @@ const Footer = () => {
                 <div className="footer_row">
                     <h6 className="text-uppercase row-title">Flights</h6>
                     <ul>
-                        {flights.map(flight => {
+                        {flights.map((flight, i) => {
                             return (
-                                <li className="text-capitalize"><a target="_self" href={flight.path}>{flight.name}</a></li>
+                                <li key={i} className="text-capitalize"><a target="_self" href={flight.path}>{flight.name}</a></li>
                             )
                         })}
                     </ul>
@@ -100,11 +100,11 @@ const Footer = () => {
                 <div className="footer_row">
                     <h6 className="text-uppercase row-title">Social</h6>
                     <ul>
-                        {contacts.map((contact, index) => {
+                        {contacts.map((contact, i) => {
                             return (
-                                <div className="footer-column" key={index}>
+                                <div className="footer-column" key={i}>
                                     <FontAwesomeIcon icon={contact.logo}/>
-                                    <li><Link className="text-capitalize" to={contact.link}>{contact.name}</Link></li>
+                                    <li><a target={"_blank"} href={contact.link} className="text-capitalize">{contact.name}</a></li>
                                 </div>
                             )
                         })}

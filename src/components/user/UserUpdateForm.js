@@ -5,12 +5,18 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import InputComponent from "../InputComponent";
 import BirthDate from "../BirthDate";
 import {CircularProgress} from "@mui/material";
-import useUser from "../../hooks/useUser";
 
-const UserUpdateForm = ({values, handleClick, handleSubmit,handleChange, inputRef, isLoading, setSelectedFile, selectedFile, user}) => {
-
-    const {user: currentUser} = useUser();
-    const userProfile = currentUser.user
+const UserUpdateForm = ({
+                            values,
+                            handleClick,
+                            handleSubmit,
+                            handleChange,
+                            inputRef,
+                            isLoading,
+                            setSelectedFile,
+                            selectedFile,
+                            user,
+                        }) => {
 
     return (
         <form className="user-update_form" onSubmit={handleSubmit}>
@@ -26,8 +32,6 @@ const UserUpdateForm = ({values, handleClick, handleSubmit,handleChange, inputRe
                    onChange={(e) => setSelectedFile(e.target.files[0])}
                    type="file"/>
             <InputComponent name="given_name" onChange={handleChange} value={values.given_name}
-                            defaultValue={user.given_name || userProfile?.given_name}
-
                             placeholder="First name"
 
                             type="text"/>
@@ -42,7 +46,6 @@ const UserUpdateForm = ({values, handleClick, handleSubmit,handleChange, inputRe
                 <BirthDate
                     handleChange={handleChange}
                     values={values.bornOn}
-                    defaultValue={user?.bornOn}
                 />
             </div>
             <button className="submit-update" disabled={isLoading} type={"submit"}>{isLoading ?

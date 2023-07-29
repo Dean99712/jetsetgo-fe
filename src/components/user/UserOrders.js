@@ -85,12 +85,6 @@ const UserOrders = () => {
         })
     }
 
-    const handleDelete = (id) => {
-        mutate({
-            order_id: id
-        })
-    }
-
     const columns = [
         {field: 'order_id', headerName: 'ID', width: 100},
         {
@@ -162,7 +156,7 @@ const UserOrders = () => {
                     loading={!orders}
                     className="data-grid"
                     rows={!orders ? [] : orders}
-                    pageSize={5}
+                    pageSize={10}
                     sx={{
                         borderRadius: "20px",
                         color: "#334a60",

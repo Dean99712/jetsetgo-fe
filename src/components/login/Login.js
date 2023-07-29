@@ -2,11 +2,7 @@ import React, {useState} from 'react';
 import '../../styles/login/Login.scss'
 import {LOGIN_URL} from "../../services/AuthService";
 import {useLocation, useNavigate} from "react-router-dom";
-import Background from '../../assets/images/login/AdobeStock_239406450.jpeg'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFacebook} from "@fortawesome/free-brands-svg-icons";
 import InputComponent from "../InputComponent";
-import GoogleSvg from '../../assets/svg/GoogleSvg.svg'
 import {GET_USER_BY_EMAIL_URL} from "../../services/UserService";
 import {CircularProgress} from "@mui/material";
 import axios from "../../api/axios";
@@ -22,7 +18,9 @@ const Login = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
 
-    const {setAuth} = useAuth()
+    console.log(from)
+
+    const {auth, setAuth} = useAuth()
     const {setUser} = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -109,6 +107,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await postLogin();
+        console.log(auth?.email)
     }
 
     return (

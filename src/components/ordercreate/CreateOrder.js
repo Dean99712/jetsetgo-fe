@@ -54,7 +54,7 @@ const CreateOrder = () => {
                 setIsLoading(false)
                 const order = data?.data
                 notification("Success!", "Order has been successfully created", "success");
-                navigate("/orderSummary", {state: {order}, replace: true});
+                navigate("/orderSummary", {state: {order}});
             }
         },
         onError: (error) => {

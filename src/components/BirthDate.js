@@ -15,18 +15,18 @@ const BirthDate = ({values, handleChange, handleBlur}) => {
         days.push(i);
     }
     const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "Jun",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
+        {value: 1, name: "January"},
+        {value: 2, name: "February"},
+        {value: 3, name: "March"},
+        {value: 4, name: "April"},
+        {value: 5, name: "May"},
+        {value: 6, name: "Jun"},
+        {value: 7, name: "July"},
+        {value: 8, name: "August"},
+        {value: 9, name: "September"},
+        {value: 10, name: "October"},
+        {value: 11, name: "November"},
+        {value: 12, name: "December"},
     ]
 
     return (
@@ -39,9 +39,7 @@ const BirthDate = ({values, handleChange, handleBlur}) => {
                     value={values?.days}
                     onBlur={handleBlur}
                 >
-                    {days && days.length && days?.map(value => (
-                        <option value={value}>{value}</option>
-                    ))}
+                    {days && days.length && days?.map(value => <option value={value}>{value}</option>)}
                     <FontAwesomeIcon icon={faArrowDown}/>
                 </select>
                 <select
@@ -50,10 +48,8 @@ const BirthDate = ({values, handleChange, handleBlur}) => {
                     value={values?.months}
                     onBlur={handleBlur}
                 >
-                    {Object.entries(months).map(([key, value]) => {
-                        return (
-                            <option value={key}>{value}</option>
-                        )
+                    {months.map(value => {
+                        return <option value={value.value}>{value.name}</option>
                     })}
                     <FontAwesomeIcon icon={faArrowDown}/>
                 </select>
@@ -63,9 +59,7 @@ const BirthDate = ({values, handleChange, handleBlur}) => {
                     value={values?.years}
                     onBlur={handleBlur}
                 >
-                    {years?.map(value => (
-                        <option value={value}>{value}</option>
-                    ))}
+                    {years?.map(value => <option value={value}>{value}</option>)}
                 </select>
             </div>
         </div>

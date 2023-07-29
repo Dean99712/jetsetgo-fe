@@ -20,7 +20,7 @@ const UserUpdate = () => {
     const {auth} = useAuth();
     const {user: currentUser, setUser} = useUser()
     const user = currentUser?.user
-    const [profileUser, setProfileUser] = useState({});
+    const [profileUser, setProfileUser] = useState(null);
 
     const inputRef = useRef(null);
 
@@ -83,13 +83,20 @@ const UserUpdate = () => {
                     })
             });
     };
+    const days = new Date(user?.born_on).toLocaleString('en', {day: "2-digit"})
+    const months = new Date(user?.born_on).toLocaleString('en', {month: "2-digit"})
+    const years = new Date(user?.born_on).toLocaleString('en', {year: "numeric"})
 
-    const {values, handleChange, handleSubmit} = useFormik({
+    const {values, handleChange, handleSubmit, setFieldValue} = useFormik({
         initialValues: {
-            givenName: "",
-            familyName: "",
-            bornOn: "",
-            phone_number: ""
+            given_name: profileUser?.given_name || user.given_name,
+            family_name: profileUser?.family_name || user.family_name,
+            bornOn: {
+                days,
+                months,
+                years
+            },
+            phone_number: profileUser?.phone_number || user.phone_number
         },
         onSubmit: async () => {
             const bornOn = new Date(values.bornOn.years,
@@ -103,11 +110,11 @@ const UserUpdate = () => {
                 }).replaceAll("/", "-");
 
             await uploadImage()
-
+            console.log(values.bornOn.months)
             mutate({
                 email: auth?.email,
-                givenName: values.givenName,
-                familyName: values.familyName,
+                givenName: values.given_name,
+                familyName: values.family_name,
                 phoneNumber: values.phone_number,
                 bornOn,
             });
@@ -127,9 +134,12 @@ const UserUpdate = () => {
                     </button>
                 </section>
                 :
+                profileUser
+                &&
                 <UserUpdateForm
                     user={profileUser}
                     handleClick={handleClick}
+                    setFieldValue={setFieldValue}
                     handleSubmit={handleSubmit}
                     handleChange={handleChange}
                     isLoading={isLoading}

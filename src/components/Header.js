@@ -34,7 +34,7 @@ const Header = () => {
     const [userIconWBg, setUserIconWBg] = useState('user-icon');
 
     const goToLoginPage = () => {
-        return navigate('login', {replace: true})
+        return navigate('login')
     }
 
     const logout = () => {
@@ -102,7 +102,7 @@ const Header = () => {
                             inputRef={inputRef}
                         />}
                         <button className="btn-signIn" onClick={() => goToLoginPage()}>Sign in</button>
-                        <button onClick={() => navigate('/register', {replace: true})}
+                        <button onClick={() => navigate('/register')}
                                 className={`${headerButtonBackground}`}>Sign up
                         </button>
                     </div>

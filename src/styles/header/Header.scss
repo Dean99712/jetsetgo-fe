@@ -43,6 +43,8 @@ $width: 71.466vw;
     border-radius: 50px;
     gap: 2em;
 
+
+
     .header_middle-title {
       color: $font-color;
       border: none;
@@ -55,6 +57,9 @@ $width: 71.466vw;
       &:hover {
         transform: translateY(-3px);
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      }
+      &.active {
+        border-bottom: 1px solid #2E79E9;
       }
     }
   }
