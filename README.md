@@ -42,11 +42,11 @@ You made it!, you have created your flight order successfully and now you can wa
 But don't worry join us is easy.
 
 ### Features
-- Fly around the world with any flight company in the world
+- Fly around the world with any flight company out there !
 - Sign in and Sign up to our services
 - Update your orders
 - Update your profile.
-- Have fun!
+- Have a good flight!
 
 ## :books: Learn More
 
