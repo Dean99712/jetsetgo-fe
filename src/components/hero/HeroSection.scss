@@ -1,0 +1,179 @@
+@import './tokens';
+
+.hero-page {
+  font-family: $font-body;
+  background: $navy-900;
+  color: $ink;
+
+  ::selection {
+    background: rgba(236, 170, 68, .35);
+  }
+
+  &__hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      radial-gradient(110% 75% at 78% 112%, rgba(236, 170, 68, .2) 0%, rgba(236, 170, 68, .05) 34%, transparent 58%),
+      radial-gradient(90% 70% at 22% -20%, $navy-700 0%, transparent 60%),
+      linear-gradient(180deg, $navy-950 0%, $navy-900 55%, #0E1638 100%);
+  }
+
+  &__sky {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    canvas {
+      position: absolute !important;
+      inset: 0;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    width: min(1180px, 92vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+    padding: 8rem 0 4.5rem;
+  }
+
+  &__eyebrow {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    color: $gold-400;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    h1 {
+      font-family: $font-display;
+      font-weight: 500;
+      font-size: clamp(2.9rem, 6.4vw, 5.4rem);
+      line-height: 1.04;
+      letter-spacing: -.015em;
+      margin: 0;
+      max-width: 13ch;
+      color: $ink;
+
+      em {
+        font-style: italic;
+        background: linear-gradient(100deg, $gold-300, $gold-500);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+
+    p {
+      color: $ink-dim;
+      font-size: clamp(1rem, 1.4vw, 1.16rem);
+      line-height: 1.65;
+      max-width: 44ch;
+      margin: 0;
+    }
+  }
+
+  &__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: .4rem;
+  }
+
+  &__showcase {
+    position: relative;
+    background: linear-gradient(180deg, #0E1638 0%, $navy-800 30%, $navy-900 100%);
+    padding: 6rem 0 7rem;
+  }
+
+  &__showcase-inner {
+    width: min(1180px, 92vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6.5rem;
+  }
+
+  @media (max-width: 767px) {
+    &__inner {
+      padding: 7rem 0 3.5rem;
+      gap: 2.2rem;
+    }
+
+    &__ctas .magnetic-button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    &__showcase {
+      padding: 4rem 0 5rem;
+    }
+
+    &__showcase-inner {
+      gap: 4rem;
+    }
+  }
+}
+
+/* ---------- static sky fallback ---------- */
+
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  &__stars {
+    position: absolute;
+    inset: 0;
+    opacity: .5;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgba(234, 240, 255, .7) 50%, transparent 51%),
+      radial-gradient(1px 1px at 34% 9%, rgba(234, 240, 255, .5) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 58% 14%, rgba(255, 220, 163, .6) 50%, transparent 51%),
+      radial-gradient(1px 1px at 73% 6%, rgba(234, 240, 255, .6) 50%, transparent 51%),
+      radial-gradient(1px 1px at 88% 22%, rgba(234, 240, 255, .4) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 45% 27%, rgba(234, 240, 255, .35) 50%, transparent 51%);
+  }
+
+  &__cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+
+    &--one {
+      left: -6%;
+      top: 62%;
+      width: 46vw;
+      height: 11vw;
+      background: rgba(159, 180, 232, .14);
+    }
+
+    &--two {
+      left: 42%;
+      top: 76%;
+      width: 50vw;
+      height: 12vw;
+      background: rgba(232, 199, 154, .16);
+    }
+
+    &--three {
+      left: 18%;
+      top: 90%;
+      width: 60vw;
+      height: 13vw;
+      background: rgba(242, 211, 160, .2);
+    }
+  }
+}

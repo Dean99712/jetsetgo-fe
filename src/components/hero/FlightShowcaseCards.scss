@@ -1,0 +1,214 @@
+@import './tokens';
+
+.flight-showcase {
+  &__eyebrow {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    color: $gold-400;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-family: $font-display;
+      font-weight: 500;
+      font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+      letter-spacing: -.01em;
+      margin: 0;
+      color: $ink;
+    }
+
+    p {
+      color: $ink-dim;
+      line-height: 1.6;
+      max-width: 52ch;
+      margin: 0;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    padding: 1.6rem;
+    background: $glass-bg;
+    border: 1px solid $glass-border;
+    border-radius: 22px;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    transition: transform .3s $ease-out, border-color .3s $ease-out, box-shadow .3s $ease-out;
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 195, 107, .5);
+      box-shadow: $shadow-soft;
+
+      .flight-showcase__leg svg {
+        left: 56%;
+      }
+    }
+  }
+
+  &__airline {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+
+    b {
+      display: block;
+      font-size: .95rem;
+      font-weight: 600;
+      color: $ink;
+    }
+
+    div > span {
+      display: block;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: $ink-faint;
+      margin-top: 2px;
+    }
+  }
+
+  &__monogram {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid rgba(245, 195, 107, .65);
+    font-family: $font-display;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: $gold-300;
+  }
+
+  &__route {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: .9rem;
+  }
+
+  &__time {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.28rem;
+    font-weight: 650;
+    color: $ink;
+  }
+
+  &__code {
+    font-size: .7rem;
+    letter-spacing: .16em;
+    color: $ink-faint;
+    margin-top: 2px;
+  }
+
+  &__leg {
+    position: relative;
+    height: 1px;
+    background: rgba(255, 255, 255, .18);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: -2.5px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $gold-400;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+
+    svg {
+      position: absolute;
+      top: -7px;
+      left: 44%;
+      font-size: .8rem;
+      color: $gold-400;
+      transition: left .35s $ease-out;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .6rem;
+    font-size: .8rem;
+    color: $ink-dim;
+
+    span:first-child {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__chip {
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: $gold-300;
+    background: rgba(245, 195, 107, .12);
+    border: 1px solid rgba(245, 195, 107, .3);
+    border-radius: $radius-pill;
+    padding: .28rem .7rem;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+  }
+
+  &__from {
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: $ink-faint;
+  }
+
+  &__price {
+    font-family: $font-display;
+    font-size: 1.85rem;
+    color: $gold-300;
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    &__card {
+      background: rgba(11, 18, 48, .85);
+    }
+  }
+
+  @media (max-width: 1020px) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

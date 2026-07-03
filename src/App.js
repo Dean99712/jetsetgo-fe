@@ -2,7 +2,7 @@ import './styles/App.scss';
 import * as React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import BookFlight from "./components/booking/BookFlight";
+import HeroSection from "./components/hero/HeroSection";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css';
 import {SkeletonTheme} from "react-loading-skeleton";
@@ -48,7 +48,7 @@ function App() {
                 {path: 'unauthorized', element: <Unauthorized/>},
 
                 //Public Routes
-                {path: '/', index: true, element: <BookFlight/>},
+                {path: '/', index: true, element: <HeroSection/>},
                 {path: 'flights', element: <Flights/>},
                 {path: 'fares', element: <FareOptions/>},
                 {path: 'orderSummary', element: <OrderSummary/>},
