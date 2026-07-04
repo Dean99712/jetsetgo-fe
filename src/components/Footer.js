@@ -117,7 +117,9 @@ const Footer = () => {
     };
 
     const location = useLocation()
-    if (location.pathname === "/") {
+    // The cinematic landing ships its own footer, so the legacy global footer
+    // is retired from '/'; it is kept behind a dead path for reference.
+    if (location.pathname === "/__legacy-footer") {
         return renderFooter()
     } else return (<></>);
 };

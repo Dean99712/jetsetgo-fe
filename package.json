@@ -94,5 +94,9 @@
   "browser": {
     "crypto": false,
     "stream": false
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "playwright-core": "^1.61.1"
   }
 }

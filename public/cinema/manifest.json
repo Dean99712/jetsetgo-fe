@@ -1,0 +1,25 @@
+{
+  "clips": {
+    "hero": {
+      "frames": 120,
+      "width": 1600,
+      "height": 900,
+      "pattern": "frame_%04d.jpg",
+      "poster": "poster.jpg"
+    },
+    "cabin": {
+      "frames": 96,
+      "width": 1600,
+      "height": 900,
+      "pattern": "frame_%04d.jpg",
+      "poster": "poster.jpg"
+    },
+    "destinations": {
+      "frames": 96,
+      "width": 1600,
+      "height": 900,
+      "pattern": "frame_%04d.jpg",
+      "poster": "poster.jpg"
+    }
+  }
+}

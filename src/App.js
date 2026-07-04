@@ -2,7 +2,8 @@ import './styles/App.scss';
 import * as React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import HeroSection from "./components/hero/HeroSection";
+import CinemaLanding from "./components/cinema/CinemaLanding";
+import BookPage from "./components/book/BookPage";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css';
 import {SkeletonTheme} from "react-loading-skeleton";
@@ -48,7 +49,8 @@ function App() {
                 {path: 'unauthorized', element: <Unauthorized/>},
 
                 //Public Routes
-                {path: '/', index: true, element: <HeroSection/>},
+                {path: '/', index: true, element: <CinemaLanding/>},
+                {path: 'book', element: <BookPage/>},
                 {path: 'flights', element: <Flights/>},
                 {path: 'fares', element: <FareOptions/>},
                 {path: 'orderSummary', element: <OrderSummary/>},

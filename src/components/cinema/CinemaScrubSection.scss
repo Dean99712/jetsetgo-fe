@@ -1,0 +1,61 @@
+@import '../hero/tokens';
+
+.cinema-scrub {
+  position: relative;
+  background: $navy-950;
+
+  &__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    pointer-events: none;
+
+    a,
+    button {
+      pointer-events: auto;
+    }
+  }
+
+  &--static {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+
+    .cinema-scrub__poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__static-overlay {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, rgba(4, 8, 26, .55), rgba(4, 8, 26, .75));
+  }
+}

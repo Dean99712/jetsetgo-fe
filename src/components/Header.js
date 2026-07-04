@@ -202,7 +202,9 @@ const Header = () => {
         case '/login':
             return
         case '/':
-            return mainHeader()
+            return
+        case '/book':
+            return
         case '/orderSummary':
             return mainHeader()
         default :
