@@ -39,7 +39,10 @@ const check = (name, ok, detail = '') => {
         const hash = await page.evaluate(() => {
             const canvas = document.querySelector('.cinema-scrub__canvas');
             if (!canvas) return null;
-            return canvas.getContext('2d').getImageData(0, 0, 8, 8).data.join(',');
+            // Sample a center block — footage can have static sky at the edges.
+            const cx = Math.floor(canvas.width / 2) - 16;
+            const cy = Math.floor(canvas.height / 2) - 16;
+            return canvas.getContext('2d').getImageData(cx, cy, 32, 32).data.join(',');
         });
         canvasHashes.push(hash);
     }
