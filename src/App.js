@@ -2,7 +2,8 @@ import './styles/App.scss';
 import * as React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import BookFlight from "./components/booking/BookFlight";
+import CinemaLanding from "./components/cinema/CinemaLanding";
+import BookPage from "./components/book/BookPage";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css';
 import {SkeletonTheme} from "react-loading-skeleton";
@@ -28,6 +29,10 @@ import CreateOrder from "./components/ordercreate/CreateOrder";
 import {UserProvider} from "./context/UserProvider";
 import About from "./components/About";
 
+// Offline frame-capture stage for scripts/render-clips.js — dev only, lazy so
+// it never enters the production bundle's critical path.
+const RenderStage = React.lazy(() => import("./components/cinema/render/RenderStage"));
+
 function App() {
 
     const ROLES = {
@@ -48,7 +53,8 @@ function App() {
                 {path: 'unauthorized', element: <Unauthorized/>},
 
                 //Public Routes
-                {path: '/', index: true, element: <BookFlight/>},
+                {path: '/', index: true, element: <CinemaLanding/>},
+                {path: 'book', element: <BookPage/>},
                 {path: 'flights', element: <Flights/>},
                 {path: 'fares', element: <FareOptions/>},
                 {path: 'orderSummary', element: <OrderSummary/>},
@@ -67,6 +73,10 @@ function App() {
                 }
             ]
         },
+        ...(process.env.NODE_ENV === 'development' ? [{
+            path: '/__render',
+            element: <React.Suspense fallback={null}><RenderStage/></React.Suspense>,
+        }] : []),
         {
             element: <RequireAuth allowedRoles={[ROLES.Admin]}/>,
             children: [

@@ -1,0 +1,50 @@
+@import './tokens';
+
+.magnetic-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.9rem;
+  border-radius: $radius-pill;
+  border: 1px solid transparent;
+  font-family: $font-body;
+  font-size: .95rem;
+  font-weight: 600;
+  color: $ink;
+  cursor: pointer;
+  transition: box-shadow .3s $ease-out, border-color .3s $ease-out, background .3s $ease-out;
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gold-400;
+    outline-offset: 3px;
+  }
+
+  &--gold {
+    background: linear-gradient(120deg, $gold-400, $gold-500 60%, $gold-600);
+    color: #241703;
+    box-shadow: $shadow-gold;
+
+    &:hover {
+      box-shadow: 0 16px 44px rgba(236, 170, 68, .48);
+    }
+  }
+
+  &--ghost {
+    background: $glass-bg;
+    border-color: $glass-border;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+
+    &:hover {
+      border-color: rgba(245, 195, 107, .55);
+    }
+  }
+}

@@ -1,0 +1,32 @@
+// JetSetGo hero design tokens — navy sunrise palette
+
+$navy-950: #04081A;
+$navy-900: #060B1F;
+$navy-800: #0B1230;
+$navy-700: #131C42;
+
+$gold-300: #FFDCA3;
+$gold-400: #F5C36B;
+$gold-500: #ECAA44;
+$gold-600: #D9932E;
+
+$ink: #EAF0FF;
+$ink-dim: rgba(234, 240, 255, .62);
+$ink-faint: rgba(234, 240, 255, .38);
+
+$glass-bg: rgba(255, 255, 255, .07);
+$glass-bg-strong: rgba(255, 255, 255, .1);
+$glass-border: rgba(255, 255, 255, .16);
+$glass-blur: 22px;
+
+$radius-lg: 24px;
+$radius-md: 16px;
+$radius-pill: 999px;
+
+$shadow-soft: 0 24px 60px rgba(3, 7, 24, .5);
+$shadow-gold: 0 12px 34px rgba(236, 170, 68, .32);
+
+$font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+$font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+$ease-out: cubic-bezier(.2, .7, .2, 1);

@@ -1,0 +1,364 @@
+@import './tokens';
+
+.glass-search {
+  font-family: $font-body;
+
+  &__toggle {
+    display: inline-flex;
+    gap: 2px;
+    margin-bottom: .8rem;
+    background: $glass-bg;
+    border: 1px solid $glass-border;
+    border-radius: $radius-pill;
+    padding: 3px;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+
+    button {
+      border: none;
+      background: transparent;
+      color: $ink-dim;
+      font-family: $font-body;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .5rem 1.1rem;
+      border-radius: $radius-pill;
+      cursor: pointer;
+      transition: background .25s $ease-out, color .25s $ease-out;
+
+      &[aria-pressed='true'] {
+        background: rgba(245, 195, 107, .18);
+        color: $gold-300;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $gold-400;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: 1.25fr 1.25fr 1fr .95fr 1fr auto;
+    align-items: stretch;
+    gap: 2px;
+    padding: .6rem;
+    background: $glass-bg;
+    border: 1px solid $glass-border;
+    border-radius: $radius-lg;
+    -webkit-backdrop-filter: blur($glass-blur) saturate(140%);
+    backdrop-filter: blur($glass-blur) saturate(140%);
+    box-shadow: $shadow-soft;
+    overflow: visible;
+
+    &.is-round {
+      grid-template-columns: 1.15fr 1.15fr .9fr .9fr .95fr .95fr auto;
+    }
+  }
+
+  &__field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .34rem;
+    padding: .85rem 1.15rem;
+    border-radius: $radius-md;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .25s $ease-out, border-color .25s $ease-out;
+
+    &:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      left: -1.5px;
+      top: 22%;
+      height: 56%;
+      width: 1px;
+      background: rgba(255, 255, 255, .1);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, .05);
+    }
+
+    &:focus-within {
+      border-color: rgba(236, 170, 68, .5);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    > label {
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: $ink-faint;
+      cursor: inherit;
+    }
+
+    input[type='date'] {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $ink;
+      font-family: $font-body;
+      font-size: .98rem;
+      font-weight: 600;
+      color-scheme: dark;
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  &__value {
+    font-size: .98rem;
+    font-weight: 600;
+    color: $ink;
+    white-space: nowrap;
+  }
+
+  &__submit {
+    align-self: center;
+    margin: 0 .3rem 0 .55rem;
+    border-radius: $radius-md;
+    padding: 1.05rem 1.6rem;
+    white-space: nowrap;
+
+    &:disabled {
+      opacity: .6;
+      cursor: default;
+    }
+  }
+
+  /* ---- reused Suggestions component, re-skinned for dark glass ---- */
+  .suggestions_container {
+    position: relative;
+
+    input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $ink;
+      font-family: $font-body;
+      font-size: .98rem;
+      font-weight: 600;
+      width: 100%;
+
+      &::placeholder {
+        color: $ink-faint;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .airports-container {
+    transform: none;
+    top: calc(100% + 14px);
+    left: 0;
+    margin: 0;
+    padding: .5rem;
+    width: 280px;
+    max-height: 240px;
+    height: auto;
+    border-radius: $radius-md;
+    background: rgba(11, 18, 48, .92);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border: 1px solid $glass-border;
+    box-shadow: $shadow-soft;
+    z-index: 20;
+
+    h6 {
+      color: $ink-dim;
+      font-size: .82rem;
+      margin: 0;
+      padding: .5rem .6rem;
+    }
+  }
+
+  .suggestions div {
+    background: transparent;
+    padding: 0 .4rem;
+  }
+
+  .suggestion {
+    color: $ink;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    font-size: .85rem;
+    transition: color .2s $ease-out;
+
+    &:hover {
+      color: $gold-300;
+    }
+  }
+
+  /* ---- reused passengers popover, re-skinned ---- */
+  .options {
+    top: calc(100% + 12px);
+    left: 0;
+    margin-top: 0;
+    width: 330px;
+    background: rgba(11, 18, 48, .95);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border: 1px solid $glass-border;
+    box-shadow: $shadow-soft;
+    color: $ink;
+    cursor: default;
+
+    &::before {
+      background: rgba(11, 18, 48, .95);
+    }
+
+    .option-display-age {
+      color: $ink-faint;
+      font-size: .8rem;
+    }
+  }
+
+  .option-counter-button {
+    background: rgba(245, 195, 107, .16);
+    color: $gold-300;
+    width: 42px;
+    height: 42px;
+    transition: background .2s $ease-out;
+
+    &:hover:not(:disabled) {
+      background: rgba(245, 195, 107, .3);
+    }
+
+    &:active {
+      background: rgba(245, 195, 107, .4);
+      color: $gold-300;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, .05);
+      color: $ink-faint;
+    }
+  }
+
+  /* ---- cabin class select ---- */
+  .cabin-select {
+    position: relative;
+
+    &__trigger {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: $ink;
+      font-family: $font-body;
+      font-size: .98rem;
+      font-weight: 600;
+
+      &:focus-visible {
+        outline: 2px solid $gold-400;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    }
+
+    &__chevron {
+      font-size: .6rem;
+      color: $ink-faint;
+    }
+
+    &__menu {
+      position: absolute;
+      top: calc(100% + 20px);
+      left: -1.15rem;
+      list-style: none;
+      margin: 0;
+      padding: .4rem;
+      min-width: 210px;
+      border-radius: $radius-md;
+      background: rgba(11, 18, 48, .95);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border: 1px solid $glass-border;
+      box-shadow: $shadow-soft;
+      z-index: 20;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-radius: 10px;
+        padding: .65rem .8rem;
+        color: $ink-dim;
+        font-family: $font-body;
+        font-size: .85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background .2s $ease-out, color .2s $ease-out;
+
+        &:hover {
+          background: rgba(255, 255, 255, .06);
+          color: $ink;
+        }
+
+        &.is-active {
+          color: $gold-300;
+
+          svg {
+            font-size: .7rem;
+          }
+        }
+      }
+    }
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    &__card,
+    .airports-container,
+    .options,
+    .cabin-select__menu {
+      background: rgba(11, 18, 48, .92);
+    }
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width: 1100px) {
+    &__card,
+    &__card.is-round {
+      grid-template-columns: 1fr 1fr;
+      padding: .8rem;
+    }
+
+    &__field:not(:first-child)::before {
+      display: none;
+    }
+
+    &__submit {
+      grid-column: 1 / -1;
+      margin: .4rem .2rem .2rem;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &__card,
+    &__card.is-round {
+      grid-template-columns: 1fr;
+    }
+
+    .airports-container {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .options {
+      width: calc(100vw - 4rem);
+      max-width: 330px;
+    }
+  }
+}
