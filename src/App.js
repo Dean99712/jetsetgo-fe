@@ -29,6 +29,10 @@ import CreateOrder from "./components/ordercreate/CreateOrder";
 import {UserProvider} from "./context/UserProvider";
 import About from "./components/About";
 
+// Offline frame-capture stage for scripts/render-clips.js — dev only, lazy so
+// it never enters the production bundle's critical path.
+const RenderStage = React.lazy(() => import("./components/cinema/render/RenderStage"));
+
 function App() {
 
     const ROLES = {
@@ -69,6 +73,10 @@ function App() {
                 }
             ]
         },
+        ...(process.env.NODE_ENV === 'development' ? [{
+            path: '/__render',
+            element: <React.Suspense fallback={null}><RenderStage/></React.Suspense>,
+        }] : []),
         {
             element: <RequireAuth allowedRoles={[ROLES.Admin]}/>,
             children: [
